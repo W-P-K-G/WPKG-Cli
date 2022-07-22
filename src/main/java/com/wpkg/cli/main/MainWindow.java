@@ -2,12 +2,14 @@ package com.wpkg.cli.main;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.wpkg.cli.actions.ActionListeners;
+import com.wpkg.cli.networking.UDPClient;
+
 import javax.swing.*;
 
 public class MainWindow {
     private JPanel WPKG;
-    private JPasswordField passwordField1;
-    private JTextField textField1;
+    private JPasswordField TokenField;
+    public JTextField IPField;
     private JButton Accept;
     public JPanel LogonUI;
     private JButton refreshButton;
@@ -23,12 +25,11 @@ public class MainWindow {
 
     public MainWindow() {
         Accept.addActionListener(ActionListeners::acceptAction);
-
         ActionListeners.main = this;
+        UDPClient.main = this;
     }
 
     public static void main(String[] args) {
-
         FlatDarkLaf.setup();
         JFrame frame = new JFrame("WPKG-CLI");
         frame.setSize(765,445);
