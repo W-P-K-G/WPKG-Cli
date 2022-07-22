@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e473b54c-061d-4fbc-863e-5931d4d07e34" name="Changes" comment="Separate Listeners">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/actions/ActionListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/actions/ActionListeners.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/main/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/main/MainWindow.java" afterDir="false" />

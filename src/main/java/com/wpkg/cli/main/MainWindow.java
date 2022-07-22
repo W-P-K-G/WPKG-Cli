@@ -26,9 +26,12 @@ public class MainWindow {
 
     public MainWindow() {
         Accept.addActionListener(ActionListeners::acceptAction);
+
+        ActionListeners.main = this;
     }
 
     public static void main(String[] args) {
+
         FlatDarkLaf.setup();
         JFrame frame = new JFrame("WPKG-CLI");
         frame.setSize(765,445);
