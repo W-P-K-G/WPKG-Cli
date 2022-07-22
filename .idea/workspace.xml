@@ -4,20 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e473b54c-061d-4fbc-863e-5931d4d07e34" name="Changes" comment="fix: in editor emojis">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/networking/ClientJSON.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/utilities/JSONParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/actions/ActionListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/actions/ActionListeners.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/main/MainWindow.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/main/MainWindow.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/main/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/main/MainWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/networking/UDPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/networking/UDPClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/utilities/JSONParaser.java" beforeDir="false" />
+    <list default="true" id="e473b54c-061d-4fbc-863e-5931d4d07e34" name="Changes" comment="workspace.xml">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/utilities/JSONParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/utilities/JSONParser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -200,7 +189,21 @@
       <option name="project" value="LOCAL" />
       <updated>1658498848309</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="add feature: basic connecting to server">
+      <created>1658528392748</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1658528392748</updated>
+    </task>
+    <task id="LOCAL-00013" summary="workspace.xml">
+      <created>1658528423867</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1658528423867</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -221,7 +224,9 @@
     <MESSAGE value="Separate Listeners" />
     <MESSAGE value="Adding: networking" />
     <MESSAGE value="fix: in editor emojis" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: in editor emojis" />
+    <MESSAGE value="add feature: basic connecting to server" />
+    <MESSAGE value="workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="workspace.xml" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
