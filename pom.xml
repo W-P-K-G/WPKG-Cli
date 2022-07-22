@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>18</maven.compiler.source>
-        <maven.compiler.target>18</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
     </properties>
     <dependencies>
         <dependency>
@@ -33,7 +33,21 @@
             <artifactId>maven-jar-plugin</artifactId>
             <version>3.2.2</version>
         </dependency>
+   <dependency>
+        <groupId>com.intellij</groupId>
+        <artifactId>forms_rt</artifactId>
+        <version>7.0.3</version>
+    </dependency>
+
     </dependencies>
+
+<pluginRepositories>
+    <pluginRepository>
+        <id>jitpack</id>
+        <url>https://jitpack.io</url>
+    </pluginRepository>
+</pluginRepositories>
+
     <build>
         <defaultGoal>package</defaultGoal>
         <plugins>
@@ -51,6 +65,44 @@
                     </archive>
                 </configuration>
             </plugin>
+        <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.3</version>
+        <configuration>
+          <finalName>${project.artifactId}</finalName>
+          <archive>
+            <manifest>
+              <addClasspath>false</addClasspath>
+              <mainClass>MainWindow</mainClass>
+            </manifest>
+          </archive>
+          <descriptors>
+            <descriptor>${project.basedir}/jar-with-deps.xml</descriptor>
+          </descriptors>
+          <appendAssemblyId>false</appendAssemblyId>
+        </configuration>
+        <executions>
+          <execution>
+            <id>make-assembly</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+<plugin>
+    <groupId>com.github.BenjaminFaal</groupId>
+    <artifactId>intellij-idea-gui-designer-maven-plugin</artifactId>
+    <version>2020.3.1</version>
+    <executions>
+        <execution>
+            <goals>
+                <goal>compile-forms</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
         </plugins>
     </build>
 </project>
