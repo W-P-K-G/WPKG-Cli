@@ -68,7 +68,7 @@
           <archive>
             <manifest>
               <addClasspath>false</addClasspath>
-              <mainClass>MainWindow</mainClass>
+              <mainClass>com.wpkg.cli.main.MainWindow</mainClass>
             </manifest>
           </archive>
           <descriptors>

@@ -1,3 +1,5 @@
+package com.wpkg.cli.main;
+
 import com.formdev.flatlaf.FlatDarkLaf;
 
 import javax.swing.*;
