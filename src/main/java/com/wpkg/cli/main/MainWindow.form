@@ -4,12 +4,14 @@
     <rowspec value="center:19dlu:noGrow"/>
     <rowspec value="center:max(m;4px):grow"/>
     <rowspec value="center:max(d;4px):grow"/>
+    <rowspec value="center:max(d;0px):noGrow"/>
     <rowspec value="center:d:noGrow"/>
     <rowspec value="center:max(d;0px):noGrow"/>
-    <rowspec value="center:max(m;4px):grow"/>
+    <rowspec value="center:max(d;0px):noGrow"/>
+    <rowspec value="center:d:grow"/>
     <colspec value="fill:d:grow"/>
     <constraints>
-      <xy x="283" y="7" width="761" height="403"/>
+      <xy x="283" y="7" width="761" height="452"/>
     </constraints>
     <properties>
       <visible value="true"/>
@@ -18,18 +20,20 @@
     <children>
       <vspacer id="fa269">
         <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
       </vspacer>
-      <component id="9a8f5" class="javax.swing.JLabel">
+      <component id="9a8f5" class="javax.swing.JLabel" binding="WPKGLabel">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-          <forms/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms top="5" left="5" bottom="0" right="0" defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
-          <font name="Noto Sans Display Italic" size="36" style="1"/>
+          <font name="Serif" size="36" style="3"/>
+          <opaque value="false"/>
           <text value="W.P.K.G"/>
+          <verifyInputWhenFocusTarget value="true"/>
         </properties>
       </component>
       <vspacer id="f487e">
@@ -38,60 +42,100 @@
           <forms defaultalign-vert="false"/>
         </constraints>
       </vspacer>
-      <grid id="3a5d8" binding="WPKGManager" layout-manager="FormLayout">
-        <rowspec value="center:max(d;37px):grow(3.0)"/>
-        <rowspec value="center:max(d;37px):grow"/>
-        <colspec value="fill:d:grow"/>
+      <grid id="3a5d8" binding="WPKGManager" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
         <properties>
-          <visible value="true"/>
+          <font name="SansSerif" size="24"/>
+          <visible value="false"/>
         </properties>
         <border type="none"/>
         <children>
-          <toolbar id="ec891">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="-1" height="20"/>
-              </grid>
-              <forms defaultalign-horz="false"/>
-            </constraints>
-            <properties>
-              <maximumSize width="120" height="40"/>
-              <minimumSize width="120" height="40"/>
-              <opaque value="true"/>
-              <preferredSize width="120" height="40"/>
-            </properties>
-            <border type="none"/>
-            <children>
-              <component id="3956d" class="javax.swing.JButton" binding="refreshButton" default-binding="true">
-                <constraints/>
-                <properties>
-                  <background color="-11972523"/>
-                  <maximumSize width="120" height="40"/>
-                  <minimumSize width="120" height="40"/>
-                  <opaque value="false"/>
-                  <preferredSize width="120" height="40"/>
-                  <text value="Refresh"/>
-                </properties>
-              </component>
-            </children>
-          </toolbar>
-          <component id="e24f4" class="javax.swing.JList" binding="list1" default-binding="true">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="50"/>
-              </grid>
-              <forms defaultalign-vert="false"/>
-            </constraints>
+          <component id="e24f4" class="javax.swing.JList" binding="ClientList">
+            <constraints border-constraint="Center"/>
             <properties>
               <enabled value="true"/>
+              <font name="SansSerif" size="24"/>
               <model/>
+              <name value="ClientListModel"/>
               <preferredSize width="99999" height="99999"/>
             </properties>
           </component>
+          <grid id="f6c95" binding="Buttons" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints border-constraint="South"/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <toolbar id="ec891">
+                <constraints/>
+                <properties>
+                  <maximumSize width="120" height="40"/>
+                  <minimumSize width="120" height="40"/>
+                  <opaque value="true"/>
+                  <orientation value="0"/>
+                  <preferredSize width="480" height="40"/>
+                  <rollover value="false"/>
+                </properties>
+                <clientProperties>
+                  <JToolBar.isRollover class="java.lang.Boolean" value="false"/>
+                </clientProperties>
+                <border type="none"/>
+                <children>
+                  <component id="3105d" class="javax.swing.JButton" binding="selectButton">
+                    <constraints/>
+                    <properties>
+                      <background color="-11972523"/>
+                      <label value="HackintoIT!"/>
+                      <maximumSize width="120" height="40"/>
+                      <minimumSize width="120" height="40"/>
+                      <opaque value="false"/>
+                      <preferredSize width="120" height="40"/>
+                      <text value="HackintoIT!"/>
+                    </properties>
+                  </component>
+                  <component id="c8bba" class="javax.swing.JButton" binding="infoButton">
+                    <constraints/>
+                    <properties>
+                      <actionCommand value="Info"/>
+                      <background color="-11972523"/>
+                      <label value="Info"/>
+                      <maximumSize width="120" height="40"/>
+                      <minimumSize width="120" height="40"/>
+                      <opaque value="false"/>
+                      <preferredSize width="120" height="40"/>
+                      <text value="Info"/>
+                    </properties>
+                  </component>
+                  <component id="a366" class="javax.swing.JButton" binding="killButton">
+                    <constraints/>
+                    <properties>
+                      <actionCommand value="KillSession"/>
+                      <background color="-11972523"/>
+                      <label value="Kill"/>
+                      <maximumSize width="120" height="40"/>
+                      <minimumSize width="120" height="40"/>
+                      <opaque value="false"/>
+                      <preferredSize width="120" height="40"/>
+                      <text value="Kill"/>
+                    </properties>
+                  </component>
+                  <component id="3956d" class="javax.swing.JButton" binding="refreshButton" default-binding="true">
+                    <constraints/>
+                    <properties>
+                      <background color="-11972523"/>
+                      <maximumSize width="120" height="40"/>
+                      <minimumSize width="120" height="40"/>
+                      <opaque value="false"/>
+                      <preferredSize width="120" height="40"/>
+                      <text value="Refresh"/>
+                    </properties>
+                  </component>
+                </children>
+              </toolbar>
+            </children>
+          </grid>
         </children>
       </grid>
       <grid id="94ee0" binding="LogonUI" layout-manager="FormLayout">
@@ -144,7 +188,7 @@
             </constraints>
             <properties>
               <preferredSize width="150" height="45"/>
-              <text value="Button"/>
+              <text value="Connect"/>
             </properties>
           </component>
           <component id="2ee72" class="javax.swing.JLabel">
@@ -169,6 +213,61 @@
               <preferredSize width="300" height="30"/>
             </properties>
           </component>
+        </children>
+      </grid>
+      <grid id="d4626" binding="ClientManager" layout-manager="FormLayout">
+        <rowspec value="center:d:grow"/>
+        <rowspec value="center:max(d;0px):noGrow"/>
+        <colspec value="fill:d:grow"/>
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <visible value="false"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="fb80a" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <toolbar id="ecf46">
+                <constraints/>
+                <properties>
+                  <maximumSize width="120" height="40"/>
+                  <minimumSize width="120" height="40"/>
+                  <opaque value="true"/>
+                  <orientation value="0"/>
+                  <preferredSize width="120" height="40"/>
+                  <rollover value="false"/>
+                </properties>
+                <clientProperties>
+                  <JToolBar.isRollover class="java.lang.Boolean" value="false"/>
+                </clientProperties>
+                <border type="none"/>
+                <children>
+                  <component id="5f136" class="javax.swing.JButton" binding="exitButton">
+                    <constraints/>
+                    <properties>
+                      <actionCommand value="Info"/>
+                      <background color="-11972523"/>
+                      <label value="Exit"/>
+                      <maximumSize width="120" height="40"/>
+                      <minimumSize width="120" height="40"/>
+                      <opaque value="false"/>
+                      <preferredSize width="120" height="40"/>
+                      <text value="Exit"/>
+                    </properties>
+                  </component>
+                </children>
+              </toolbar>
+            </children>
+          </grid>
         </children>
       </grid>
     </children>

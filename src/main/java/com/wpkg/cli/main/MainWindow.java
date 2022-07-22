@@ -1,10 +1,10 @@
 package com.wpkg.cli.main;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-
+import com.wpkg.cli.actions.ActionListeners;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 
 public class MainWindow {
@@ -12,18 +12,20 @@ public class MainWindow {
     private JPasswordField passwordField1;
     private JTextField textField1;
     private JButton Accept;
-    private JPanel LogonUI;
+    public JPanel LogonUI;
     private JButton refreshButton;
-    private JPanel WPKGManager;
-    private JList list1;
+    public JPanel WPKGManager;
+    public JList<String> ClientList;
+    private JButton selectButton;
+    private JButton killButton;
+    private JButton infoButton;
+    private JLabel WPKGLabel;
+    private JPanel Buttons;
+    private JPanel ClientManager;
+    private JButton exitButton;
 
     public MainWindow() {
-        Accept.addActionListener(actionEvent -> {
-            LogonUI.setVisible(false);
-            LogonUI.setEnabled(false);
-            WPKGManager.setVisible(true);
-            WPKGManager.setEnabled(true);
-        });
+        Accept.addActionListener(ActionListeners);
     }
 
     public static void main(String[] args) {
@@ -34,5 +36,6 @@ public class MainWindow {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
+
 
 }
