@@ -1,132 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.wpkg.cli.main.MainWindow">
   <grid id="27dc6" binding="WPKG" layout-manager="FormLayout">
+    <rowspec value="center:19dlu:noGrow"/>
+    <rowspec value="center:max(m;4px):grow"/>
+    <rowspec value="center:max(d;4px):grow"/>
+    <rowspec value="center:d:noGrow"/>
     <rowspec value="center:max(d;0px):noGrow"/>
-    <rowspec value="top:0dlu:noGrow"/>
-    <rowspec value="center:410px:noGrow"/>
+    <rowspec value="center:max(m;4px):grow"/>
     <colspec value="fill:d:grow"/>
     <constraints>
-      <xy x="283" y="7" width="761" height="767"/>
+      <xy x="283" y="7" width="761" height="403"/>
     </constraints>
     <properties>
       <visible value="true"/>
     </properties>
     <border type="none"/>
     <children>
-      <grid id="94ee0" binding="LogonUI" layout-manager="FormLayout">
-        <rowspec value="center:max(d;4px):noGrow"/>
-        <rowspec value="top:4dlu:noGrow"/>
-        <rowspec value="center:10dlu:noGrow"/>
-        <rowspec value="top:4dlu:noGrow"/>
-        <rowspec value="center:20dlu:noGrow"/>
-        <rowspec value="top:4dlu:noGrow"/>
-        <rowspec value="center:20dlu:noGrow"/>
-        <rowspec value="top:4dlu:noGrow"/>
-        <rowspec value="center:20dlu:noGrow"/>
-        <rowspec value="top:4dlu:noGrow"/>
-        <rowspec value="center:20dlu:noGrow"/>
-        <rowspec value="top:4dlu:noGrow"/>
-        <rowspec value="center:d:grow"/>
-        <rowspec value="center:23dlu:noGrow"/>
-        <rowspec value="top:4dlu:noGrow"/>
-        <colspec value="fill:0dlu:grow"/>
+      <vspacer id="fa269">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
+      </vspacer>
+      <component id="9a8f5" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
         <properties>
-          <visible value="false"/>
+          <font name="Noto Sans Display Italic" size="36" style="1"/>
+          <text value="W.P.K.G"/>
         </properties>
-        <border type="none"/>
-        <children>
-          <vspacer id="65e57">
-            <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-              <forms defaultalign-vert="false"/>
-            </constraints>
-          </vspacer>
-          <component id="e8001" class="javax.swing.JPasswordField" binding="passwordField1" default-binding="true">
-            <constraints>
-              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-              <forms defaultalign-horz="false"/>
-            </constraints>
-            <properties>
-              <inheritsPopupMenu value="false"/>
-              <minimumSize width="300" height="30"/>
-              <preferredSize width="300" height="30"/>
-            </properties>
-          </component>
-          <component id="3f2f0" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-              <forms defaultalign-horz="false"/>
-            </constraints>
-            <properties>
-              <font size="20"/>
-              <text value="Enter IP Address"/>
-            </properties>
-          </component>
-          <component id="ded93" class="javax.swing.JButton" binding="Accept">
-            <constraints>
-              <grid row="13" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-              <forms defaultalign-horz="false"/>
-            </constraints>
-            <properties>
-              <preferredSize width="150" height="45"/>
-              <text value="Button"/>
-            </properties>
-          </component>
-          <component id="2ee72" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-              <forms defaultalign-horz="false"/>
-            </constraints>
-            <properties>
-              <font size="20"/>
-              <text value="Enter AuthToken"/>
-            </properties>
-          </component>
-          <component id="9a8f5" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-              <forms/>
-            </constraints>
-            <properties>
-              <font name="Noto Sans Display Italic" size="36" style="1"/>
-              <text value="W.P.K.G"/>
-            </properties>
-          </component>
-          <component id="765f" class="javax.swing.JTextField" binding="textField1" default-binding="true">
-            <constraints>
-              <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-              <forms defaultalign-horz="false"/>
-            </constraints>
-            <properties>
-              <minimumSize width="300" height="30"/>
-              <preferredSize width="300" height="30"/>
-            </properties>
-          </component>
-          <vspacer id="1de35">
-            <constraints>
-              <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-              <forms defaultalign-vert="false"/>
-            </constraints>
-          </vspacer>
-        </children>
-      </grid>
+      </component>
+      <vspacer id="f487e">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
+        </constraints>
+      </vspacer>
       <grid id="3a5d8" binding="WPKGManager" layout-manager="FormLayout">
-        <rowspec value="center:d:noGrow"/>
-        <rowspec value="top:4dlu:noGrow"/>
-        <rowspec value="center:302px:noGrow"/>
-        <rowspec value="top:4dlu:noGrow"/>
-        <rowspec value="center:40px:noGrow"/>
+        <rowspec value="center:max(d;37px):grow(3.0)"/>
+        <rowspec value="center:max(d;37px):grow"/>
         <colspec value="fill:d:grow"/>
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
         <properties>
@@ -136,7 +53,7 @@
         <children>
           <toolbar id="ec891">
             <constraints>
-              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="-1" height="20"/>
               </grid>
               <forms defaultalign-horz="false"/>
@@ -162,24 +79,95 @@
               </component>
             </children>
           </toolbar>
-          <component id="60d34" class="javax.swing.JLabel">
+          <component id="e24f4" class="javax.swing.JList" binding="list1" default-binding="true">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-              <forms/>
-            </constraints>
-            <properties>
-              <font name="Noto Sans Display Italic" size="36" style="1"/>
-              <text value="W.P.K.G"/>
-            </properties>
-          </component>
-          <component id="a83a1" class="javax.swing.JList" binding="list1" default-binding="true">
-            <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="50"/>
               </grid>
               <forms defaultalign-vert="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <enabled value="true"/>
+              <model/>
+              <preferredSize width="99999" height="99999"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="94ee0" binding="LogonUI" layout-manager="FormLayout">
+        <rowspec value="center:max(d;27px):grow"/>
+        <rowspec value="top:5dlu:noGrow"/>
+        <rowspec value="center:max(d;27px):grow"/>
+        <rowspec value="top:5dlu:noGrow"/>
+        <rowspec value="center:max(d;27px):grow"/>
+        <rowspec value="top:5dlu:noGrow"/>
+        <rowspec value="center:max(d;35px):grow"/>
+        <rowspec value="top:5dlu:noGrow"/>
+        <rowspec value="center:max(d;47px):grow"/>
+        <colspec value="fill:0dlu:grow"/>
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <visible value="false"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="e8001" class="javax.swing.JPasswordField" binding="passwordField1" default-binding="true">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <inheritsPopupMenu value="false"/>
+              <minimumSize width="300" height="30"/>
+              <preferredSize width="300" height="30"/>
+            </properties>
+          </component>
+          <component id="3f2f0" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <font size="20"/>
+              <text value="Enter IP Address"/>
+            </properties>
+          </component>
+          <component id="ded93" class="javax.swing.JButton" binding="Accept">
+            <constraints>
+              <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <preferredSize width="150" height="45"/>
+              <text value="Button"/>
+            </properties>
+          </component>
+          <component id="2ee72" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <font size="20"/>
+              <text value="Enter AuthToken"/>
+            </properties>
+          </component>
+          <component id="765f" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+            <constraints>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <minimumSize width="300" height="30"/>
+              <preferredSize width="300" height="30"/>
+            </properties>
           </component>
         </children>
       </grid>

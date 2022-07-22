@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e473b54c-061d-4fbc-863e-5931d4d07e34" name="Changes" comment="Initial Commit" />
+    <list default="true" id="e473b54c-061d-4fbc-863e-5931d4d07e34" name="Changes" comment="Fix Error">
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/main/MainWindow.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/main/MainWindow.form" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,8 +58,8 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration name="MainWindow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MainWindow" />
+    <configuration name="com.wpkg.cli.main.MainWindow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.wpkg.cli.main.MainWindow" />
       <module name="WPKG-Cli" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -63,7 +67,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainWindow" />
+        <item itemvalue="Application.com.wpkg.cli.main.MainWindow" />
       </list>
     </recent_temporary>
   </component>
@@ -111,7 +115,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658482741851</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fix Error">
+      <created>1658482752061</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1658482752061</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -127,6 +138,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit" />
+    <MESSAGE value="Fix Error" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix Error" />
   </component>
 </project>
