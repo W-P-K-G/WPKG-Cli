@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="MainWindow">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.wpkg.cli.main.MainWindow">
   <grid id="27dc6" binding="WPKG" layout-manager="FormLayout">
     <rowspec value="center:max(d;0px):noGrow"/>
     <rowspec value="top:0dlu:noGrow"/>
