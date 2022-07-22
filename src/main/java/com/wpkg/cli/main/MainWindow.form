@@ -32,7 +32,7 @@
         <properties>
           <font name="Serif" size="36" style="3"/>
           <opaque value="false"/>
-          <text value="W.P.K.G"/>
+          <text value="✨ W.P.K.G ✨"/>
           <verifyInputWhenFocusTarget value="true"/>
         </properties>
       </component>
@@ -154,7 +154,7 @@
           <forms defaultalign-vert="false"/>
         </constraints>
         <properties>
-          <visible value="false"/>
+          <visible value="true"/>
         </properties>
         <border type="none"/>
         <children>

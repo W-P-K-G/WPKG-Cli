@@ -3,9 +3,6 @@ package com.wpkg.cli.main;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.wpkg.cli.actions.ActionListeners;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-
 
 public class MainWindow {
     private JPanel WPKG;
