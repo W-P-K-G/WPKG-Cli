@@ -25,7 +25,7 @@ public class MainWindow {
     private JButton exitButton;
 
     public MainWindow() {
-        Accept.addActionListener(ActionListeners);
+        Accept.addActionListener(ActionListeners::acceptAction);
     }
 
     public static void main(String[] args) {

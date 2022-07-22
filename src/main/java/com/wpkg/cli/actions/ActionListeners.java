@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class ActionListeners {
-    public void acceptAction(ActionEvent actionEvent) {
+    public static void acceptAction(ActionEvent actionEvent) {
         LogonUI.setVisible(false);
         WPKGManager.setVisible(true);
         DefaultListModel<String> ClientListModel = new DefaultListModel<String>();

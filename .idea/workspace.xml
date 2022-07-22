@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e473b54c-061d-4fbc-863e-5931d4d07e34" name="Changes" comment="Fix Resizing">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/actions/ActionListeners.java" afterDir="false" />
+    <list default="true" id="e473b54c-061d-4fbc-863e-5931d4d07e34" name="Changes" comment="Separate Listeners">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/main/MainWindow.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/main/MainWindow.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/actions/ActionListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/actions/ActionListeners.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/main/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/main/MainWindow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -130,7 +129,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658487185028</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Separate Listeners">
+      <created>1658493973693</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1658493973693</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -148,6 +154,7 @@
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="Fix Error" />
     <MESSAGE value="Fix Resizing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix Resizing" />
+    <MESSAGE value="Separate Listeners" />
+    <option name="LAST_COMMIT_MESSAGE" value="Separate Listeners" />
   </component>
 </project>
