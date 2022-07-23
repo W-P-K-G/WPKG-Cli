@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e473b54c-061d-4fbc-863e-5931d4d07e34" name="Changes" comment="feature: refresh button">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/gui/ClientManager.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/gui/ClientManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/gui/LogonUI.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/gui/LogonUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/gui/WPKGManager.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/gui/WPKGManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/main/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/actions/ActionListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/actions/Actions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/main/MainWindow.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/main/MainWindow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/networking/UDPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/networking/UDPClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/utilities/JSONParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/utilities/JSONParser.java" afterDir="false" />
-    </list>
+    <list default="true" id="e473b54c-061d-4fbc-863e-5931d4d07e34" name="Changes" comment="rework" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -260,7 +244,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658584584084</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="rework">
+      <created>1658611162323</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1658611162323</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -288,7 +279,8 @@
     <MESSAGE value="feature: disconnecting" />
     <MESSAGE value="fix: socket closed" />
     <MESSAGE value="feature: refresh button" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature: refresh button" />
+    <MESSAGE value="rework" />
+    <option name="LAST_COMMIT_MESSAGE" value="rework" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

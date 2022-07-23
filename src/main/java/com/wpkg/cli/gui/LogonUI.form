@@ -17,7 +17,7 @@
     <rowspec value="center:d:grow"/>
     <colspec value="fill:d:grow"/>
     <constraints>
-      <xy x="20" y="20" width="731" height="419"/>
+      <xy x="20" y="20" width="731" height="401"/>
     </constraints>
     <properties/>
     <border type="none"/>
