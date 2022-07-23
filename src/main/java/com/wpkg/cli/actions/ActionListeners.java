@@ -16,6 +16,7 @@ public class ActionListeners {
         DefaultListModel<String> ClientListModel = new DefaultListModel<String>();
         client = new UDPClient();
         client.sendString("register");
+        client.receiveString();
         client.sendString("/rat-list");
         JSONParser.setList(ClientListModel, client.receiveString());
         main.ClientList.setModel(ClientListModel);

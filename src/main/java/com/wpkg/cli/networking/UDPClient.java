@@ -49,6 +49,7 @@ public class UDPClient {
         }
     }
     public String receiveString(){
+        buf = new byte[65536];
         packet = new DatagramPacket(buf, buf.length);
 
         /* Receiving Packet */
