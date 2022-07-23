@@ -60,4 +60,8 @@ public class UDPClient {
         }
         return new String(packet.getData(), 0, packet.getLength());
     }
+    public void logOff(){
+        sendString("/disconnect");
+        socket.close();
+    }
 }

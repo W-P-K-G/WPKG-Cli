@@ -21,4 +21,10 @@ public class ActionListeners {
         JSONParser.setList(ClientListModel, client.receiveString());
         main.ClientList.setModel(ClientListModel);
     }
+
+    public static void logoffAction(ActionEvent actionEvent){
+        client.logOff();
+        main.WPKGManager.setVisible(false);
+        main.LogonUI.setVisible(true);
+    }
 }

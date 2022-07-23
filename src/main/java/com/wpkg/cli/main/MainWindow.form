@@ -3,6 +3,7 @@
   <grid id="27dc6" binding="WPKG" layout-manager="FormLayout">
     <rowspec value="center:19dlu:noGrow"/>
     <rowspec value="center:max(m;4px):grow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
     <rowspec value="center:max(d;4px):grow"/>
     <rowspec value="center:max(d;0px):noGrow"/>
     <rowspec value="center:d:noGrow"/>
@@ -20,7 +21,7 @@
     <children>
       <vspacer id="fa269">
         <constraints>
-          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
       </vspacer>
@@ -44,7 +45,7 @@
       </vspacer>
       <grid id="3a5d8" binding="WPKGManager" layout-manager="BorderLayout" hgap="0" vgap="0">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-vert="false"/>
         </constraints>
         <properties>
@@ -75,7 +76,7 @@
                   <minimumSize width="120" height="40"/>
                   <opaque value="true"/>
                   <orientation value="0"/>
-                  <preferredSize width="480" height="40"/>
+                  <preferredSize width="600" height="40"/>
                   <rollover value="false"/>
                 </properties>
                 <clientProperties>
@@ -130,6 +131,72 @@
                       <opaque value="false"/>
                       <preferredSize width="120" height="40"/>
                       <text value="Refresh"/>
+                    </properties>
+                  </component>
+                  <component id="464cc" class="javax.swing.JButton" binding="logOffButton">
+                    <constraints/>
+                    <properties>
+                      <background color="-11972523"/>
+                      <maximumSize width="120" height="40"/>
+                      <minimumSize width="120" height="40"/>
+                      <opaque value="false"/>
+                      <preferredSize width="120" height="40"/>
+                      <text value="Log Off"/>
+                    </properties>
+                  </component>
+                </children>
+              </toolbar>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <grid id="d4626" binding="ClientManager" layout-manager="FormLayout">
+        <rowspec value="center:d:grow"/>
+        <rowspec value="center:max(d;0px):noGrow"/>
+        <colspec value="fill:d:grow"/>
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <visible value="false"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <grid id="fb80a" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <toolbar id="ecf46">
+                <constraints/>
+                <properties>
+                  <maximumSize width="120" height="40"/>
+                  <minimumSize width="120" height="40"/>
+                  <opaque value="true"/>
+                  <orientation value="0"/>
+                  <preferredSize width="120" height="40"/>
+                  <rollover value="false"/>
+                </properties>
+                <clientProperties>
+                  <JToolBar.isRollover class="java.lang.Boolean" value="false"/>
+                </clientProperties>
+                <border type="none"/>
+                <children>
+                  <component id="5f136" class="javax.swing.JButton" binding="exitButton">
+                    <constraints/>
+                    <properties>
+                      <actionCommand value="Info"/>
+                      <background color="-11972523"/>
+                      <label value="Exit"/>
+                      <maximumSize width="120" height="40"/>
+                      <minimumSize width="120" height="40"/>
+                      <opaque value="false"/>
+                      <preferredSize width="120" height="40"/>
+                      <text value="Exit"/>
                     </properties>
                   </component>
                 </children>
@@ -214,61 +281,6 @@
               <preferredSize width="300" height="30"/>
             </properties>
           </component>
-        </children>
-      </grid>
-      <grid id="d4626" binding="ClientManager" layout-manager="FormLayout">
-        <rowspec value="center:d:grow"/>
-        <rowspec value="center:max(d;0px):noGrow"/>
-        <colspec value="fill:d:grow"/>
-        <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false"/>
-          <forms defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <visible value="false"/>
-        </properties>
-        <border type="none"/>
-        <children>
-          <grid id="fb80a" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <forms/>
-            </constraints>
-            <properties/>
-            <border type="none"/>
-            <children>
-              <toolbar id="ecf46">
-                <constraints/>
-                <properties>
-                  <maximumSize width="120" height="40"/>
-                  <minimumSize width="120" height="40"/>
-                  <opaque value="true"/>
-                  <orientation value="0"/>
-                  <preferredSize width="120" height="40"/>
-                  <rollover value="false"/>
-                </properties>
-                <clientProperties>
-                  <JToolBar.isRollover class="java.lang.Boolean" value="false"/>
-                </clientProperties>
-                <border type="none"/>
-                <children>
-                  <component id="5f136" class="javax.swing.JButton" binding="exitButton">
-                    <constraints/>
-                    <properties>
-                      <actionCommand value="Info"/>
-                      <background color="-11972523"/>
-                      <label value="Exit"/>
-                      <maximumSize width="120" height="40"/>
-                      <minimumSize width="120" height="40"/>
-                      <opaque value="false"/>
-                      <preferredSize width="120" height="40"/>
-                      <text value="Exit"/>
-                    </properties>
-                  </component>
-                </children>
-              </toolbar>
-            </children>
-          </grid>
         </children>
       </grid>
     </children>
