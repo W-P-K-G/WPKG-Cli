@@ -3,11 +3,11 @@ package com.wpkg.cli.networking;
 import java.io.IOException;
 import java.net.*;
 
-import com.wpkg.cli.main.MainWindow;
+import com.wpkg.cli.main.main;
 
 
+@SuppressWarnings("FieldMayBeFinal")
 public class UDPClient {
-    public static MainWindow main;
     private DatagramSocket socket;
     private InetAddress address;
     private String[] portAddress;
@@ -30,7 +30,7 @@ public class UDPClient {
         }
 
         /* Getting IP Address */
-        portAddress = main.IPField.getText().split(":");
+        portAddress = main.LogonUI.IPField.getText().split(":");
         try {
             address = InetAddress.getByName(portAddress[0]);
         } catch (UnknownHostException e) {

@@ -3,8 +3,6 @@ import com.wpkg.cli.networking.ClientJSON;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import javax.swing.*;
-
 public class JSONParser {
     public static ClientJSON getClientList(String json){
         ObjectMapper objectMapper = new ObjectMapper();

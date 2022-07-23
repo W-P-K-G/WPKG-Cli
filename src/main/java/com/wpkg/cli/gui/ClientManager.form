@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.wpkg.cli.gui.ClientManager">
+  <grid id="27dc6" binding="clientManager" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="704" height="412"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <splitpane id="32fe2">
+        <constraints border-constraint="Center"/>
+        <properties>
+          <minimumSize width="164" height="204"/>
+          <preferredSize width="99999" height="99999"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="a045a" class="javax.swing.JList" binding="list1" default-binding="true">
+            <constraints>
+              <splitpane position="right"/>
+            </constraints>
+            <properties/>
+          </component>
+          <grid id="41107" layout-manager="FormLayout">
+            <rowspec value="center:max(d;20px):noGrow"/>
+            <rowspec value="top:4dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:4dlu:noGrow"/>
+            <rowspec value="center:d:noGrow"/>
+            <rowspec value="top:4dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:4dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:4dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:4dlu:noGrow"/>
+            <rowspec value="center:23px:noGrow"/>
+            <rowspec value="top:10dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="center:d:noGrow"/>
+            <rowspec value="top:4dlu:noGrow"/>
+            <rowspec value="center:d:noGrow"/>
+            <colspec value="fill:d:grow"/>
+            <constraints>
+              <splitpane position="left"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="41016" class="javax.swing.JProgressBar" binding="cpuBar">
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false" defaultalign-vert="false"/>
+                </constraints>
+                <properties>
+                  <orientation value="0"/>
+                  <preferredSize width="200" height="20"/>
+                  <string value="0%"/>
+                  <value value="50"/>
+                </properties>
+              </component>
+              <vspacer id="7c654">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-vert="false"/>
+                </constraints>
+              </vspacer>
+              <component id="6e92e" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <text value="CPU Usage"/>
+                </properties>
+              </component>
+              <component id="eb1a" class="javax.swing.JProgressBar" binding="ramBar">
+                <constraints>
+                  <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false" defaultalign-vert="false"/>
+                </constraints>
+                <properties>
+                  <orientation value="0"/>
+                  <preferredSize width="200" height="20"/>
+                  <string value="0%"/>
+                  <value value="50"/>
+                </properties>
+              </component>
+              <component id="38e9b" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <text value="RAM Usage"/>
+                </properties>
+              </component>
+              <component id="f1e65" class="javax.swing.JProgressBar" binding="gpuBar">
+                <constraints>
+                  <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false" defaultalign-vert="false"/>
+                </constraints>
+                <properties>
+                  <orientation value="0"/>
+                  <preferredSize width="200" height="20"/>
+                  <requestFocusEnabled value="true"/>
+                  <string value="0%"/>
+                  <value value="50"/>
+                </properties>
+              </component>
+              <component id="34162" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <text value="GPU Usage"/>
+                </properties>
+              </component>
+              <component id="37d51" class="javax.swing.JButton" binding="cryptoManager">
+                <constraints>
+                  <grid row="14" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false" defaultalign-vert="false"/>
+                </constraints>
+                <properties>
+                  <label value="Crypto Manager"/>
+                  <preferredSize width="144" height="40"/>
+                  <text value="Crypto Manager"/>
+                  <visible value="true"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </splitpane>
+      <grid id="3607c" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints border-constraint="South"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <toolbar id="5ee11">
+            <constraints/>
+            <properties>
+              <maximumSize width="120" height="40"/>
+              <minimumSize width="120" height="40"/>
+              <opaque value="true"/>
+              <orientation value="0"/>
+              <preferredSize width="120" height="40"/>
+              <rollover value="false"/>
+            </properties>
+            <clientProperties>
+              <JToolBar.isRollover class="java.lang.Boolean" value="false"/>
+            </clientProperties>
+            <border type="none"/>
+            <children>
+              <component id="4f1fd" class="javax.swing.JButton" binding="exitButton">
+                <constraints/>
+                <properties>
+                  <actionCommand value="Info"/>
+                  <background color="-11972523"/>
+                  <label value="Log Off"/>
+                  <maximumSize width="120" height="40"/>
+                  <minimumSize width="120" height="40"/>
+                  <opaque value="false"/>
+                  <preferredSize width="120" height="40"/>
+                  <text value="Log Off"/>
+                </properties>
+              </component>
+            </children>
+          </toolbar>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
