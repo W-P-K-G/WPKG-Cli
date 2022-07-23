@@ -3,6 +3,8 @@ package com.wpkg.cli.actions;
 import com.wpkg.cli.networking.*;
 import com.wpkg.cli.main.*;
 import com.wpkg.cli.utilities.JSONParser;
+import com.wpkg.cli.utilities.Tools;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
@@ -10,15 +12,15 @@ public class ActionListeners {
     public static UDPClient client;
     public static MainWindow main;
 
+    private static DefaultListModel<String> ClientListModel = new DefaultListModel<String>();
     public static void acceptAction(ActionEvent actionEvent) {
         main.LogonUI.setVisible(false);
         main.WPKGManager.setVisible(true);
-        DefaultListModel<String> ClientListModel = new DefaultListModel<String>();
+
         client = new UDPClient();
         client.sendString("register");
         client.receiveString();
-        client.sendString("/rat-list");
-        JSONParser.setList(ClientListModel, client.receiveString());
+        Tools.refreshClientlist(ClientListModel, client);
         main.ClientList.setModel(ClientListModel);
     }
 
@@ -26,5 +28,9 @@ public class ActionListeners {
         client.logOff();
         main.WPKGManager.setVisible(false);
         main.LogonUI.setVisible(true);
+    }
+
+    public static void refreshAction(ActionEvent actionEvent){
+        Tools.refreshClientlist(ClientListModel, client);
     }
 }
