@@ -33,4 +33,9 @@ public class ActionListeners {
     public static void refreshAction(ActionEvent actionEvent){
         Tools.refreshClientlist(ClientListModel, client);
     }
+    public  static void killAction(ActionEvent actionEvent){
+        client.sendString("/close "+ Tools.list.clients[main.ClientList.getSelectedIndex()].id);
+        client.receiveString();
+        Tools.refreshClientlist(ClientListModel, client);
+    }
 }

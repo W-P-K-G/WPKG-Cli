@@ -34,6 +34,7 @@ public class MainWindow {
         logOffButton.addActionListener(ActionListeners::logoffAction);
         exitButton.addActionListener(ActionListeners::logoffAction);
         refreshButton.addActionListener(ActionListeners::refreshAction);
+        killButton.addActionListener(ActionListeners::killAction);
 
         ActionListeners.main = this;
         UDPClient.main = this;

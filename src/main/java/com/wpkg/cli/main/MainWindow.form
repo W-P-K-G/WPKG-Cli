@@ -128,6 +128,7 @@
                       <opaque value="false"/>
                       <preferredSize width="120" height="40"/>
                       <text value="Refresh"/>
+                      <visible value="true"/>
                     </properties>
                   </component>
                   <component id="464cc" class="javax.swing.JButton" binding="logOffButton">
@@ -153,7 +154,7 @@
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
-          <visible value="true"/>
+          <visible value="false"/>
         </properties>
         <border type="none"/>
         <children>
@@ -313,6 +314,7 @@
                       <label value="Crypto Manager"/>
                       <preferredSize width="144" height="40"/>
                       <text value="Crypto Manager"/>
+                      <visible value="true"/>
                     </properties>
                   </component>
                 </children>
@@ -337,7 +339,7 @@
           <forms defaultalign-vert="false"/>
         </constraints>
         <properties>
-          <visible value="false"/>
+          <visible value="true"/>
         </properties>
         <border type="none"/>
         <children>
