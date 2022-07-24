@@ -72,7 +72,7 @@
           <archive>
             <manifest>
               <addClasspath>false</addClasspath>
-              <mainClass>com.wpkg.cli.main.main</mainClass>
+              <mainClass>com.wpkg.cli.main.Main</mainClass>
             </manifest>
           </archive>
           <descriptors>

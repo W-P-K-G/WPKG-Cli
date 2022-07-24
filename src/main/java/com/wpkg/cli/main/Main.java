@@ -8,15 +8,15 @@ import com.wpkg.cli.gui.WPKGManager;
 
 import javax.swing.*;
 
-public class main {
+public class Main {
 
     public static JFrame frame = new JFrame("WPKG-CLI");
     public static LogonUI LogonUI;
     public static WPKGManager WPKGManager;
     public static ClientManager ClientManager;
 
-    @SuppressWarnings("MethodNameSameAsClassName")
-    public static void main(String[] args){
+    public static void main(String[] args)
+    {
         // Dark-mode on
         FlatDarkLaf.setup();
 

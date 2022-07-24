@@ -3,7 +3,7 @@ package com.wpkg.cli.networking;
 import java.io.IOException;
 import java.net.*;
 
-import com.wpkg.cli.main.main;
+import javax.swing.*;
 
 
 @SuppressWarnings("FieldMayBeFinal")
@@ -40,28 +40,38 @@ public class UDPClient {
         socket.receive(packet);
     }
 
-    public void sendString(String msg){
-        byte[] buf = msg.getBytes();
-        DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
+    public void sendString(String msg)
+    {
+        try
+        {
+            byte[] buf = msg.getBytes();
+            DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
 
-        /* Sending Packet */
-        try {
+            /* Sending Packet */
             socket.send(packet);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Can't send message: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             throw new RuntimeException(e);
         }
     }
-    public String receiveString(){
-        byte[] buf = new byte[65536];
-        DatagramPacket packet = new DatagramPacket(buf, buf.length);
+    public String receiveString()
+    {
+        try
+        {
+            byte[] buf = new byte[65536];
+            DatagramPacket packet = new DatagramPacket(buf, buf.length);
 
-        /* Receiving Packet */
-        try {
+            /* Receiving Packet */
             socket.receive(packet);
-        } catch (IOException e) {
+
+            return new String(packet.getData(), 0, packet.getLength());
+        }
+        catch (IOException e)
+        {
+            JOptionPane.showMessageDialog(null, "Can't receive message: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             throw new RuntimeException(e);
         }
-        return new String(packet.getData(), 0, packet.getLength());
     }
     public void logOff(){
         if(socket.isClosed()) return;

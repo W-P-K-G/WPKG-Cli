@@ -18,15 +18,15 @@ public class Actions {
      */
     public static void acceptAction() {
         try {
-            String[] portAddress = main.LogonUI.IPField.getText().split(":");
+            String[] portAddress = Main.LogonUI.IPField.getText().split(":");
             client = new UDPClient(portAddress[0],Integer.parseInt(portAddress[1]));
             client.sendRegisterPing();
 
-            main.LogonUI.logonUI.setVisible(false);
-            main.WPKGManager.wpkgManager.setVisible(true);
-            main.frame.setContentPane(main.WPKGManager.wpkgManager);
+            Main.LogonUI.logonUI.setVisible(false);
+            Main.WPKGManager.wpkgManager.setVisible(true);
+            Main.frame.setContentPane(Main.WPKGManager.wpkgManager);
             Tools.refreshClientlist(clientModel, client);
-            main.WPKGManager.ClientList.setModel(clientModel);
+            Main.WPKGManager.ClientList.setModel(clientModel);
         } catch (IOException e){
           JOptionPane.showMessageDialog(null, "Can't connect to server: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
         }
@@ -38,9 +38,9 @@ public class Actions {
      */
     public static void logoffAction(){
         client.logOff();
-        main.WPKGManager.wpkgManager.setVisible(false);
-        main.LogonUI.logonUI.setVisible(true);
-        main.frame.setContentPane(main.LogonUI.logonUI);
+        Main.WPKGManager.wpkgManager.setVisible(false);
+        Main.LogonUI.logonUI.setVisible(true);
+        Main.frame.setContentPane(Main.LogonUI.logonUI);
     }
 
     public static void refreshClientAction(){
@@ -48,16 +48,16 @@ public class Actions {
     }
 
     public static void killAction(){
-        client.sendString("/close "+ Tools.clientJSON.clients[main.WPKGManager.ClientList.getSelectedIndex()].id);
+        client.sendString("/close "+ Tools.clientJSON.clients[Main.WPKGManager.ClientList.getSelectedIndex()].id);
         client.receiveString();
         Tools.refreshClientlist(clientModel, client);
     }
 
     public static void joinAction(){
-        client.sendString("/join "+ Tools.clientJSON.clients[main.WPKGManager.ClientList.getSelectedIndex()].id);
-        main.ClientManager.clientManager.setVisible(true);
-        main.WPKGManager.wpkgManager.setVisible(false);
-        main.frame.setContentPane(main.ClientManager.clientManager);
+        client.sendString("/join "+ Tools.clientJSON.clients[Main.WPKGManager.ClientList.getSelectedIndex()].id);
+        Main.ClientManager.clientManager.setVisible(true);
+        Main.WPKGManager.wpkgManager.setVisible(false);
+        Main.frame.setContentPane(Main.ClientManager.clientManager);
         client.receiveString();
     }
 
@@ -67,9 +67,9 @@ public class Actions {
      */
     public static void unjoinAction(){
         client.sendString("/unjoin");
-        main.ClientManager.clientManager.setVisible(false);
-        main.WPKGManager.wpkgManager.setVisible(true);
-        main.frame.setContentPane(main.WPKGManager.wpkgManager);
+        Main.ClientManager.clientManager.setVisible(false);
+        Main.WPKGManager.wpkgManager.setVisible(true);
+        Main.frame.setContentPane(Main.WPKGManager.wpkgManager);
         client.receiveString();
     }
 
