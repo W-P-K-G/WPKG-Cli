@@ -31,9 +31,26 @@ public class Actions {
     public static void refreshAction(){
         Tools.refreshClientlist(ClientListModel, client);
     }
-    public  static void killAction(){
+
+    public static void killAction(){
         client.sendString("/close "+ Tools.list.clients[main.WPKGManager.ClientList.getSelectedIndex()].id);
         client.receiveString();
         Tools.refreshClientlist(ClientListModel, client);
+    }
+
+    public static void joinAction(){
+        client.sendString("/join "+ Tools.list.clients[main.WPKGManager.ClientList.getSelectedIndex()].id);
+        main.ClientManager.clientManager.setVisible(true);
+        main.WPKGManager.wpkgManager.setVisible(false);
+        main.frame.setContentPane(main.ClientManager.clientManager);
+        client.receiveString();
+    }
+
+    public static void unjoinAction(){
+        client.sendString("/unjoin");
+        main.ClientManager.clientManager.setVisible(false);
+        main.WPKGManager.wpkgManager.setVisible(true);
+        main.frame.setContentPane(main.WPKGManager.wpkgManager);
+        client.receiveString();
     }
 }

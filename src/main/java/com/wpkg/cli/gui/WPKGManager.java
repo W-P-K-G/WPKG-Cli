@@ -3,6 +3,7 @@ package com.wpkg.cli.gui;
 import com.wpkg.cli.actions.Actions;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("unused")
 public class WPKGManager {
@@ -21,5 +22,6 @@ public class WPKGManager {
         logOffButton.addActionListener(actionEvent -> Actions.logoffAction());
         refreshButton.addActionListener(actionEvent -> Actions.refreshAction());
         killButton.addActionListener(ActionEvent -> Actions.killAction());
+        selectButton.addActionListener(ActionEvent -> Actions.joinAction());
     }
 }
