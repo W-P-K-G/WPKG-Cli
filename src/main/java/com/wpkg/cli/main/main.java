@@ -2,6 +2,7 @@ package com.wpkg.cli.main;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.wpkg.cli.actions.Actions;
+import com.wpkg.cli.gui.ClientManager;
 import com.wpkg.cli.gui.LogonUI;
 import com.wpkg.cli.gui.WPKGManager;
 
@@ -12,6 +13,7 @@ public class main {
     public static JFrame frame = new JFrame("WPKG-CLI");
     public static LogonUI LogonUI;
     public static WPKGManager WPKGManager;
+    public static ClientManager ClientManager;
 
     @SuppressWarnings("MethodNameSameAsClassName")
     public static void main(String[] args){
@@ -21,6 +23,7 @@ public class main {
         // Declare Windows
         LogonUI = new LogonUI();
         WPKGManager = new WPKGManager();
+        ClientManager = new ClientManager();
 
         // Disconnect on close
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {

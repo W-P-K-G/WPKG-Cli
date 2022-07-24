@@ -153,17 +153,17 @@
             </clientProperties>
             <border type="none"/>
             <children>
-              <component id="4f1fd" class="javax.swing.JButton" binding="exitButton">
+              <component id="4f1fd" class="javax.swing.JButton" binding="unjoinButton">
                 <constraints/>
                 <properties>
                   <actionCommand value="Info"/>
                   <background color="-11972523"/>
-                  <label value="Log Off"/>
+                  <label value="Disconnect"/>
                   <maximumSize width="120" height="40"/>
                   <minimumSize width="120" height="40"/>
                   <opaque value="false"/>
                   <preferredSize width="120" height="40"/>
-                  <text value="Log Off"/>
+                  <text value="Disconnect"/>
                 </properties>
               </component>
             </children>
