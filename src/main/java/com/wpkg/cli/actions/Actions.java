@@ -1,7 +1,7 @@
 package com.wpkg.cli.actions;
 
-import com.wpkg.cli.networking.*;
-import com.wpkg.cli.main.*;
+import com.wpkg.cli.main.main;
+import com.wpkg.cli.networking.UDPClient;
 import com.wpkg.cli.utilities.Tools;
 
 import javax.swing.*;
