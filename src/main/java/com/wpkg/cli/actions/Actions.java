@@ -1,6 +1,6 @@
 package com.wpkg.cli.actions;
 
-import com.wpkg.cli.main.main;
+import com.wpkg.cli.main.Main;
 import com.wpkg.cli.networking.UDPClient;
 import com.wpkg.cli.utilities.Tools;
 
@@ -74,7 +74,7 @@ public class Actions {
         Tools.refreshCommandslist(commandsModel, client);
     }
     public static void executeAction(){
-        client.sendString("/join " + Tools.commandsJSON.commands[main.ClientManager.commandList.getSelectedIndex()].name);
+        client.sendString("/join " + Tools.commandsJSON.commands[Main.ClientManager.commandList.getSelectedIndex()].name);
         client.receiveString(); //TODO: dokończyć to gówno
     }
 }
