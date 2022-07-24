@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e473b54c-061d-4fbc-863e-5931d4d07e34" name="Changes" comment="fix: add joined">
+    <list default="true" id="e473b54c-061d-4fbc-863e-5931d4d07e34" name="Changes" comment="fix: vairable names">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/actions/Actions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/actions/Actions.java" afterDir="false" />
     </list>
@@ -264,7 +264,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658669773903</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="fix: vairable names">
+      <created>1658669836405</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1658669836405</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -295,7 +302,8 @@
     <MESSAGE value="rework" />
     <MESSAGE value="feature: command list" />
     <MESSAGE value="fix: add joined" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: add joined" />
+    <MESSAGE value="fix: vairable names" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: vairable names" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

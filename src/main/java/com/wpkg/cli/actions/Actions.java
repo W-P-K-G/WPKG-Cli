@@ -43,7 +43,7 @@ public class Actions {
         main.frame.setContentPane(main.LogonUI.logonUI);
     }
 
-    public static void refreshAction(){
+    public static void refreshClientAction(){
         Tools.refreshClientlist(clientModel, client);
     }
 
