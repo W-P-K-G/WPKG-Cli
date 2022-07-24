@@ -5,12 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e473b54c-061d-4fbc-863e-5931d4d07e34" name="Changes" comment="rework">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/actions/Actions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/actions/Actions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/gui/ClientManager.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/gui/ClientManager.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/gui/ClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/gui/ClientManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/gui/WPKGManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/gui/WPKGManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/main/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/main/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/networking/ClientJSON.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/utilities/JSONParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/utilities/JSONParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/utilities/Tools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/wpkg/cli/utilities/Tools.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,27 +61,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;226&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/rafal/Pulpit/WPKG-Cli&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "226",
+    "last_opened_file_path": "/home/rafal/Pulpit/WPKG-Cli",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "copyright"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;PLAIN_TEXT&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "PLAIN_TEXT"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean install" />

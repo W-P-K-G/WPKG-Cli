@@ -15,12 +15,6 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="a045a" class="javax.swing.JList" binding="list1" default-binding="true">
-            <constraints>
-              <splitpane position="right"/>
-            </constraints>
-            <properties/>
-          </component>
           <grid id="41107" layout-manager="FormLayout">
             <rowspec value="center:max(d;20px):noGrow"/>
             <rowspec value="top:4dlu:noGrow"/>
@@ -129,6 +123,62 @@
                   <visible value="true"/>
                 </properties>
               </component>
+            </children>
+          </grid>
+          <grid id="3018" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <splitpane position="right"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="67656" class="javax.swing.JList" binding="list1" default-binding="true">
+                <constraints border-constraint="Center"/>
+                <properties/>
+              </component>
+              <toolbar id="3fb73">
+                <constraints border-constraint="South"/>
+                <properties>
+                  <maximumSize width="120" height="40"/>
+                  <minimumSize width="120" height="40"/>
+                  <opaque value="true"/>
+                  <orientation value="0"/>
+                  <preferredSize width="120" height="40"/>
+                  <rollover value="false"/>
+                </properties>
+                <clientProperties>
+                  <JToolBar.isRollover class="java.lang.Boolean" value="false"/>
+                </clientProperties>
+                <border type="none"/>
+                <children>
+                  <component id="ef5e5" class="javax.swing.JButton" binding="executeButton">
+                    <constraints/>
+                    <properties>
+                      <actionCommand value="Info"/>
+                      <background color="-11972523"/>
+                      <label value="Execute"/>
+                      <maximumSize width="120" height="40"/>
+                      <minimumSize width="120" height="40"/>
+                      <opaque value="false"/>
+                      <preferredSize width="120" height="40"/>
+                      <text value="Execute"/>
+                    </properties>
+                  </component>
+                  <component id="19549" class="javax.swing.JButton" binding="refreshButton">
+                    <constraints/>
+                    <properties>
+                      <actionCommand value="Info"/>
+                      <background color="-11972523"/>
+                      <label value="Refresh"/>
+                      <maximumSize width="120" height="40"/>
+                      <minimumSize width="120" height="40"/>
+                      <opaque value="false"/>
+                      <preferredSize width="120" height="40"/>
+                      <text value="Refresh"/>
+                    </properties>
+                  </component>
+                </children>
+              </toolbar>
             </children>
           </grid>
         </children>

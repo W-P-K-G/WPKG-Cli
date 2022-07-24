@@ -10,14 +10,17 @@ import java.awt.event.ActionListener;
 public class ClientManager {
     public JPanel clientManager;
     private JButton unjoinButton;
-    private JList<String> list1;
     private JProgressBar cpuBar;
     private JProgressBar ramBar;
     private JProgressBar gpuBar;
     private JButton cryptoManager;
+    private JList list1;
+    private JButton executeButton;
+    private JButton refreshButton;
 
     public ClientManager() {
         unjoinButton.addActionListener(actionEvent -> Actions.unjoinAction());
+        refreshButton.addActionListener(actionEvent -> Actions.refreshCommandsList());
     }
 }
 // TODO: ClientManager
