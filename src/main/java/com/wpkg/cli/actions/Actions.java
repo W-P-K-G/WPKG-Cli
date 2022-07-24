@@ -5,20 +5,33 @@ import com.wpkg.cli.main.*;
 import com.wpkg.cli.utilities.Tools;
 
 import javax.swing.*;
+import java.io.IOException;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 
 public class Actions {
     public static UDPClient client;
     private static final DefaultListModel<String> ClientListModel = new DefaultListModel<>();
     public static void acceptAction() {
-        main.LogonUI.logonUI.setVisible(false);
-        main.WPKGManager.wpkgManager.setVisible(true);
-        main.frame.setContentPane(main.WPKGManager.wpkgManager);
 
-        client = new UDPClient();
-        client.sendString("register");
-        client.receiveString();
-        Tools.refreshClientlist(ClientListModel, client);
-        main.WPKGManager.ClientList.setModel(ClientListModel);
+        try
+        {
+            String[] portAddress = main.LogonUI.IPField.getText().split(":");
+
+            client = new UDPClient(portAddress[0],Integer.parseInt(portAddress[1]));
+
+            client.sendRegisterPing();
+
+            main.LogonUI.logonUI.setVisible(false);
+            main.WPKGManager.wpkgManager.setVisible(true);
+            main.frame.setContentPane(main.WPKGManager.wpkgManager);
+            Tools.refreshClientlist(ClientListModel, client);
+            main.WPKGManager.ClientList.setModel(ClientListModel);
+        }
+        catch (IOException e)
+        {
+            JOptionPane.showMessageDialog(null,"Can't connect to server: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public static void logoffAction(){

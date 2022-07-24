@@ -10,36 +10,39 @@ import com.wpkg.cli.main.main;
 public class UDPClient {
     private DatagramSocket socket;
     private InetAddress address;
-    private String[] portAddress;
-    private DatagramPacket packet;
-    private byte[] buf;
 
-    public UDPClient(){
+    private int port;
+
+    public UDPClient(String ip,int port) throws SocketException, UnknownHostException
+    {
+        /* Getting IP Address */
+        this.address = InetAddress.getByName(ip);
+        this.port = port;
+
         /* Creating Socket */
-        try {
-            socket = new DatagramSocket();
-        } catch (SocketException e) {
-            throw new RuntimeException(e);
-        }
+        socket = new DatagramSocket();
 
         /* Setting Timeout */
-        try {
-            socket.setSoTimeout(10000);
-        } catch (SocketException e) {
-            throw new RuntimeException(e);
-        }
-
-        /* Getting IP Address */
-        portAddress = main.LogonUI.IPField.getText().split(":");
-        try {
-            address = InetAddress.getByName(portAddress[0]);
-        } catch (UnknownHostException e) {
-            throw new RuntimeException(e);
-        }
+        socket.setSoTimeout(2000);
     }
+
+    public void sendRegisterPing() throws IOException
+    {
+        //this method don't using receiveString and sendString method because using IOException to properly error handling
+        byte[] buf = "register".getBytes();
+        DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
+
+        socket.send(packet);
+
+        byte[] buf2 = new byte[65536];
+        packet = new DatagramPacket(buf2, buf2.length);
+
+        socket.receive(packet);
+    }
+
     public void sendString(String msg){
-        buf = msg.getBytes();
-        packet = new DatagramPacket(buf, buf.length, address, Integer.parseInt(portAddress[1]));
+        byte[] buf = msg.getBytes();
+        DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
 
         /* Sending Packet */
         try {
@@ -49,8 +52,8 @@ public class UDPClient {
         }
     }
     public String receiveString(){
-        buf = new byte[65536];
-        packet = new DatagramPacket(buf, buf.length);
+        byte[] buf = new byte[65536];
+        DatagramPacket packet = new DatagramPacket(buf, buf.length);
 
         /* Receiving Packet */
         try {

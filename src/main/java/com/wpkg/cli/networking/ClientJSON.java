@@ -6,5 +6,7 @@ public class ClientJSON {
     public static class clients {
         public String name;
         public int id;
+
+        public boolean joined;
     }
 }
