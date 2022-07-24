@@ -9,6 +9,7 @@ public class JSONParser {
         public static class clients {
             public String name;
             public int id;
+            public boolean joined;
         }
     }
     public static class CommandsJSON{
