@@ -3,8 +3,6 @@ package com.wpkg.cli.gui;
 import com.wpkg.cli.actions.Actions;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 @SuppressWarnings("unused")
 public class ClientManager {
@@ -14,7 +12,7 @@ public class ClientManager {
     private JProgressBar ramBar;
     private JProgressBar gpuBar;
     private JButton cryptoManager;
-    private JList list1;
+    public JList commandList;
     private JButton executeButton;
     private JButton refreshButton;
 

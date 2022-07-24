@@ -79,3 +79,4 @@ public class UDPClient {
         socket.close();
     }
 }
+// TODO: dialogi w try catch

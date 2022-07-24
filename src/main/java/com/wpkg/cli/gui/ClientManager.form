@@ -132,7 +132,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="67656" class="javax.swing.JList" binding="list1" default-binding="true">
+              <component id="67656" class="javax.swing.JList" binding="commandList">
                 <constraints border-constraint="Center"/>
                 <properties/>
               </component>
