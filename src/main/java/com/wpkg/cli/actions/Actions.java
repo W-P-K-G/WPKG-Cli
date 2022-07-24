@@ -5,26 +5,31 @@ import com.wpkg.cli.main.*;
 import com.wpkg.cli.utilities.Tools;
 
 import javax.swing.*;
+import java.io.IOException;
 
 public class Actions {
     public static UDPClient client;
     private static final DefaultListModel<String> clientModel = new DefaultListModel<>();
     private static final DefaultListModel<String> commandsModel = new DefaultListModel<>();
 
-    
+
     /**
      * Login Manager Actions:
      */
     public static void acceptAction() {
-        main.LogonUI.logonUI.setVisible(false);
-        main.WPKGManager.wpkgManager.setVisible(true);
-        main.frame.setContentPane(main.WPKGManager.wpkgManager);
+        try {
+            String[] portAddress = main.LogonUI.IPField.getText().split(":");
+            client = new UDPClient(portAddress[0],Integer.parseInt(portAddress[1]));
+            client.sendRegisterPing();
 
-        client = new UDPClient();
-        client.sendString("register");
-        client.receiveString();
-        Tools.refreshClientlist(clientModel, client);
-        main.WPKGManager.ClientList.setModel(clientModel);
+            main.LogonUI.logonUI.setVisible(false);
+            main.WPKGManager.wpkgManager.setVisible(true);
+            main.frame.setContentPane(main.WPKGManager.wpkgManager);
+            Tools.refreshClientlist(ClientListModel, client);
+            main.WPKGManager.ClientList.setModel(ClientListModel);
+        } catch (IOException e){
+          JOptionPane.showMessageDialog(null, "Can't connect to server: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        }
     }
 
 
@@ -38,18 +43,18 @@ public class Actions {
         main.frame.setContentPane(main.LogonUI.logonUI);
     }
 
-    public static void refreshClientAction(){
-        Tools.refreshClientlist(clientModel, client);
+    public static void refreshAction(){
+        Tools.refreshClientlist(ClientListModel, client);
     }
 
     public static void killAction(){
-        client.sendString("/close "+ Tools.clientJSON.clients[main.WPKGManager.ClientList.getSelectedIndex()].id);
+        client.sendString("/close "+ Tools.list.clients[main.WPKGManager.ClientList.getSelectedIndex()].id);
         client.receiveString();
-        Tools.refreshClientlist(clientModel, client);
+        Tools.refreshClientlist(ClientListModel, client);
     }
 
     public static void joinAction(){
-        client.sendString("/join "+ Tools.clientJSON.clients[main.WPKGManager.ClientList.getSelectedIndex()].id);
+        client.sendString("/join "+ Tools.list.clients[main.WPKGManager.ClientList.getSelectedIndex()].id);
         main.ClientManager.clientManager.setVisible(true);
         main.WPKGManager.wpkgManager.setVisible(false);
         main.frame.setContentPane(main.ClientManager.clientManager);
@@ -67,6 +72,7 @@ public class Actions {
         main.frame.setContentPane(main.WPKGManager.wpkgManager);
         client.receiveString();
     }
+
     public static void refreshCommandsList(){
         Tools.refreshCommandslist(commandsModel, client);
     }
