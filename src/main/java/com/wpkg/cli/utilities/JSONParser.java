@@ -45,3 +45,4 @@ public class JSONParser {
         return  commandsJSON;
     }
 }
+// TODO: dialogi w try catch

@@ -46,13 +46,11 @@ public class Actions {
     public static void refreshClientAction(){
         Tools.refreshClientlist(clientModel, client);
     }
-
     public static void killAction(){
         client.sendString("/close "+ Tools.clientJSON.clients[main.WPKGManager.ClientList.getSelectedIndex()].id);
         client.receiveString();
         Tools.refreshClientlist(clientModel, client);
     }
-
     public static void joinAction(){
         client.sendString("/join "+ Tools.clientJSON.clients[main.WPKGManager.ClientList.getSelectedIndex()].id);
         main.ClientManager.clientManager.setVisible(true);
@@ -72,8 +70,11 @@ public class Actions {
         main.frame.setContentPane(main.WPKGManager.wpkgManager);
         client.receiveString();
     }
-
     public static void refreshCommandsList(){
         Tools.refreshCommandslist(commandsModel, client);
+    }
+    public static void executeAction(){
+        client.sendString("/join " + Tools.commandsJSON.commands[main.ClientManager.commandList.getSelectedIndex()].name);
+        client.receiveString(); //TODO: dokończyć to gówno
     }
 }
