@@ -25,7 +25,7 @@ public class Actions {
             Main.LogonUI.logonUI.setVisible(false);
             Main.WPKGManager.wpkgManager.setVisible(true);
             Main.frame.setContentPane(Main.WPKGManager.wpkgManager);
-            Tools.refreshClientlist(clientModel, client);
+            Tools.requestClientList(clientModel, client);
             Main.WPKGManager.ClientList.setModel(clientModel);
         } catch (IOException e){
           JOptionPane.showMessageDialog(null, "Can't connect to server: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
@@ -44,12 +44,12 @@ public class Actions {
     }
 
     public static void refreshClientAction(){
-        Tools.refreshClientlist(clientModel, client);
+        Tools.requestClientList(clientModel, client);
     }
     public static void killAction(){
         client.sendString("/close "+ Tools.clientJSON.clients[Main.WPKGManager.ClientList.getSelectedIndex()].id);
         client.receiveString();
-        Tools.refreshClientlist(clientModel, client);
+        Tools.requestClientList(clientModel, client);
     }
     public static void joinAction(){
         client.sendString("/join "+ Tools.clientJSON.clients[Main.WPKGManager.ClientList.getSelectedIndex()].id);

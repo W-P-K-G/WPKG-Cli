@@ -6,12 +6,11 @@ import java.net.*;
 import javax.swing.*;
 
 
-@SuppressWarnings("FieldMayBeFinal")
 public class UDPClient {
-    private DatagramSocket socket;
-    private InetAddress address;
+    public DatagramSocket socket;
+    public InetAddress address;
 
-    private int port;
+    public int port;
 
     public UDPClient(String ip,int port) throws SocketException, UnknownHostException
     {
