@@ -1,10 +1,10 @@
 package com.wpkg.cli.main;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import com.wpkg.cli.actions.Actions;
 import com.wpkg.cli.gui.ClientManager;
 import com.wpkg.cli.gui.LogonUI;
 import com.wpkg.cli.gui.WPKGManager;
+import com.wpkg.cli.networking.UDPClient;
 
 import javax.swing.*;
 
@@ -21,15 +21,16 @@ public class Main {
         FlatDarkLaf.setup();
 
         // Declare Windows
-        LogonUI = new LogonUI();
         WPKGManager = new WPKGManager();
+        LogonUI = new LogonUI(WPKGManager);
+
         ClientManager = new ClientManager();
 
         // Disconnect on close
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            if(Actions.client == null) return;
+            if(!UDPClient.isConnected()) return;
 
-            Actions.client.logOff();
+            UDPClient.logOff();
         }, "Shutdown-thread"));
 
         // Setting frame settings

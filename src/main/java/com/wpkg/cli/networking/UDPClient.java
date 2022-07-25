@@ -1,5 +1,8 @@
 package com.wpkg.cli.networking;
 
+import com.wpkg.cli.main.Main;
+import com.wpkg.cli.utilities.Tools;
+
 import java.io.IOException;
 import java.net.*;
 
@@ -7,26 +10,32 @@ import javax.swing.*;
 
 
 public class UDPClient {
-    public DatagramSocket socket;
-    public InetAddress address;
+    public static DatagramSocket socket;
+    public static InetAddress address;
 
-    public int port;
+    public static int port;
 
-    public UDPClient(String ip,int port) throws SocketException, UnknownHostException
-    {
+    public static boolean connected;
+
+    public static void connect(String ip, int p) throws SocketException, UnknownHostException {
         /* Getting IP Address */
-        this.address = InetAddress.getByName(ip);
-        this.port = port;
+        address = InetAddress.getByName(ip);
+        port = p;
 
         /* Creating Socket */
         socket = new DatagramSocket();
 
         /* Setting Timeout */
         socket.setSoTimeout(2000);
+
+        connected = true;
     }
 
-    public void sendRegisterPing() throws IOException
-    {
+    public static boolean isConnected() {
+        return connected;
+    }
+
+    public static void sendRegisterPing() throws IOException {
         //this method don't using receiveString and sendString method because using IOException to properly error handling
         byte[] buf = "register".getBytes();
         DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
@@ -39,25 +48,21 @@ public class UDPClient {
         socket.receive(packet);
     }
 
-    public void sendString(String msg)
-    {
-        try
-        {
+    public static void sendString(String msg) {
+        try {
             byte[] buf = msg.getBytes();
             DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
 
             /* Sending Packet */
             socket.send(packet);
-        }
-        catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Can't send message: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Can't send message: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             throw new RuntimeException(e);
         }
     }
-    public String receiveString()
-    {
-        try
-        {
+
+    public static String receiveString() {
+        try {
             byte[] buf = new byte[65536];
             DatagramPacket packet = new DatagramPacket(buf, buf.length);
 
@@ -65,15 +70,14 @@ public class UDPClient {
             socket.receive(packet);
 
             return new String(packet.getData(), 0, packet.getLength());
-        }
-        catch (IOException e)
-        {
-            JOptionPane.showMessageDialog(null, "Can't receive message: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Can't receive message: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             throw new RuntimeException(e);
         }
     }
-    public void logOff(){
-        if(socket.isClosed()) return;
+
+    public static void logOff() {
+        if (socket.isClosed()) return;
         sendString("/disconnect");
         socket.close();
     }
