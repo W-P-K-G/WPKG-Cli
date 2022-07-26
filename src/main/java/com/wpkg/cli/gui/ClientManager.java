@@ -5,6 +5,8 @@ import com.wpkg.cli.networking.UDPClient;
 import com.wpkg.cli.utilities.Tools;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 @SuppressWarnings("unused")
 public class ClientManager {
@@ -24,6 +26,7 @@ public class ClientManager {
     {
         unjoinButton.addActionListener(ActionEvent -> unjoinAction());
         refreshButton.addActionListener(ActionEvent -> refreshAction());
+        cryptoManager.addActionListener(actionEvent -> cryptoAction());
     }
     public void unjoinAction(){
         UDPClient.sendString("/unjoin");
@@ -34,6 +37,11 @@ public class ClientManager {
     }
     public void refreshAction(){
         Tools.refreshCommandsList(commandsModel);
+    }
+    public void cryptoAction(){
+        Main.ClientManager.clientManager.setVisible(false);
+        Main.WPKGManager.wpkgManager.setVisible(true);
+        Main.frame.setContentPane(Main.CryptoManager.CryptoPanelGPU);
     }
 }
 // TODO: ClientManager
