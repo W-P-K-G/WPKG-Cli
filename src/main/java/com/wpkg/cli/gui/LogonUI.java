@@ -16,8 +16,6 @@ public class LogonUI
     private JButton Accept;
     public JComboBox IPField;
 
-    public WPKGManager wpkgmanager;
-
     // Buttons Actions
     public LogonUI()
     {
@@ -27,18 +25,16 @@ public class LogonUI
     {
         try {
             String[] portAddress = Main.LogonUI.IPField.getSelectedItem().toString().split(":");
-            System.out.println(portAddress[0]);
-            System.out.println(portAddress[1]);
             UDPClient.connect(portAddress[0],Integer.parseInt(portAddress[1]));
             UDPClient.sendRegisterPing();
 
-            Tools.refreshClientList(wpkgmanager.clientModel);
-            wpkgmanager.ClientList.setModel(wpkgmanager.clientModel);
+            Tools.refreshClientList(Main.WPKGManager.clientModel);
+            Main.WPKGManager.ClientList.setModel(Main.WPKGManager.clientModel);
 
 
             logonUI.setVisible(false);
-            wpkgmanager.wpkgManager.setVisible(true);
-            Main.frame.setContentPane(wpkgmanager.wpkgManager);
+            Main.WPKGManager.wpkgManager.setVisible(true);
+            Main.frame.setContentPane(Main.WPKGManager.wpkgManager);
         } catch (IOException e){
             JOptionPane.showMessageDialog(null, "Can't connect to server: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
         }
