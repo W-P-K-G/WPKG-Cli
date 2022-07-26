@@ -1,4 +1,5 @@
 package com.wpkg.cli.utilities;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -32,7 +33,21 @@ public class JSONParser {
             public int port;
         }
     }
-
+    public static class walletJSON{
+        public String coin;
+        public String id;
+        public String referral;
+    }
+    public static class CryptoJSON{
+        public String coin;
+        public String wallet;
+        public String referral;
+        public CryptoJSON(String coin, String wallet, String referral){
+            this.coin = coin;
+            this.wallet = wallet;
+            this.referral = referral;
+        }
+    }
     public static ClientJSON getClientList(String json){
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -66,6 +81,17 @@ public class JSONParser {
             throw new RuntimeException(e);
         }
         return addressJSON;
+    }
+    public static walletJSON[] getWallet(String json){
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        walletJSON[] walletJSON;
+        try {
+            walletJSON = objectMapper.readValue(json, walletJSON[].class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return walletJSON;
     }
 }
 // TODO: dialogi w try catch

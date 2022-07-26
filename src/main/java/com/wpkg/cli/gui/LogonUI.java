@@ -32,7 +32,7 @@ public class LogonUI
             UDPClient.connect(portAddress[0],Integer.parseInt(portAddress[1]));
             UDPClient.sendRegisterPing();
 
-            Tools.requestClientList(wpkgmanager.clientModel);
+            Tools.refreshClientList(wpkgmanager.clientModel);
             wpkgmanager.ClientList.setModel(wpkgmanager.clientModel);
 
 

@@ -36,12 +36,12 @@ public class WPKGManager {
         Main.frame.setContentPane(Main.LogonUI.logonUI);
     }
     public void refreshAction(){
-        Tools.requestClientList(clientModel);
+        Tools.refreshClientList(clientModel);
     }
     public void killAction(){
         UDPClient.sendString("/close "+ Tools.clientJSON.clients[Main.WPKGManager.ClientList.getSelectedIndex()].id);
         UDPClient.receiveString();
-        Tools.requestClientList(clientModel);
+        Tools.refreshClientList(clientModel);
     }
     public void selectAction(){
         UDPClient.sendString("/join "+ Tools.clientJSON.clients[Main.WPKGManager.ClientList.getSelectedIndex()].id);
