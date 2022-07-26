@@ -41,7 +41,7 @@ public class Main {
 
         // Setting frame settings
         frame.setSize(765, 445);
-        frame.setContentPane(CryptoManager.CryptoPanelGPU);
+        frame.setContentPane(LogonUI.logonUI);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
