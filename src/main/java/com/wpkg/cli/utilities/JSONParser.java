@@ -39,13 +39,11 @@ public class JSONParser {
         public String referral;
     }
     public static class CryptoJSON{
-        public String coin;
+        public String pool;
         public String wallet;
-        public String referral;
-        public CryptoJSON(String coin, String wallet, String referral){
-            this.coin = coin;
-            this.wallet = wallet;
-            this.referral = referral;
+        public CryptoJSON(String coin, String wallet, String referral, String pool){
+            this.wallet = coin  + wallet +  referral;
+            this.pool = pool;
         }
     }
     public static ClientJSON getClientList(String json){
