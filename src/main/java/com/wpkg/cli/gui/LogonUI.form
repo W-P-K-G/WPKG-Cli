@@ -66,7 +66,7 @@
           <text value="Enter AuthToken"/>
         </properties>
       </component>
-      <component id="d6e0e" class="javax.swing.JTextField" binding="IPField">
+      <component id="566eb" class="javax.swing.JComboBox" binding="IPField">
         <constraints>
           <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -74,6 +74,7 @@
           <forms defaultalign-horz="false"/>
         </constraints>
         <properties>
+          <editable value="true"/>
           <minimumSize width="300" height="30"/>
           <preferredSize width="300" height="30"/>
         </properties>

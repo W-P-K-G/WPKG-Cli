@@ -20,6 +20,18 @@ public class JSONParser {
             public String args;
         }
     }
+    public static class AddressJSON{
+        public uAddresses[] uAddresses;
+        public tAddresses[] tAddresses;
+        public static class uAddresses{
+            public String ip;
+            public int port;
+        }
+        public static class tAddresses{
+            public String ip;
+            public int port;
+        }
+    }
 
     public static ClientJSON getClientList(String json){
         ObjectMapper objectMapper = new ObjectMapper();
@@ -43,6 +55,17 @@ public class JSONParser {
             throw new RuntimeException(e);
         }
         return  commandsJSON;
+    }
+    public static AddressJSON getAddress(String json){
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        AddressJSON addressJSON;
+        try {
+            addressJSON = objectMapper.readValue(json, AddressJSON.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+        return addressJSON;
     }
 }
 // TODO: dialogi w try catch

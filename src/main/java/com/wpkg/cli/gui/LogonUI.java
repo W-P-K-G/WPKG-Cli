@@ -5,50 +5,42 @@ import com.wpkg.cli.networking.UDPClient;
 import com.wpkg.cli.utilities.Tools;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
 @SuppressWarnings("unused")
-public class LogonUI implements ActionListener
+public class LogonUI
 {
     public JPanel logonUI;
     private JLabel WPKGLabel;
     private JPasswordField TokenField;
     private JButton Accept;
-    public JTextField IPField;
+    public JComboBox IPField;
 
     public WPKGManager wpkgmanager;
 
     // Buttons Actions
-    public LogonUI(WPKGManager manager)
+    public LogonUI()
     {
-        wpkgmanager = manager;
-        Accept.addActionListener(this);
+        Accept.addActionListener(ActionEvent -> acceptAction());
     }
-
-    @Override
-    public void actionPerformed(ActionEvent actionEvent)
+    public void acceptAction()
     {
-        var source = actionEvent.getSource();
+        try {
+            String[] portAddress = Main.LogonUI.IPField.getSelectedItem().toString().split(":");
+            System.out.println(portAddress[0]);
+            System.out.println(portAddress[1]);
+            UDPClient.connect(portAddress[0],Integer.parseInt(portAddress[1]));
+            UDPClient.sendRegisterPing();
 
-        if (source == Accept)
-        {
-            try {
-                String[] portAddress = Main.LogonUI.IPField.getText().split(":");
-                UDPClient.connect(portAddress[0],Integer.parseInt(portAddress[1]));
-                UDPClient.sendRegisterPing();
+            Tools.requestClientList(wpkgmanager.clientModel);
+            wpkgmanager.ClientList.setModel(wpkgmanager.clientModel);
 
-                logonUI.setVisible(false);
-                wpkgmanager.wpkgManager.setVisible(true);
-                Tools.requestClientList(wpkgmanager.clientModel);
-                wpkgmanager.ClientList.setModel(wpkgmanager.clientModel);
 
-                Main.frame.setContentPane(wpkgmanager.wpkgManager);
-            } catch (IOException e){
-                JOptionPane.showMessageDialog(null, "Can't connect to server: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
-            }
+            logonUI.setVisible(false);
+            wpkgmanager.wpkgManager.setVisible(true);
+            Main.frame.setContentPane(wpkgmanager.wpkgManager);
+        } catch (IOException e){
+            JOptionPane.showMessageDialog(null, "Can't connect to server: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
         }
-
     }
 }
