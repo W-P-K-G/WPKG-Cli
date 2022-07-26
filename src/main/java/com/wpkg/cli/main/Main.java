@@ -27,10 +27,8 @@ public class Main {
         // Declare Windows
         WPKGManager = new WPKGManager();
         LogonUI = new LogonUI();
-        Tools.refreshServerList(LogonUI.IPField);
         ClientManager = new ClientManager();
         CryptoManager = new CryptoManagerGPU();
-        CryptoManager.cryptoComboBox.setModel(new DefaultComboBoxModel(CryptoManagerGPU.CryptoCurrencies.values()));
 
         // Disconnect on close
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {

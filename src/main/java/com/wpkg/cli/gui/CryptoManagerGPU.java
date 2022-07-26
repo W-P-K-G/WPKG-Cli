@@ -21,6 +21,8 @@ public class CryptoManagerGPU {
     private JButton RUNButton;
     static ArrayList<ArrayList<String>> Wallets = new ArrayList<>();
     static ArrayList<String> referrals;
+
+
     public static void refreshWallets(JComboBox walletComboBox){
         Wallets.clear();
         JSONParser.walletJSON[] walletJSONS = JSONParser.getWallet(Tools.readStringFromURL(Tools.URL+"Wallets.json"));
@@ -61,7 +63,9 @@ public class CryptoManagerGPU {
             return name;
         }
     }
-    public CryptoManagerGPU() {
+    public CryptoManagerGPU()
+    {
+        cryptoComboBox.setModel(new DefaultComboBoxModel(CryptoManagerGPU.CryptoCurrencies.values()));
         poolComboBox.setModel(new DefaultComboBoxModel<>(ETCPools.values()));
         cryptoComboBox.addActionListener(actionEvent -> updatePoolComboBox());
         RUNButton.addActionListener(actionEvent -> runAction());

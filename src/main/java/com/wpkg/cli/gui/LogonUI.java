@@ -19,7 +19,10 @@ public class LogonUI
     // Buttons Actions
     public LogonUI()
     {
+        Tools.refreshServerList(IPField);
+
         Accept.addActionListener(ActionEvent -> acceptAction());
+
     }
     public void acceptAction()
     {
