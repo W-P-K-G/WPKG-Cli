@@ -60,4 +60,8 @@ public class Tools {
             list.add(address.uAddresses[i].ip+":"+address.uAddresses[i].port);
         IPField.setModel(new DefaultComboBoxModel(list.toArray()));
     }
+
+    public static double roundTo2DecimalPlace(double value) {
+        return Math.round(value * 100.0) / 100.0;
+    }
 }

@@ -89,7 +89,7 @@
                   <text value="RAM Usage"/>
                 </properties>
               </component>
-              <component id="f1e65" class="javax.swing.JProgressBar" binding="gpuBar">
+              <component id="f1e65" class="javax.swing.JProgressBar" binding="swapBar">
                 <constraints>
                   <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                   <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -108,7 +108,7 @@
                   <forms defaultalign-horz="false"/>
                 </constraints>
                 <properties>
-                  <text value="GPU Usage"/>
+                  <text value="Swap Usage"/>
                 </properties>
               </component>
               <component id="37d51" class="javax.swing.JButton" binding="cryptoManager">
