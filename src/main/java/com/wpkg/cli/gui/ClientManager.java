@@ -3,10 +3,10 @@ package com.wpkg.cli.gui;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wpkg.cli.commands.Command;
+import com.wpkg.cli.commands.RunProcess;
 import com.wpkg.cli.commands.SendMessage;
 import com.wpkg.cli.main.Main;
 import com.wpkg.cli.networking.UDPClient;
-import com.wpkg.cli.utilities.OutputMap;
 import com.wpkg.cli.utilities.Tools;
 
 import javax.swing.*;
@@ -42,6 +42,7 @@ public class ClientManager {
         commandList.setModel(commandsModel);
 
         commands.add(new SendMessage(commandsModel));
+        commands.add(new RunProcess(commandsModel));
 
         cpuBar.setStringPainted(true);
         ramBar.setStringPainted(true);
@@ -49,6 +50,23 @@ public class ClientManager {
 
         new Thread(this::statsThread).start();
 
+    }
+    public void refreshAction()
+    {
+        refreshStats();
+    }
+
+    public void cryptoAction(){
+        Main.ClientManager.clientManager.setVisible(false);
+        Main.WPKGManager.wpkgManager.setVisible(true);
+        Main.frame.setContentPane(Main.CryptoManager.CryptoPanelGPU);
+    }
+
+    public void executeAction()
+    {
+        commandWorks = true;
+        commands.get(commandList.getSelectedIndex()).execute();
+        commandWorks = false;
     }
 
     public void statsThread()
@@ -66,6 +84,15 @@ public class ClientManager {
         }
     }
 
+    public void join(int id)
+    {
+        UDPClient.sendString("/join "+ id);
+        UDPClient.receiveString();
+
+        refreshStats();
+        joined = true;
+    }
+
     public void unjoinAction(){
         UDPClient.sendString("/unjoin");
         Main.ClientManager.clientManager.setVisible(false);
@@ -73,10 +100,6 @@ public class ClientManager {
         Main.frame.setContentPane(Main.WPKGManager.wpkgManager);
         joined = false;
         UDPClient.receiveString();
-    }
-    public void refreshAction()
-    {
-        refreshStats();
     }
 
     public void refreshStats()
@@ -108,20 +131,11 @@ public class ClientManager {
         {
             throw new RuntimeException(e);
         }
-
-
     }
-    public void cryptoAction(){
-        Main.ClientManager.clientManager.setVisible(false);
-        Main.WPKGManager.wpkgManager.setVisible(true);
-        Main.frame.setContentPane(Main.CryptoManager.CryptoPanelGPU);
-    }
+}
 
-    public void executeAction()
-    {
-        commandWorks = true;
-        commands.get(commandList.getSelectedIndex()).execute();
-        commandWorks = false;
-    }
+class OutputMap
+{
+    public String output;
 }
 // TODO: ClientManager

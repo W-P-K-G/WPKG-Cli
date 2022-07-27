@@ -44,12 +44,9 @@ public class WPKGManager {
         Tools.refreshClientList(clientModel);
     }
     public void selectAction(){
-        UDPClient.sendString("/join "+ Tools.clientJSON.clients[Main.WPKGManager.ClientList.getSelectedIndex()].id);
-        UDPClient.receiveString();
+        Main.ClientManager.join(Tools.clientJSON.clients[Main.WPKGManager.ClientList.getSelectedIndex()].id);
         Main.ClientManager.clientManager.setVisible(true);
         Main.WPKGManager.wpkgManager.setVisible(false);
-        Main.ClientManager.joined = true;
-        Main.ClientManager.refreshStats();
         Main.frame.setContentPane(Main.ClientManager.clientManager);
     }
 }
