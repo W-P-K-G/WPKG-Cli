@@ -39,7 +39,7 @@ public class Main {
 
         // Setting frame settings
         frame.setSize(765, 445);
-        frame.setContentPane(LogonUI.logonUI);
+        frame.setContentPane(ClientManager.clientManager);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

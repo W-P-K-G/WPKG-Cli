@@ -134,7 +134,9 @@
             <children>
               <component id="67656" class="javax.swing.JList" binding="commandList">
                 <constraints border-constraint="Center"/>
-                <properties/>
+                <properties>
+                  <model/>
+                </properties>
               </component>
               <toolbar id="3fb73">
                 <constraints border-constraint="South"/>
