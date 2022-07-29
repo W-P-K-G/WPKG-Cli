@@ -26,7 +26,7 @@ public class UDPClient {
         socket = new DatagramSocket();
 
         /* Setting Timeout */
-        socket.setSoTimeout(10000);
+        socket.setSoTimeout(20000);
 
         connected = true;
     }
@@ -73,6 +73,44 @@ public class UDPClient {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Can't receive message: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             throw new RuntimeException(e);
+        }
+    }
+
+    public static byte[] rawdata_receive()
+    {
+        try
+        {
+            byte[] buf = new byte[65536];
+            DatagramPacket packet = new DatagramPacket(buf, buf.length);
+
+            /* Receiving Packet */
+            socket.receive(packet);
+
+            int len = packet.getLength();
+            byte[] ret = new byte[len];
+
+            for (int i = 0;i < len;i++)
+                ret[i] = buf[i];
+
+            return ret;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void rawdata_send(byte[] b)
+    {
+        DatagramPacket p = new DatagramPacket(b, b.length, address, port);
+        try
+        {
+            socket.send(p);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
         }
     }
 

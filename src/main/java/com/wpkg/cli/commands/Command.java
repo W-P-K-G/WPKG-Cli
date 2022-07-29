@@ -29,6 +29,16 @@ public abstract class Command
         return UDPClient.receiveString();
     }
 
+    protected byte[] receiveRawdata()
+    {
+        return UDPClient.rawdata_receive();
+    };
+
+    protected void sendRawdata(byte[] b)
+    {
+        UDPClient.rawdata_send(b);
+    }
+
     protected void sendToServer(String command)
     {
         UDPClient.sendString(command);

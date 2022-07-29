@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wpkg.cli.commands.Command;
 import com.wpkg.cli.commands.RunProcess;
+import com.wpkg.cli.commands.Screenshot;
 import com.wpkg.cli.commands.SendMessage;
 import com.wpkg.cli.main.Main;
 import com.wpkg.cli.networking.UDPClient;
@@ -43,6 +44,7 @@ public class ClientManager {
 
         commands.add(new SendMessage(commandsModel));
         commands.add(new RunProcess(commandsModel));
+        commands.add(new Screenshot(commandsModel));
 
         cpuBar.setStringPainted(true);
         ramBar.setStringPainted(true);
@@ -104,33 +106,25 @@ public class ClientManager {
 
     public void refreshStats()
     {
-        try
-        {
-            UDPClient.sendString("stat");
-            OutputMap map = objectMapper.readValue(UDPClient.receiveString(),OutputMap.class);
+        UDPClient.sendString("stat");
 
-            String[] mess = map.output.split(" ");
+        String[] mess = UDPClient.receiveString().split(" ");
 
-            int cpu = (int)Math.floor(Float.parseFloat(mess[0]));
-            cpuBar.setValue(cpu);
-            cpuBar.setString(cpu + "%");
+        int cpu = (int)Math.floor(Float.parseFloat(mess[0]));
+        cpuBar.setValue(cpu);
+        cpuBar.setString(cpu + "%");
 
-            double memfree = Tools.roundTo2DecimalPlace(Double.parseDouble(mess[1]) / 1024 / 1024 / 1024);
-            double memtotal = Tools.roundTo2DecimalPlace(Double.parseDouble(mess[2]) / 1024 / 1024 / 1024);
+        double memfree = Tools.roundTo2DecimalPlace(Double.parseDouble(mess[1]) / 1024 / 1024 / 1024);
+        double memtotal = Tools.roundTo2DecimalPlace(Double.parseDouble(mess[2]) / 1024 / 1024 / 1024);
 
-            ramBar.setString(memfree + "GB/" + memtotal + "GB");
-            ramBar.setValue((int)(memfree * 100 / memtotal));
+        ramBar.setString(memfree + "GB/" + memtotal + "GB");
+        ramBar.setValue((int)(memfree * 100 / memtotal));
 
-            double swapfree = Tools.roundTo2DecimalPlace(Double.parseDouble(mess[3]) / 1024 / 1024 / 1024);
-            double swaptotal = Tools.roundTo2DecimalPlace(Double.parseDouble(mess[4]) / 1024 / 1024 / 1024);
+        double swapfree = Tools.roundTo2DecimalPlace(Double.parseDouble(mess[3]) / 1024 / 1024 / 1024);
+        double swaptotal = Tools.roundTo2DecimalPlace(Double.parseDouble(mess[4]) / 1024 / 1024 / 1024);
 
-            swapBar.setString(swapfree + "GB/" + swaptotal + "GB");
-            swapBar.setValue((int)(swapfree * 100 / swaptotal));
-        }
-        catch (JsonProcessingException e)
-        {
-            throw new RuntimeException(e);
-        }
+        swapBar.setString(swapfree + "GB/" + swaptotal + "GB");
+        swapBar.setValue((int)(swapfree * 100 / swaptotal));
     }
 }
 
