@@ -6,7 +6,8 @@ import com.wpkg.cli.gui.CryptoManagerGPU;
 import com.wpkg.cli.gui.LogonUI;
 import com.wpkg.cli.gui.WPKGManager;
 import com.wpkg.cli.networking.UDPClient;
-import com.wpkg.cli.utilities.Tools;
+import com.wpkg.cli.state.State;
+import com.wpkg.cli.state.StateManager;
 
 import javax.swing.*;
 
@@ -39,7 +40,9 @@ public class Main {
 
         // Setting frame settings
         frame.setSize(765, 445);
-        frame.setContentPane(LogonUI.logonUI);
+
+        StateManager.changeState(State.LOGON_UI);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

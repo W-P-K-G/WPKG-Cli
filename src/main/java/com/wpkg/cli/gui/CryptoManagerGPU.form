@@ -59,6 +59,15 @@
                           <text value="Refresh"/>
                         </properties>
                       </component>
+                      <component id="d92c0" class="javax.swing.JButton" binding="backButton">
+                        <constraints/>
+                        <properties>
+                          <maximumSize width="120" height="40"/>
+                          <minimumSize width="120" height="40"/>
+                          <preferredSize width="120" height="30"/>
+                          <text value="Back"/>
+                        </properties>
+                      </component>
                     </children>
                   </toolbar>
                 </children>

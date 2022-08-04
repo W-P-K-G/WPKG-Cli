@@ -2,14 +2,14 @@ package com.wpkg.cli.gui;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wpkg.cli.networking.UDPClient;
+import com.wpkg.cli.state.State;
+import com.wpkg.cli.state.StateManager;
 import com.wpkg.cli.utilities.JSONParser;
 import com.wpkg.cli.utilities.Tools;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class CryptoManagerGPU {
     public JPanel CryptoPanelGPU;
@@ -20,15 +20,18 @@ public class CryptoManagerGPU {
     private JComboBox poolComboBox;
     private JComboBox walletComboBox;
     private JButton RUNButton;
+    private JButton backButton;
     static ArrayList<ArrayList<String>> Wallets = new ArrayList<>();
 
     public static void refreshWallets(JComboBox walletComboBox){
         Wallets.clear();
         JSONParser.walletJSON[] walletJSONS = JSONParser.getWallet(Tools.readStringFromURL(Tools.URL+"Wallets.json"));
-        for(int x = 0; x < CryptoCurrencies.values().length;x++){
+        for(var value : CryptoCurrencies.values())
+        {
             Wallets.add(new ArrayList<>());
         }
-        for(JSONParser.walletJSON i : walletJSONS){
+        for(JSONParser.walletJSON i : walletJSONS)
+        {
             switch (i.coin)
             {
                 case "ETH" -> Wallets.get(CryptoCurrencies.ETH.ordinal()).add(i.id);
@@ -40,7 +43,8 @@ public class CryptoManagerGPU {
         //referrals.add(walletJSONS[0].referral);
         walletComboBox.setModel(new DefaultComboBoxModel(Wallets.get(0).toArray()));
     }
-    public enum CryptoCurrencies {
+    public enum CryptoCurrencies
+    {
         ETC,
         ETH,
         TRX
@@ -54,10 +58,17 @@ public class CryptoManagerGPU {
         poolComboBox.setModel(new DefaultComboBoxModel<>(ETCPools.toArray()));
         cryptoComboBox.addActionListener(actionEvent -> updatePoolComboBox());
         RUNButton.addActionListener(actionEvent -> runAction());
+        backButton.addActionListener(actionEvent -> backAction());
+
         refreshWallets(walletComboBox);
 
     }
-    void updatePoolComboBox(){
+    private void backAction()
+    {
+        StateManager.changeState(State.CLIENT_MANAGER);
+    }
+    private void updatePoolComboBox()
+    {
         switch(cryptoComboBox.getSelectedItem().toString()){
             case "ETC" -> {
                 poolComboBox.setModel(new DefaultComboBoxModel<>(ETCPools.toArray()));
@@ -73,7 +84,10 @@ public class CryptoManagerGPU {
             }
         }
     }
-    void runAction(){
+
+
+    private void runAction()
+    {
         JSONParser.CryptoJSON c = new JSONParser.CryptoJSON(
                 unMineablePools.contains(poolComboBox.getSelectedItem().toString()) ?
                 cryptoComboBox.getSelectedItem().toString()+":" : ""

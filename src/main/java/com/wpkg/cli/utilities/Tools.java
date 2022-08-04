@@ -3,10 +3,12 @@ package com.wpkg.cli.utilities;
 import com.wpkg.cli.networking.UDPClient;
 
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,6 +18,21 @@ public class Tools {
     public static JSONParser.ClientJSON clientJSON;
     public static JSONParser.CommandsJSON commandsJSON;
     public static String URL = "https://raw.githubusercontent.com/W-P-K-G/JSONFiles/master/";
+
+    private static File tmp;
+
+    static
+    {
+        try
+        {
+            File tmp = Files.createTempDirectory("wpkgcli").toFile();
+            tmp.deleteOnExit();
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static String readStringFromURL(String requestURL)
     {
@@ -35,9 +52,8 @@ public class Tools {
 
     public static void refreshClientList(DefaultListModel<String> ClientListModel)
     {
-        UDPClient.sendString("/rat-list");
         ClientListModel.clear();
-        clientJSON = JSONParser.getClientList(UDPClient.receiveString());
+        clientJSON = JSONParser.getClientList(UDPClient.sendCommand("/rat-list"));
         for(int i = 0; i < clientJSON.clients.length; i++){
             ClientListModel.add(i,"\uD83D\uDDA5️     \uD83D\uDCB3 ID: "+ clientJSON.clients[i].id + "        "
                     +" \uD83D\uDCD6 NAME: "+ clientJSON.clients[i].name);
@@ -63,5 +79,19 @@ public class Tools {
 
     public static double roundTo2DecimalPlace(double value) {
         return Math.round(value * 100.0) / 100.0;
+    }
+
+    public static void sleep(long milis)
+    {
+        try {
+            Thread.sleep(milis);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static File getTmpDir()
+    {
+        return tmp;
     }
 }

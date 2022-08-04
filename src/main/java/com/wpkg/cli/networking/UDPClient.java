@@ -1,5 +1,6 @@
 package com.wpkg.cli.networking;
 
+import com.wpkg.cli.commands.SendMessage;
 import com.wpkg.cli.main.Main;
 import com.wpkg.cli.utilities.Tools;
 
@@ -76,6 +77,12 @@ public class UDPClient {
         }
     }
 
+    public static String sendCommand(String command)
+    {
+        sendString(command);
+        return receiveString();
+    }
+
     public static byte[] rawdata_receive()
     {
         try
@@ -114,10 +121,10 @@ public class UDPClient {
         }
     }
 
-    public static void logOff() {
+    public static void logOff()
+    {
         if (socket.isClosed()) return;
         sendString("/disconnect");
         socket.close();
     }
 }
-// TODO: dialogi w try catch

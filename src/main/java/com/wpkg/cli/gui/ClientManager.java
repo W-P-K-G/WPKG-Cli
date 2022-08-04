@@ -8,6 +8,8 @@ import com.wpkg.cli.commands.Screenshot;
 import com.wpkg.cli.commands.SendMessage;
 import com.wpkg.cli.main.Main;
 import com.wpkg.cli.networking.UDPClient;
+import com.wpkg.cli.state.State;
+import com.wpkg.cli.state.StateManager;
 import com.wpkg.cli.utilities.Tools;
 
 import javax.swing.*;
@@ -59,56 +61,52 @@ public class ClientManager {
     }
 
     public void cryptoAction(){
-        Main.ClientManager.clientManager.setVisible(false);
-        Main.WPKGManager.wpkgManager.setVisible(true);
-        Main.frame.setContentPane(Main.CryptoManager.CryptoPanelGPU);
+        StateManager.changeState(State.CRYPTO_MANAGER);
     }
 
     public void executeAction()
     {
-        commandWorks = true;
-        commands.get(commandList.getSelectedIndex()).execute();
-        commandWorks = false;
+        try
+        {
+            commandWorks = true;
+            commands.get(commandList.getSelectedIndex()).execute();
+            commandWorks = false;
+        }
+        catch (ArrayIndexOutOfBoundsException e)
+        {
+            JOptionPane.showMessageDialog(Main.frame,"Command not selected","Error",JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void statsThread()
     {
         while (true)
         {
-            if (joined && !commandWorks)
+            if (joined && !commandWorks && StateManager.getState() == State.CLIENT_MANAGER)
                 refreshStats();
 
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            Tools.sleep(10000);
         }
     }
 
     public void join(int id)
     {
-        UDPClient.sendString("/join "+ id);
-        UDPClient.receiveString();
-
+        UDPClient.sendCommand("/join "+ id);
         refreshStats();
         joined = true;
     }
 
-    public void unjoinAction(){
-        UDPClient.sendString("/unjoin");
-        Main.ClientManager.clientManager.setVisible(false);
-        Main.WPKGManager.wpkgManager.setVisible(true);
-        Main.frame.setContentPane(Main.WPKGManager.wpkgManager);
+    public void unjoinAction()
+    {
         joined = false;
-        UDPClient.receiveString();
+
+        UDPClient.sendCommand("/unjoin");
+        StateManager.changeState(State.CLIENT_LIST);
     }
 
     public void refreshStats()
     {
-        UDPClient.sendString("stat");
-
-        String[] mess = UDPClient.receiveString().split(" ");
+        String[] mess = UDPClient.sendCommand("stat").split(" ");
 
         int cpu = (int)Math.floor(Float.parseFloat(mess[0]));
         cpuBar.setValue(cpu);
@@ -126,9 +124,4 @@ public class ClientManager {
         swapBar.setString(swapfree + "GB/" + swaptotal + "GB");
         swapBar.setValue((int)(swapfree * 100 / swaptotal));
     }
-}
-
-class OutputMap
-{
-    public String output;
 }
