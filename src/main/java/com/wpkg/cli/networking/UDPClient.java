@@ -70,7 +70,7 @@ public class UDPClient {
             /* Receiving Packet */
             socket.receive(packet);
 
-            return new String(packet.getData(), 0, packet.getLength());
+            return new String(packet.getData(), packet.getOffset(), packet.getLength());
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Can't receive message: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             throw new RuntimeException(e);

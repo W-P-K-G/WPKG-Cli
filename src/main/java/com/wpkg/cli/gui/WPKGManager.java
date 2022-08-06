@@ -50,6 +50,12 @@ public class WPKGManager {
     {
         try
         {
+            if (Tools.clientJSON.clients[ClientList.getSelectedIndex()].joined)
+            {
+                JOptionPane.showMessageDialog(Main.frame,"Can't connect to client: Client already joined","Error",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             int index = Tools.clientJSON.clients[ClientList.getSelectedIndex()].id;
             Main.ClientManager.join(index);
             StateManager.changeState(State.CLIENT_MANAGER);
