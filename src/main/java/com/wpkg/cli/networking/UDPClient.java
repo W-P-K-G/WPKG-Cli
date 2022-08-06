@@ -27,7 +27,7 @@ public class UDPClient {
         socket = new DatagramSocket();
 
         /* Setting Timeout */
-        socket.setSoTimeout(20000);
+        socket.setSoTimeout(60 * 1000);
 
         connected = true;
     }
