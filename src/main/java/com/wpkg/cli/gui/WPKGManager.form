@@ -7,99 +7,67 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="c6708" class="javax.swing.JList" binding="ClientList">
-        <constraints border-constraint="Center"/>
-        <properties>
-          <enabled value="true"/>
-          <font name="SansSerif" size="24"/>
-          <model/>
-          <name value="ClientListModel"/>
-          <preferredSize width="99999" height="99999"/>
-        </properties>
-      </component>
       <grid id="97005" binding="Buttons" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
         <constraints border-constraint="South"/>
         <properties/>
         <border type="none"/>
         <children>
-          <toolbar id="fec59">
+          <component id="3abf9" class="javax.swing.JButton" binding="selectButton">
+            <constraints/>
+            <properties>
+              <label value="HackintoIT!"/>
+              <maximumSize width="120" height="40"/>
+              <minimumSize width="120" height="40"/>
+              <opaque value="false"/>
+              <preferredSize width="120" height="40"/>
+              <text value="HackintoIT!"/>
+            </properties>
+          </component>
+          <component id="2bb0e" class="javax.swing.JButton" binding="infoButton">
+            <constraints/>
+            <properties>
+              <actionCommand value="Info"/>
+              <label value="Info"/>
+              <maximumSize width="120" height="40"/>
+              <minimumSize width="120" height="40"/>
+              <opaque value="false"/>
+              <preferredSize width="120" height="40"/>
+              <text value="Info"/>
+            </properties>
+          </component>
+          <component id="41122" class="javax.swing.JButton" binding="killButton">
+            <constraints/>
+            <properties>
+              <actionCommand value="KillSession"/>
+              <label value="Kill"/>
+              <maximumSize width="120" height="40"/>
+              <minimumSize width="120" height="40"/>
+              <opaque value="false"/>
+              <preferredSize width="120" height="40"/>
+              <text value="Kill"/>
+            </properties>
+          </component>
+          <component id="f2adf" class="javax.swing.JButton" binding="refreshButton" default-binding="true">
             <constraints/>
             <properties>
               <maximumSize width="120" height="40"/>
               <minimumSize width="120" height="40"/>
-              <opaque value="true"/>
-              <orientation value="0"/>
-              <preferredSize width="600" height="40"/>
-              <rollover value="false"/>
+              <opaque value="false"/>
+              <preferredSize width="120" height="40"/>
+              <text value="Refresh"/>
+              <visible value="true"/>
             </properties>
-            <clientProperties>
-              <JToolBar.isRollover class="java.lang.Boolean" value="false"/>
-            </clientProperties>
-            <border type="none"/>
-            <children>
-              <component id="3abf9" class="javax.swing.JButton" binding="selectButton">
-                <constraints/>
-                <properties>
-                  <background color="-11972523"/>
-                  <label value="HackintoIT!"/>
-                  <maximumSize width="120" height="40"/>
-                  <minimumSize width="120" height="40"/>
-                  <opaque value="false"/>
-                  <preferredSize width="120" height="40"/>
-                  <text value="HackintoIT!"/>
-                </properties>
-              </component>
-              <component id="2bb0e" class="javax.swing.JButton" binding="infoButton">
-                <constraints/>
-                <properties>
-                  <actionCommand value="Info"/>
-                  <background color="-11972523"/>
-                  <label value="Info"/>
-                  <maximumSize width="120" height="40"/>
-                  <minimumSize width="120" height="40"/>
-                  <opaque value="false"/>
-                  <preferredSize width="120" height="40"/>
-                  <text value="Info"/>
-                </properties>
-              </component>
-              <component id="41122" class="javax.swing.JButton" binding="killButton">
-                <constraints/>
-                <properties>
-                  <actionCommand value="KillSession"/>
-                  <background color="-11972523"/>
-                  <label value="Kill"/>
-                  <maximumSize width="120" height="40"/>
-                  <minimumSize width="120" height="40"/>
-                  <opaque value="false"/>
-                  <preferredSize width="120" height="40"/>
-                  <text value="Kill"/>
-                </properties>
-              </component>
-              <component id="f2adf" class="javax.swing.JButton" binding="refreshButton" default-binding="true">
-                <constraints/>
-                <properties>
-                  <background color="-11972523"/>
-                  <maximumSize width="120" height="40"/>
-                  <minimumSize width="120" height="40"/>
-                  <opaque value="false"/>
-                  <preferredSize width="120" height="40"/>
-                  <text value="Refresh"/>
-                  <visible value="true"/>
-                </properties>
-              </component>
-              <component id="e0e3" class="javax.swing.JButton" binding="logOffButton">
-                <constraints/>
-                <properties>
-                  <background color="-11972523"/>
-                  <maximumSize width="120" height="40"/>
-                  <minimumSize width="120" height="40"/>
-                  <opaque value="false"/>
-                  <preferredSize width="120" height="40"/>
-                  <text value="Log Off"/>
-                </properties>
-              </component>
-            </children>
-          </toolbar>
+          </component>
+          <component id="e0e3" class="javax.swing.JButton" binding="logOffButton">
+            <constraints/>
+            <properties>
+              <maximumSize width="120" height="40"/>
+              <minimumSize width="120" height="40"/>
+              <opaque value="false"/>
+              <preferredSize width="120" height="40"/>
+              <text value="Log Off"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <component id="51672" class="javax.swing.JLabel" binding="WPKGLabel">
@@ -111,6 +79,23 @@
           <verifyInputWhenFocusTarget value="true"/>
         </properties>
       </component>
+      <scrollpane id="b5f06">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="c6708" class="javax.swing.JList" binding="ClientList">
+            <constraints/>
+            <properties>
+              <enabled value="true"/>
+              <font name="SansSerif" size="24"/>
+              <model/>
+              <name value="ClientListModel"/>
+              <preferredSize width="99999" height="99999"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
     </children>
   </grid>
 </form>

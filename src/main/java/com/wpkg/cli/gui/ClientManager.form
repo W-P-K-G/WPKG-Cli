@@ -34,6 +34,14 @@
             <rowspec value="center:d:noGrow"/>
             <rowspec value="top:4dlu:noGrow"/>
             <rowspec value="center:d:noGrow"/>
+            <rowspec value="top:4dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:4dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:4dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:4dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
             <colspec value="fill:d:grow"/>
             <constraints>
               <splitpane position="left"/>
@@ -132,45 +140,15 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="67656" class="javax.swing.JList" binding="commandList">
-                <constraints border-constraint="Center"/>
-                <properties>
-                  <model/>
-                </properties>
-              </component>
-              <toolbar id="3fb73">
+              <grid id="9b6db" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
                 <constraints border-constraint="South"/>
-                <properties>
-                  <maximumSize width="120" height="40"/>
-                  <minimumSize width="120" height="40"/>
-                  <opaque value="true"/>
-                  <orientation value="0"/>
-                  <preferredSize width="120" height="40"/>
-                  <rollover value="false"/>
-                </properties>
-                <clientProperties>
-                  <JToolBar.isRollover class="java.lang.Boolean" value="false"/>
-                </clientProperties>
+                <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="ef5e5" class="javax.swing.JButton" binding="executeButton">
-                    <constraints/>
-                    <properties>
-                      <actionCommand value="Info"/>
-                      <background color="-11972523"/>
-                      <label value="Execute"/>
-                      <maximumSize width="120" height="40"/>
-                      <minimumSize width="120" height="40"/>
-                      <opaque value="false"/>
-                      <preferredSize width="120" height="40"/>
-                      <text value="Execute"/>
-                    </properties>
-                  </component>
                   <component id="19549" class="javax.swing.JButton" binding="refreshButton">
                     <constraints/>
                     <properties>
                       <actionCommand value="Info"/>
-                      <background color="-11972523"/>
                       <label value="Refresh"/>
                       <maximumSize width="120" height="40"/>
                       <minimumSize width="120" height="40"/>
@@ -179,8 +157,32 @@
                       <text value="Refresh"/>
                     </properties>
                   </component>
+                  <component id="6d758" class="javax.swing.JButton" binding="executeButton">
+                    <constraints/>
+                    <properties>
+                      <actionCommand value="Info"/>
+                      <label value="Execute"/>
+                      <maximumSize width="120" height="40"/>
+                      <minimumSize width="120" height="40"/>
+                      <preferredSize width="120" height="40"/>
+                      <text value="Execute"/>
+                    </properties>
+                  </component>
                 </children>
-              </toolbar>
+              </grid>
+              <scrollpane id="f2e0e">
+                <constraints border-constraint="Center"/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="67656" class="javax.swing.JList" binding="commandList">
+                    <constraints/>
+                    <properties>
+                      <model/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
             </children>
           </grid>
         </children>
@@ -190,36 +192,18 @@
         <properties/>
         <border type="none"/>
         <children>
-          <toolbar id="5ee11">
+          <component id="4f1fd" class="javax.swing.JButton" binding="unjoinButton">
             <constraints/>
             <properties>
+              <actionCommand value="Info"/>
+              <label value="Disconnect"/>
               <maximumSize width="120" height="40"/>
               <minimumSize width="120" height="40"/>
-              <opaque value="true"/>
-              <orientation value="0"/>
+              <opaque value="false"/>
               <preferredSize width="120" height="40"/>
-              <rollover value="false"/>
+              <text value="Disconnect"/>
             </properties>
-            <clientProperties>
-              <JToolBar.isRollover class="java.lang.Boolean" value="false"/>
-            </clientProperties>
-            <border type="none"/>
-            <children>
-              <component id="4f1fd" class="javax.swing.JButton" binding="unjoinButton">
-                <constraints/>
-                <properties>
-                  <actionCommand value="Info"/>
-                  <background color="-11972523"/>
-                  <label value="Disconnect"/>
-                  <maximumSize width="120" height="40"/>
-                  <minimumSize width="120" height="40"/>
-                  <opaque value="false"/>
-                  <preferredSize width="120" height="40"/>
-                  <text value="Disconnect"/>
-                </properties>
-              </component>
-            </children>
-          </toolbar>
+          </component>
         </children>
       </grid>
     </children>

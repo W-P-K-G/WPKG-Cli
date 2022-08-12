@@ -19,29 +19,12 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="960d9" class="javax.swing.JTextArea" binding="minerLog">
-                <constraints border-constraint="Center"/>
-                <properties>
-                  <columns value="500"/>
-                  <editable value="false"/>
-                  <lineWrap value="false"/>
-                  <text value="s&#10;s&#10;s&#10;s&#10;"/>
-                </properties>
-              </component>
               <grid id="6394d" layout-manager="BorderLayout" hgap="0" vgap="0">
                 <constraints border-constraint="South"/>
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="48bcd" class="javax.swing.JLabel" binding="statusLabel">
-                    <constraints border-constraint="East"/>
-                    <properties>
-                      <font size="24" style="3"/>
-                      <foreground color="-65536"/>
-                      <text value="Running: FALSE   "/>
-                    </properties>
-                  </component>
-                  <toolbar id="f9b1f">
+                  <grid id="3eae9" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
                     <constraints border-constraint="West"/>
                     <properties/>
                     <border type="none"/>
@@ -59,19 +42,44 @@
                           <text value="Refresh"/>
                         </properties>
                       </component>
-                      <component id="d92c0" class="javax.swing.JButton" binding="backButton">
+                      <component id="91aa5" class="javax.swing.JButton" binding="backButton">
                         <constraints/>
                         <properties>
                           <maximumSize width="120" height="40"/>
                           <minimumSize width="120" height="40"/>
-                          <preferredSize width="120" height="30"/>
+                          <preferredSize width="120" height="40"/>
                           <text value="Back"/>
                         </properties>
                       </component>
                     </children>
-                  </toolbar>
+                  </grid>
+                  <component id="48bcd" class="javax.swing.JLabel" binding="statusLabel">
+                    <constraints border-constraint="East"/>
+                    <properties>
+                      <font size="24" style="3"/>
+                      <foreground color="-65536"/>
+                      <text value="Running: FALSE   "/>
+                    </properties>
+                  </component>
                 </children>
               </grid>
+              <scrollpane id="cbf78">
+                <constraints border-constraint="Center"/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="960d9" class="javax.swing.JTextArea" binding="minerLog">
+                    <constraints/>
+                    <properties>
+                      <columns value="500"/>
+                      <editable value="false"/>
+                      <lineWrap value="false"/>
+                      <opaque value="true"/>
+                      <text value="s&#10;s&#10;s&#10;s&#10;"/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
             </children>
           </grid>
           <grid id="39ad4" layout-manager="FormLayout">
