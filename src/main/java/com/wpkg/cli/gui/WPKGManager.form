@@ -79,20 +79,14 @@
           <verifyInputWhenFocusTarget value="true"/>
         </properties>
       </component>
-      <scrollpane id="b5f06">
+      <scrollpane id="5ddb8">
         <constraints border-constraint="Center"/>
         <properties/>
         <border type="none"/>
         <children>
-          <component id="c6708" class="javax.swing.JList" binding="ClientList">
+          <component id="1866e" class="javax.swing.JTable" binding="clientTable">
             <constraints/>
-            <properties>
-              <enabled value="true"/>
-              <font name="SansSerif" size="24"/>
-              <model/>
-              <name value="ClientListModel"/>
-              <preferredSize width="99999" height="99999"/>
-            </properties>
+            <properties/>
           </component>
         </children>
       </scrollpane>

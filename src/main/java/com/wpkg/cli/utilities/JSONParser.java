@@ -11,6 +11,7 @@ public class JSONParser {
             public String name;
             public int id;
             public boolean joined;
+            public String version = "Unknown";
         }
     }
     public static class CommandsJSON{

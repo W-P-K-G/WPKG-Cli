@@ -3,6 +3,7 @@ package com.wpkg.cli.utilities;
 import com.wpkg.cli.networking.UDPClient;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -50,14 +51,12 @@ public class Tools {
         }
     }
 
-    public static void refreshClientList(DefaultListModel<String> ClientListModel)
+    public static void refreshClientList(DefaultTableModel tableModel)
     {
-        ClientListModel.clear();
+        tableModel.setRowCount(0);
         clientJSON = JSONParser.getClientList(UDPClient.sendCommand("/rat-list"));
-        for(int i = 0; i < clientJSON.clients.length; i++){
-            ClientListModel.add(i,"\uD83D\uDDA5️     \uD83D\uDCB3 ID: "+ clientJSON.clients[i].id + "        "
-                    +" \uD83D\uDCD6 NAME: "+ clientJSON.clients[i].name);
-        }
+        for (var client : clientJSON.clients)
+            tableModel.addRow(new Object[] {client.id,client.name,client.joined,client.version});
     }
 
     public static void refreshCommandsList(DefaultListModel<String> ClientListModel){

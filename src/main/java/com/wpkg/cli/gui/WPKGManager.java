@@ -7,11 +7,12 @@ import com.wpkg.cli.state.StateManager;
 import com.wpkg.cli.utilities.Tools;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.Vector;
 
 @SuppressWarnings("unused")
 public class WPKGManager {
     public JPanel wpkgManager;
-    public JList<String> ClientList;
     private JPanel Buttons;
     private JButton selectButton;
     private JButton infoButton;
@@ -19,7 +20,9 @@ public class WPKGManager {
     private JButton refreshButton;
     private JButton logOffButton;
     private JLabel WPKGLabel;
-    public DefaultListModel<String> clientModel = new DefaultListModel<>();
+    public JTable clientTable;
+
+    public TableModel tableModel;
 
     // Buttons Actions
     public WPKGManager()
@@ -28,6 +31,9 @@ public class WPKGManager {
         refreshButton.addActionListener(ActionEvent -> refreshAction());
         killButton.addActionListener(ActionEvent -> killAction());
         selectButton.addActionListener(ActionEvent -> selectAction());
+
+        tableModel = new TableModel();
+        clientTable.setModel(tableModel);
     }
 
     public void logOffAction()
@@ -38,25 +44,25 @@ public class WPKGManager {
     }
     public void refreshAction()
     {
-        Tools.refreshClientList(clientModel);
+        Tools.refreshClientList(tableModel);
     }
     public void killAction()
     {
-        UDPClient.sendCommand("/close "+ Tools.clientJSON.clients[ClientList.getSelectedIndex()].id);
+        UDPClient.sendCommand("/close "+ Tools.clientJSON.clients[clientTable.getSelectedRow()].id);
 
-        Tools.refreshClientList(clientModel);
+        Tools.refreshClientList(tableModel);
     }
     public void selectAction()
     {
         try
         {
-            if (Tools.clientJSON.clients[ClientList.getSelectedIndex()].joined)
+            if (Tools.clientJSON.clients[clientTable.getSelectedRow()].joined)
             {
                 JOptionPane.showMessageDialog(Main.frame,"Can't connect to client: Client already joined","Error",JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            int index = Tools.clientJSON.clients[ClientList.getSelectedIndex()].id;
+            int index = Tools.clientJSON.clients[clientTable.getSelectedRow()].id;
             Main.ClientManager.join(index);
             StateManager.changeState(State.CLIENT_MANAGER);
         }
@@ -65,4 +71,39 @@ public class WPKGManager {
             JOptionPane.showMessageDialog(Main.frame,"Client not selected","Error",JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    public class TableModel extends DefaultTableModel {
+
+        public TableModel() {
+            super(new String[] {"ID","Name","Joined","Version"}, 0);
+        }
+
+        @Override
+        public Class<?> getColumnClass(int columnIndex)
+        {
+            return switch (columnIndex) {
+                case 0 -> Integer.class;
+                case 1,3 -> String.class;
+                case 2 -> Boolean.class;
+                default -> null;
+            };
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+
+        @Override
+        public void setValueAt(Object aValue, int row, int column) {
+            if (aValue instanceof Boolean && column == 2) {
+                Vector rowData = (Vector)getDataVector().get(row);
+                rowData.set(2, (boolean)aValue);
+                fireTableCellUpdated(row, column);
+            }
+        }
+
+    }
+
 }
+
