@@ -7,6 +7,7 @@ import com.wpkg.cli.state.StateManager;
 import com.wpkg.cli.utilities.Tools;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class WPKGManager {
@@ -29,6 +30,10 @@ public class WPKGManager {
 
         tableModel = new TableModel();
         clientTable.setModel(tableModel);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        clientTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
     }
 
     public void logOffAction()
