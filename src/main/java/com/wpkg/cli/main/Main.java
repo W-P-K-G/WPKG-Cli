@@ -1,6 +1,7 @@
 package com.wpkg.cli.main;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import com.wpkg.cli.gui.ClientManager;
 import com.wpkg.cli.gui.CryptoManagerGPU;
 import com.wpkg.cli.gui.LogonUI;
@@ -22,6 +23,9 @@ public class Main {
 
     public static void main(String[] args)
     {
+        System.setProperty("sun.java2d.opengl", "true");
+        UIManager.put("ProgressBar.repaintInterval", 5);
+
         // Dark-mode on
         FlatDarkLaf.setup();
 

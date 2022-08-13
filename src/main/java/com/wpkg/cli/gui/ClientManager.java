@@ -1,6 +1,5 @@
 package com.wpkg.cli.gui;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wpkg.cli.commands.Command;
 import com.wpkg.cli.commands.RunProcess;
@@ -33,6 +32,10 @@ public class ClientManager {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
+    Thread statsThread;
+
+    boolean statsRefreshing;
+
     public boolean commandWorks = false,joined = false;
 
     public ClientManager()
@@ -52,12 +55,12 @@ public class ClientManager {
         ramBar.setStringPainted(true);
         swapBar.setStringPainted(true);
 
-        new Thread(this::statsThread).start();
 
     }
     public void refreshAction()
     {
-        refreshStats();
+        ProgressDialog progressDialog = new ProgressDialog("Refreshing...");
+        progressDialog.start((dialog) -> refreshStats());
     }
 
     public void cryptoAction(){
@@ -80,19 +83,26 @@ public class ClientManager {
 
     public void statsThread()
     {
-        while (true)
-        {
-            if (joined && !commandWorks && StateManager.getState() == State.CLIENT_MANAGER)
-                refreshStats();
+        statsThread = new Thread(() -> {
+            while (true)
+            {
+                if (!joined)
+                    return;
 
-            Tools.sleep(10000);
-        }
+                if (!commandWorks && StateManager.getState() == State.CLIENT_MANAGER)
+                    refreshStats();
+
+                Tools.sleep(10000);
+            }
+        });
+        statsThread.start();
     }
 
     public void join(int id)
     {
         UDPClient.sendCommand("/join "+ id);
-        refreshStats();
+        refreshAction();
+        statsThread();
         joined = true;
     }
 
@@ -100,28 +110,38 @@ public class ClientManager {
     {
         joined = false;
 
+        while (statsRefreshing)
+            Tools.sleep(1);
+
         UDPClient.sendCommand("/unjoin");
         StateManager.changeState(State.CLIENT_LIST);
     }
 
     public void refreshStats()
     {
+        statsRefreshing = true;
+
         String[] mess = UDPClient.sendCommand("stat").split(" ");
 
         int cpu = (int)Math.floor(Float.parseFloat(mess[0]));
-        cpuBar.setValue(cpu);
-        cpuBar.setString(cpu + "%");
 
         double memfree = Tools.roundTo2DecimalPlace(Double.parseDouble(mess[1]) / 1024 / 1024 / 1024);
         double memtotal = Tools.roundTo2DecimalPlace(Double.parseDouble(mess[2]) / 1024 / 1024 / 1024);
 
-        ramBar.setString(memfree + "GB/" + memtotal + "GB");
-        ramBar.setValue((int)(memfree * 100 / memtotal));
-
         double swapfree = Tools.roundTo2DecimalPlace(Double.parseDouble(mess[3]) / 1024 / 1024 / 1024);
         double swaptotal = Tools.roundTo2DecimalPlace(Double.parseDouble(mess[4]) / 1024 / 1024 / 1024);
 
-        swapBar.setString(swapfree + "GB/" + swaptotal + "GB");
-        swapBar.setValue((int)(swapfree * 100 / swaptotal));
+        SwingUtilities.invokeLater(() -> {
+            cpuBar.setValue(cpu);
+            cpuBar.setString(cpu + "%");
+
+            ramBar.setString(memfree + "GB/" + memtotal + "GB");
+            ramBar.setValue((int)(memfree * 100 / memtotal));
+
+            swapBar.setString(swapfree + "GB/" + swaptotal + "GB");
+            swapBar.setValue((int)(swapfree * 100 / swaptotal));
+        });
+        statsRefreshing = false;
+
     }
 }

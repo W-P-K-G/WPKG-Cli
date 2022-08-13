@@ -28,15 +28,22 @@ public class LogonUI
     }
     public void acceptAction()
     {
-        try {
-            String[] portAddress = Main.LogonUI.IPField.getSelectedItem().toString().split(":");
-            UDPClient.connect(portAddress[0],Integer.parseInt(portAddress[1]));
-            UDPClient.sendRegisterPing();
+        ProgressDialog progressDialog = new ProgressDialog("Connecting...");
+        progressDialog.start(dialog -> {
+            try
+            {
+                String[] portAddress = Main.LogonUI.IPField.getSelectedItem().toString().split(":");
+                UDPClient.connect(portAddress[0],Integer.parseInt(portAddress[1]));
+                UDPClient.sendRegisterPing();
 
-            StateManager.changeState(State.CLIENT_LIST);
+                SwingUtilities.invokeLater(() -> StateManager.changeState(State.CLIENT_LIST));
+            }
+            catch (IOException e)
+            {
+                SwingUtilities.invokeLater(() -> dialog.dispose());
+                JOptionPane.showMessageDialog(null, "Can't connect to server: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            }
+        });
 
-        } catch (IOException e){
-            JOptionPane.showMessageDialog(null, "Can't connect to server: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
-        }
     }
 }

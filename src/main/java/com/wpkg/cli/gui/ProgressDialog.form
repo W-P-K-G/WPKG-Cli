@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.wpkg.cli.gui.ProgressDialog">
+  <grid id="27dc6" binding="panel" layout-manager="FormLayout">
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:d:grow"/>
+    <colspec value="fill:d:grow"/>
+    <constraints>
+      <xy x="20" y="20" width="576" height="201"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="a8070" class="javax.swing.JProgressBar" binding="progressBar1" default-binding="true">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <indeterminate value="true"/>
+          <string value="50%"/>
+          <stringPainted value="false"/>
+          <value value="0"/>
+        </properties>
+      </component>
+      <component id="5504f" class="javax.swing.JLabel" binding="label">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="Label"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

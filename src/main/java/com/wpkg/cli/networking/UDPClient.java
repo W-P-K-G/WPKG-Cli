@@ -36,7 +36,8 @@ public class UDPClient {
         return connected;
     }
 
-    public static void sendRegisterPing() throws IOException {
+    public static void sendRegisterPing() throws IOException
+    {
         //this method don't using receiveString and sendString method because using IOException to properly error handling
         byte[] buf = "register".getBytes();
         DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
@@ -49,7 +50,9 @@ public class UDPClient {
         socket.receive(packet);
     }
 
-    public static void sendString(String msg) {
+    public static void sendString(String msg)
+    {
+        System.out.println("Sended: " + msg);
         try {
             byte[] buf = msg.getBytes();
             DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
@@ -70,7 +73,9 @@ public class UDPClient {
             /* Receiving Packet */
             socket.receive(packet);
 
-            return new String(packet.getData(), packet.getOffset(), packet.getLength());
+            String msg = new String(packet.getData(), packet.getOffset(), packet.getLength());
+            System.out.println("Received: " + msg);
+            return msg;
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Can't receive message: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             throw new RuntimeException(e);

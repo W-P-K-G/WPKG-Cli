@@ -33,7 +33,6 @@
                         <constraints/>
                         <properties>
                           <actionCommand value="Info"/>
-                          <background color="-11972523"/>
                           <label value="Refresh"/>
                           <maximumSize width="120" height="40"/>
                           <minimumSize width="120" height="40"/>
