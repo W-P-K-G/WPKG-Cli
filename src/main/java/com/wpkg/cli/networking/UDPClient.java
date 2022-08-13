@@ -33,10 +33,10 @@ public class UDPClient {
         return connected;
     }
 
-    public static void connectAndAuthorize(String token) throws IOException
+    public static void sendRegisterPing() throws IOException
     {
         //this method don't using receiveString and sendString method because using IOException to properly error handling
-        byte[] buf = ("/authorize " + token).getBytes();
+        byte[] buf = "register".getBytes();
         DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
 
         socket.send(packet);
@@ -45,14 +45,6 @@ public class UDPClient {
         packet = new DatagramPacket(buf2, buf2.length);
 
         socket.receive(packet);
-
-        String msg = new String(packet.getData(),packet.getOffset(),packet.getLength());
-
-        if (msg.contains("wrong authtoken"))
-        {
-            sendString("/disconnect");
-            throw new IOException("Authorize failed");
-        }
     }
 
     public static void sendString(String msg)
