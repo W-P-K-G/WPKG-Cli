@@ -26,16 +26,23 @@ public class LogonUI
     }
     public void acceptAction()
     {
+        String token = String.valueOf(TokenField.getPassword());
+        if (token.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Authtoken is empty", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         ProgressDialog progressDialog = new ProgressDialog("Connecting...");
         progressDialog.start(dialog -> {
             try
             {
-                String ip = (String) Main.LogonUI.IPField.getSelectedItem();
+                String ip = (String) IPField.getSelectedItem();
                 if (ip != null)
                 {
                     String[] portAddress = ip.split(":");
                     UDPClient.connect(portAddress[0],Integer.parseInt(portAddress[1]));
-                    UDPClient.sendRegisterPing();
+                    UDPClient.connectAndAuthorize(token);
 
                     SwingUtilities.invokeLater(() -> StateManager.changeState(State.CLIENT_LIST));
                 }
