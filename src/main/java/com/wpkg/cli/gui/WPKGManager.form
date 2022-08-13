@@ -23,18 +23,6 @@
               <text value="HackintoIT!"/>
             </properties>
           </component>
-          <component id="2bb0e" class="javax.swing.JButton" binding="infoButton">
-            <constraints/>
-            <properties>
-              <actionCommand value="Info"/>
-              <label value="Info"/>
-              <maximumSize width="120" height="40"/>
-              <minimumSize width="120" height="40"/>
-              <opaque value="false"/>
-              <preferredSize width="120" height="40"/>
-              <text value="Info"/>
-            </properties>
-          </component>
           <component id="41122" class="javax.swing.JButton" binding="killButton">
             <constraints/>
             <properties>

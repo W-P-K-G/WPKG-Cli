@@ -15,7 +15,6 @@ public class WPKGManager {
     public JPanel wpkgManager;
     private JPanel Buttons;
     private JButton selectButton;
-    private JButton infoButton;
     private JButton killButton;
     private JButton refreshButton;
     private JButton logOffButton;
@@ -48,9 +47,16 @@ public class WPKGManager {
     }
     public void killAction()
     {
-        UDPClient.sendCommand("/close "+ Tools.clientJSON.clients[clientTable.getSelectedRow()].id);
+        try
+        {
+            UDPClient.sendCommand("/close "+ Tools.clientJSON.clients[clientTable.getSelectedRow()].id);
 
-        Tools.refreshClientList(tableModel);
+            Tools.refreshClientList(tableModel);
+        }
+        catch (ArrayIndexOutOfBoundsException e)
+        {
+            JOptionPane.showMessageDialog(Main.frame,"Client not selected","Error",JOptionPane.ERROR_MESSAGE);
+        }
     }
     public void selectAction()
     {
@@ -93,16 +99,6 @@ public class WPKGManager {
         public boolean isCellEditable(int row, int column) {
             return false;
         }
-
-        @Override
-        public void setValueAt(Object aValue, int row, int column) {
-            if (aValue instanceof Boolean && column == 2) {
-                Vector rowData = (Vector)getDataVector().get(row);
-                rowData.set(2, (boolean)aValue);
-                fireTableCellUpdated(row, column);
-            }
-        }
-
     }
 
 }
