@@ -1,5 +1,6 @@
 package com.wpkg.cli.gui;
 
+import com.wpkg.cli.main.Main;
 import com.wpkg.cli.networking.UDPClient;
 import com.wpkg.cli.state.State;
 import com.wpkg.cli.state.StateManager;
@@ -11,6 +12,7 @@ import java.io.IOException;
 public class LogonUI
 {
     public JPanel logonUI;
+    private JPasswordField TokenField;
     private JButton Accept;
     public JComboBox<String> IPField;
 
@@ -24,12 +26,12 @@ public class LogonUI
     }
     public void acceptAction()
     {
-//        String token = String.valueOf(TokenField.getPassword());
-//        if (token.isEmpty())
-//        {
-//            JOptionPane.showMessageDialog(null, "Authtoken is empty", "Error", JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
+        String token = String.valueOf(TokenField.getPassword());
+        if (token.isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Authtoken is empty", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         ProgressDialog progressDialog = new ProgressDialog("Connecting...");
         progressDialog.start(dialog -> {
@@ -40,7 +42,7 @@ public class LogonUI
                 {
                     String[] portAddress = ip.split(":");
                     UDPClient.connect(portAddress[0],Integer.parseInt(portAddress[1]));
-                    UDPClient.sendRegisterPing();
+                    UDPClient.connectAndAuthorize(token);
 
                     SwingUtilities.invokeLater(() -> StateManager.changeState(State.CLIENT_LIST));
                 }
