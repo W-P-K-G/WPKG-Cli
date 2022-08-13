@@ -1,8 +1,5 @@
 package com.wpkg.cli.networking;
 
-import com.wpkg.cli.commands.SendMessage;
-import com.wpkg.cli.main.Main;
-import com.wpkg.cli.utilities.Tools;
 
 import java.io.IOException;
 import java.net.*;
@@ -101,8 +98,7 @@ public class UDPClient {
             int len = packet.getLength();
             byte[] ret = new byte[len];
 
-            for (int i = 0;i < len;i++)
-                ret[i] = buf[i];
+            System.arraycopy(buf, 0, ret, 0, len);
 
             return ret;
         }

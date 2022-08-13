@@ -5,12 +5,11 @@ import javax.swing.*;
 public class ProgressDialog extends JDialog
 {
     private JPanel panel;
-    private JProgressBar progressBar1;
     private JLabel label;
 
     public interface Target
     {
-        public void target(JDialog dialog);
+        void target(JDialog dialog);
     }
 
     public ProgressDialog(String title)
@@ -40,7 +39,7 @@ public class ProgressDialog extends JDialog
     {
         Thread t = new Thread(() -> {
             target.target(this);
-            SwingUtilities.invokeLater(() -> this.dispose());
+            SwingUtilities.invokeLater(this::dispose);
         });
         t.start();
         setVisible(true);

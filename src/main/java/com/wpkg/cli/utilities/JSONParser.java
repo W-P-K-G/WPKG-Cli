@@ -1,9 +1,10 @@
 package com.wpkg.cli.utilities;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class JSONParser {
+public class JSONParser
+{
 
     public static class ClientJSON {
         public clients[] clients;
@@ -14,14 +15,7 @@ public class JSONParser {
             public String version = "Unknown";
         }
     }
-    public static class CommandsJSON{
-        public commands[] commands;
-        public static class commands{
-            public String name;
-            public String help;
-            public String args;
-        }
-    }
+
     public static class AddressJSON{
         public uAddresses[] uAddresses;
         public tAddresses[] tAddresses;
@@ -59,17 +53,7 @@ public class JSONParser {
         }
         return clientJSON;
     }
-    public static CommandsJSON getCommandsList(String json){
-        ObjectMapper objectMapper = new ObjectMapper();
 
-        CommandsJSON commandsJSON;
-        try {
-            commandsJSON = objectMapper.readValue(json, CommandsJSON.class);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-        return  commandsJSON;
-    }
     public static AddressJSON getAddress(String json){
         ObjectMapper objectMapper = new ObjectMapper();
 

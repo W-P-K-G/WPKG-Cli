@@ -9,14 +9,12 @@ import com.wpkg.cli.utilities.Tools;
 import javax.swing.*;
 import java.io.IOException;
 
-@SuppressWarnings("unused")
 public class LogonUI
 {
     public JPanel logonUI;
-    private JLabel WPKGLabel;
     private JPasswordField TokenField;
     private JButton Accept;
-    public JComboBox IPField;
+    public JComboBox<String> IPField;
 
     // Buttons Actions
     public LogonUI()
@@ -32,15 +30,19 @@ public class LogonUI
         progressDialog.start(dialog -> {
             try
             {
-                String[] portAddress = Main.LogonUI.IPField.getSelectedItem().toString().split(":");
-                UDPClient.connect(portAddress[0],Integer.parseInt(portAddress[1]));
-                UDPClient.sendRegisterPing();
+                String ip = (String) Main.LogonUI.IPField.getSelectedItem();
+                if (ip != null)
+                {
+                    String[] portAddress = ip.split(":");
+                    UDPClient.connect(portAddress[0],Integer.parseInt(portAddress[1]));
+                    UDPClient.sendRegisterPing();
 
-                SwingUtilities.invokeLater(() -> StateManager.changeState(State.CLIENT_LIST));
+                    SwingUtilities.invokeLater(() -> StateManager.changeState(State.CLIENT_LIST));
+                }
             }
             catch (IOException e)
             {
-                SwingUtilities.invokeLater(() -> dialog.dispose());
+                SwingUtilities.invokeLater(dialog::dispose);
                 JOptionPane.showMessageDialog(null, "Can't connect to server: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             }
         });

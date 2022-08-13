@@ -8,17 +8,13 @@ import com.wpkg.cli.utilities.Tools;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.util.Vector;
 
-@SuppressWarnings("unused")
 public class WPKGManager {
     public JPanel wpkgManager;
-    private JPanel Buttons;
     private JButton selectButton;
     private JButton killButton;
     private JButton refreshButton;
     private JButton logOffButton;
-    private JLabel WPKGLabel;
     public JTable clientTable;
 
     public TableModel tableModel;
@@ -78,7 +74,7 @@ public class WPKGManager {
         }
     }
 
-    public class TableModel extends DefaultTableModel {
+    public static class TableModel extends DefaultTableModel {
 
         public TableModel() {
             super(new String[] {"ID","Name","Joined","Version"}, 0);

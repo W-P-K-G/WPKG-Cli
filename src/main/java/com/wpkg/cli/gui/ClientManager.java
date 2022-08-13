@@ -1,6 +1,5 @@
 package com.wpkg.cli.gui;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wpkg.cli.commands.Command;
 import com.wpkg.cli.commands.RunProcess;
 import com.wpkg.cli.commands.Screenshot;
@@ -14,7 +13,6 @@ import com.wpkg.cli.utilities.Tools;
 import javax.swing.*;
 import java.util.ArrayList;
 
-@SuppressWarnings("unused")
 public class ClientManager {
     public JPanel clientManager;
     private JButton unjoinButton;
@@ -22,15 +20,11 @@ public class ClientManager {
     private JProgressBar ramBar;
     private JProgressBar swapBar;
     private JButton cryptoManager;
-    public JList commandList;
+    public JList<String> commandList;
     private JButton executeButton;
     private JButton refreshButton;
 
-    private DefaultListModel<String> commandsModel = new DefaultListModel<>();
-
-    private ArrayList<Command> commands = new ArrayList<>();
-
-    ObjectMapper objectMapper = new ObjectMapper();
+    private final ArrayList<Command> commands = new ArrayList<>();
 
     Thread statsThread;
 
@@ -45,6 +39,7 @@ public class ClientManager {
         cryptoManager.addActionListener(actionEvent -> cryptoAction());
         executeButton.addActionListener(actionEvent -> executeAction());
 
+        DefaultListModel<String> commandsModel = new DefaultListModel<>();
         commandList.setModel(commandsModel);
 
         commands.add(new SendMessage(commandsModel));

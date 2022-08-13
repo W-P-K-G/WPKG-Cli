@@ -7,7 +7,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="97005" binding="Buttons" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+      <grid id="97005" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
         <constraints border-constraint="South"/>
         <properties/>
         <border type="none"/>
@@ -58,7 +58,7 @@
           </component>
         </children>
       </grid>
-      <component id="51672" class="javax.swing.JLabel" binding="WPKGLabel">
+      <component id="51672" class="javax.swing.JLabel">
         <constraints border-constraint="North"/>
         <properties>
           <font name="Serif" size="36" style="3"/>
