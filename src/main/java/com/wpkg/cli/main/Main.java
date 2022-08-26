@@ -28,7 +28,6 @@ public class Main {
 
         // Dark-mode on
         FlatDarkLaf.setup();
-
         // Declare Windows
         WPKGManager = new WPKGManager();
         LogonUI = new LogonUI();

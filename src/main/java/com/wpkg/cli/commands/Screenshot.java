@@ -26,11 +26,12 @@ public class Screenshot extends Command
                 try {
                     Desktop.getDesktop().browse(new URI(url));
                 } catch (IOException e) {
-                    JOptionPane.showMessageDialog(Main.frame,"System don't support java.awt.Desktop","Error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(Main.frame,"Error:" + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
                 } catch (URISyntaxException e) {
                     JOptionPane.showMessageDialog(Main.frame,"Can't open url: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
                 }
             }
+            else JOptionPane.showMessageDialog(Main.frame,"System don't support java.awt.Desktop","Error",JOptionPane.ERROR_MESSAGE);
         });
     }
 }
