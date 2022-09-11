@@ -1,14 +1,14 @@
-package com.wpkg.cli.gui;
+package me.wpkg.cli.gui;
 
-import com.wpkg.cli.commands.Command;
-import com.wpkg.cli.commands.RunProcess;
-import com.wpkg.cli.commands.Screenshot;
-import com.wpkg.cli.commands.SendMessage;
-import com.wpkg.cli.main.Main;
-import com.wpkg.cli.networking.UDPClient;
-import com.wpkg.cli.state.State;
-import com.wpkg.cli.state.StateManager;
-import com.wpkg.cli.utilities.Tools;
+import me.wpkg.cli.commands.Command;
+import me.wpkg.cli.commands.RunProcess;
+import me.wpkg.cli.commands.Screenshot;
+import me.wpkg.cli.commands.SendMessage;
+import me.wpkg.cli.main.Main;
+import me.wpkg.cli.networking.UDPClient;
+import me.wpkg.cli.state.State;
+import me.wpkg.cli.state.StateManager;
+import me.wpkg.cli.utilities.Tools;
 
 import javax.swing.*;
 import java.util.ArrayList;

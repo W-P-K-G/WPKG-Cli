@@ -1,4 +1,4 @@
-package com.wpkg.cli.gui;
+package me.wpkg.cli.gui;
 
 import javax.swing.*;
 

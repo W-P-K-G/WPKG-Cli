@@ -1,6 +1,6 @@
-package com.wpkg.cli.utilities;
+package me.wpkg.cli.utilities;
 
-import com.wpkg.cli.networking.UDPClient;
+import me.wpkg.cli.networking.UDPClient;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Scanner;
 
-import static com.wpkg.cli.utilities.JSONParser.getAddress;
+import static me.wpkg.cli.utilities.JSONParser.getAddress;
 
 public class Tools {
     public static JSONParser.ClientJSON clientJSON;

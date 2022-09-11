@@ -1,7 +1,7 @@
-package com.wpkg.cli.commands;
+package me.wpkg.cli.commands;
 
-import com.wpkg.cli.gui.ProgressDialog;
-import com.wpkg.cli.main.Main;
+import me.wpkg.cli.gui.ProgressDialog;
+import me.wpkg.cli.main.Main;
 
 import javax.swing.*;
 import java.awt.*;

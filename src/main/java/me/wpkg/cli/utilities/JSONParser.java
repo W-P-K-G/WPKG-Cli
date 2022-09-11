@@ -1,4 +1,4 @@
-package com.wpkg.cli.utilities;
+package me.wpkg.cli.utilities;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

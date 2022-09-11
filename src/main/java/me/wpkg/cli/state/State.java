@@ -1,4 +1,4 @@
-package com.wpkg.cli.state;
+package me.wpkg.cli.state;
 
 public enum State
 {

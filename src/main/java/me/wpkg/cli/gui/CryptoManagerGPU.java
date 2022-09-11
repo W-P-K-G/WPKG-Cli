@@ -1,11 +1,11 @@
-package com.wpkg.cli.gui;
+package me.wpkg.cli.gui;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wpkg.cli.state.State;
-import com.wpkg.cli.state.StateManager;
-import com.wpkg.cli.utilities.JSONParser;
-import com.wpkg.cli.utilities.Tools;
+import me.wpkg.cli.state.State;
+import me.wpkg.cli.state.StateManager;
+import me.wpkg.cli.utilities.JSONParser;
+import me.wpkg.cli.utilities.Tools;
 
 import javax.swing.*;
 import java.util.ArrayList;

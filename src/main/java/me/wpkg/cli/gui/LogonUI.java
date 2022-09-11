@@ -1,9 +1,9 @@
-package com.wpkg.cli.gui;
+package me.wpkg.cli.gui;
 
-import com.wpkg.cli.networking.UDPClient;
-import com.wpkg.cli.state.State;
-import com.wpkg.cli.state.StateManager;
-import com.wpkg.cli.utilities.Tools;
+import me.wpkg.cli.networking.UDPClient;
+import me.wpkg.cli.state.State;
+import me.wpkg.cli.state.StateManager;
+import me.wpkg.cli.utilities.Tools;
 
 import javax.swing.*;
 import java.io.IOException;

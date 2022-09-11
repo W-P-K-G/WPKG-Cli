@@ -1,6 +1,6 @@
-package com.wpkg.cli.commands;
+package me.wpkg.cli.commands;
 
-import com.wpkg.cli.networking.UDPClient;
+import me.wpkg.cli.networking.UDPClient;
 
 import javax.swing.*;
 

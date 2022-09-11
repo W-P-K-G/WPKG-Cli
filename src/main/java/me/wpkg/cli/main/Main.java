@@ -1,17 +1,16 @@
-package com.wpkg.cli.main;
+package me.wpkg.cli.main;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLightLaf;
-import com.wpkg.cli.gui.ClientManager;
-import com.wpkg.cli.gui.CryptoManagerGPU;
-import com.wpkg.cli.gui.LogonUI;
-import com.wpkg.cli.gui.WPKGManager;
-import com.wpkg.cli.networking.UDPClient;
-import com.wpkg.cli.state.State;
-import com.wpkg.cli.state.StateManager;
+
+import me.wpkg.cli.gui.ClientManager;
+import me.wpkg.cli.gui.CryptoManagerGPU;
+import me.wpkg.cli.gui.LogonUI;
+import me.wpkg.cli.gui.WPKGManager;
+import me.wpkg.cli.networking.UDPClient;
+import me.wpkg.cli.state.State;
+import me.wpkg.cli.state.StateManager;
 
 import javax.swing.*;
-
 
 public class Main {
 
