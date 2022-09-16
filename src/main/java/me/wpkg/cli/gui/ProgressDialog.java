@@ -1,11 +1,14 @@
 package me.wpkg.cli.gui;
 
 import javax.swing.*;
+import java.util.concurrent.CompletableFuture;
 
 public class ProgressDialog extends JDialog
 {
     private JPanel panel;
     private JLabel label;
+
+    private CompletableFuture<Void> future;
 
     public interface Target
     {
@@ -26,23 +29,18 @@ public class ProgressDialog extends JDialog
         label.setText(title);
     }
 
-    public void startAndJoin(Target target)
+    public void await()
     {
-        try {
-            start(target).join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        future.join();
     }
 
-    public Thread start(Target target)
+    public ProgressDialog start(Target target)
     {
-        Thread t = new Thread(() -> {
+        future = CompletableFuture.runAsync(() -> {
             target.target(this);
             SwingUtilities.invokeLater(this::dispose);
         });
-        t.start();
         setVisible(true);
-        return t;
+        return this;
     }
 }

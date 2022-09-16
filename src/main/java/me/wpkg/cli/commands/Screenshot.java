@@ -19,7 +19,7 @@ public class Screenshot extends Command
     public void execute()
     {
         ProgressDialog progressDialog = new ProgressDialog("Waiting for screenshot...");
-        progressDialog.startAndJoin((dialog) -> {
+        progressDialog.start((dialog) -> {
             String url = sendCommand("screenshot");
             if (Desktop.isDesktopSupported())
             {
@@ -32,6 +32,6 @@ public class Screenshot extends Command
                 }
             }
             else JOptionPane.showMessageDialog(Main.frame,"System don't support java.awt.Desktop","Error",JOptionPane.ERROR_MESSAGE);
-        });
+        }).await();
     }
 }

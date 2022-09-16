@@ -15,7 +15,7 @@ import static me.wpkg.cli.utilities.JSONParser.getAddress;
 
 public class Tools {
     public static JSONParser.ClientJSON clientJSON;
-    public static String URL = "https://raw.githubusercontent.com/W-P-K-G/JSONFiles/master/";
+    public static String URL = "https://wpkg.me/WPKG/JSONFiles/";
 
     private static File tmp;
 
