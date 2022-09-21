@@ -1,5 +1,6 @@
 package me.wpkg.cli.utilities;
 
+import me.wpkg.cli.main.Main;
 import me.wpkg.cli.networking.UDPClient;
 
 import javax.swing.*;
@@ -13,10 +14,8 @@ import java.util.Scanner;
 
 import static me.wpkg.cli.utilities.JSONParser.getAddress;
 
-public class Tools {
-    public static JSONParser.ClientJSON clientJSON;
-    public static String URL = "https://wpkg.me/WPKG/JSONFiles/";
-
+public class Tools
+{
     private static File tmp;
 
     static
@@ -28,50 +27,36 @@ public class Tools {
         }
         catch (IOException e)
         {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(Main.frame,"Error: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            System.exit(-1);
         }
     }
 
     public static String readStringFromURL(String requestURL)
     {
         try (Scanner scanner = new Scanner(new URL(requestURL).openStream(),
-                StandardCharsets.UTF_8.toString()))
+                StandardCharsets.UTF_8))
         {
             scanner.useDelimiter("\\A");
             String result = scanner.hasNext() ? scanner.next() : "";
             scanner.close();
             return result;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
-    }
-
-    public static void refreshClientList(DefaultTableModel tableModel)
-    {
-        tableModel.setRowCount(0);
-        clientJSON = JSONParser.getClientList(UDPClient.sendCommand("/rat-list"));
-        for (var client : clientJSON.clients)
-            tableModel.addRow(new Object[] {client.id,client.name,client.joined,client.version});
-    }
-
-    public static void refreshServerList(JComboBox<String> IPField){
-        JSONParser.AddressJSON address = getAddress(Tools.readStringFromURL(URL+"Addreses.json"));
-
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-        for(var addr : address.uAddresses)
-            model.addElement(addr.ip + ":" + addr.port);
-
-        IPField.setModel(model);
+        catch (IOException e)
+        {
+            JOptionPane.showMessageDialog(Main.frame,"Error: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            return "";
+        }
     }
 
     public static double roundTo2DecimalPlace(double value) {
         return Math.round(value * 100.0) / 100.0;
     }
 
-    public static void sleep(long milis)
+    public static void sleep(long millis)
     {
         try {
-            Thread.sleep(milis);
+            Thread.sleep(millis);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

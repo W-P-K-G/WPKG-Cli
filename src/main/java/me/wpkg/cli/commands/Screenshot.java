@@ -32,6 +32,6 @@ public class Screenshot extends Command
                 }
             }
             else JOptionPane.showMessageDialog(Main.frame,"System don't support java.awt.Desktop","Error",JOptionPane.ERROR_MESSAGE);
-        }).await();
+        });
     }
 }

@@ -26,7 +26,7 @@ public class StateManager
             }
 
             case CLIENT_LIST -> {
-                Tools.refreshClientList(Main.WPKGManager.tableModel);
+                Main.WPKGManager.refreshClientList(Main.WPKGManager.tableModel);
                 Main.LogonUI.logonUI.setVisible(false);
 
                 Main.WPKGManager.wpkgManager.setVisible(true);

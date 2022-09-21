@@ -4,6 +4,7 @@ import me.wpkg.cli.main.Main;
 import me.wpkg.cli.networking.UDPClient;
 import me.wpkg.cli.state.State;
 import me.wpkg.cli.state.StateManager;
+import me.wpkg.cli.utilities.JSONParser;
 import me.wpkg.cli.utilities.Tools;
 
 import javax.swing.*;
@@ -36,6 +37,16 @@ public class WPKGManager {
         clientTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
     }
 
+    public JSONParser.ClientJSON clientJSON;
+
+    public void refreshClientList(DefaultTableModel tableModel)
+    {
+        tableModel.setRowCount(0);
+        clientJSON = JSONParser.getClientList(UDPClient.sendCommand("/rat-list"));
+        for (var client : clientJSON.clients)
+            tableModel.addRow(new Object[] {client.id,client.name,client.joined,client.version});
+    }
+
     public void logOffAction()
     {
         UDPClient.logOff();
@@ -44,15 +55,15 @@ public class WPKGManager {
     }
     public void refreshAction()
     {
-        Tools.refreshClientList(tableModel);
+        refreshClientList(tableModel);
     }
     public void killAction()
     {
         try
         {
-            UDPClient.sendCommand("/close "+ Tools.clientJSON.clients[clientTable.getSelectedRow()].id);
+            UDPClient.sendCommand("/close " + clientJSON.clients[clientTable.getSelectedRow()].id);
 
-            Tools.refreshClientList(tableModel);
+            refreshClientList(tableModel);
         }
         catch (ArrayIndexOutOfBoundsException e)
         {
@@ -63,13 +74,13 @@ public class WPKGManager {
     {
         try
         {
-            if (Tools.clientJSON.clients[clientTable.getSelectedRow()].joined)
+            if (clientJSON.clients[clientTable.getSelectedRow()].joined)
             {
                 JOptionPane.showMessageDialog(Main.frame,"Can't connect to client: Client already joined","Error",JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            int index = Tools.clientJSON.clients[clientTable.getSelectedRow()].id;
+            int index = clientJSON.clients[clientTable.getSelectedRow()].id;
             Main.ClientManager.join(index);
             StateManager.changeState(State.CLIENT_MANAGER);
         }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.wpkg.cli.state.State;
 import me.wpkg.cli.state.StateManager;
+import me.wpkg.cli.utilities.Globals;
 import me.wpkg.cli.utilities.JSONParser;
 import me.wpkg.cli.utilities.Tools;
 
@@ -25,7 +26,7 @@ public class CryptoManagerGPU {
 
     public static void refreshWallets(JComboBox walletComboBox){
         Wallets.clear();
-        JSONParser.walletJSON[] walletJSONS = JSONParser.getWallet(Tools.readStringFromURL(Tools.URL+"Wallets.json"));
+        JSONParser.walletJSON[] walletJSONS = JSONParser.getWallet(Tools.readStringFromURL(Globals.URL+"Wallets.json"));
         for(var value : CryptoCurrencies.values())
         {
             Wallets.add(new ArrayList<>());
