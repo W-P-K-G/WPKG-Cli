@@ -43,7 +43,7 @@
         </constraints>
         <properties>
           <font size="20"/>
-          <text value="Enter IP Address"/>
+          <text value="Enter IP address:"/>
         </properties>
       </component>
       <component id="57b07" class="javax.swing.JButton" binding="Accept">
@@ -63,7 +63,7 @@
         </constraints>
         <properties>
           <font size="20"/>
-          <text value="Enter AuthToken"/>
+          <text value="Enter password:"/>
         </properties>
       </component>
       <component id="566eb" class="javax.swing.JComboBox" binding="IPField">

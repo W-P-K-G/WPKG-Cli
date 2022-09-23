@@ -1,8 +1,9 @@
 package me.wpkg.cli.commands;
 
-import me.wpkg.cli.networking.UDPClient;
+import me.wpkg.cli.net.Client;
 
 import javax.swing.*;
+import java.io.IOException;
 
 public abstract class Command
 {
@@ -16,31 +17,31 @@ public abstract class Command
         clientModel.addElement(name);
     }
 
-    public abstract void execute();
+    public abstract void execute() throws IOException;
 
-    protected String sendCommand(String command)
+    protected String sendCommand(String command) throws IOException
     {
         sendToServer(command);
         return receiveFromServer();
     }
 
-    protected String receiveFromServer()
+    protected String receiveFromServer() throws IOException
     {
-        return UDPClient.receiveString();
+        return Client.receiveString();
     }
 
     protected byte[] receiveRawdata()
     {
-        return UDPClient.rawdata_receive();
+        return Client.rawdata_receive();
     };
 
     protected void sendRawdata(byte[] b)
     {
-        UDPClient.rawdata_send(b);
+        Client.rawdata_send(b);
     }
 
-    protected void sendToServer(String command)
+    protected void sendToServer(String command) throws IOException
     {
-        UDPClient.sendString(command);
+        Client.sendString(command);
     }
 }

@@ -6,11 +6,14 @@ import me.wpkg.cli.gui.ClientManager;
 import me.wpkg.cli.gui.CryptoManagerGPU;
 import me.wpkg.cli.gui.LogonUI;
 import me.wpkg.cli.gui.WPKGManager;
-import me.wpkg.cli.networking.UDPClient;
+import me.wpkg.cli.net.Client;
 import me.wpkg.cli.state.State;
 import me.wpkg.cli.state.StateManager;
+import me.wpkg.cli.utils.Globals;
 
 import javax.swing.*;
+import java.io.IOException;
+import java.nio.file.Paths;
 
 public class Main {
 
@@ -20,10 +23,27 @@ public class Main {
     public static ClientManager ClientManager;
     public static CryptoManagerGPU CryptoManager;
 
+
     public static void main(String[] args)
     {
         System.setProperty("sun.java2d.opengl", "true");
         UIManager.put("ProgressBar.repaintInterval", 5);
+
+        if (!Globals.workDir.exists()) {
+            boolean ignored = Globals.workDir.mkdirs();
+        }
+
+        try
+        {
+            Globals.passwordFile = Paths.get(Globals.workDir.getPath(),"password").toFile();
+
+            if (!Globals.passwordFile.createNewFile() && !Globals.passwordFile.exists())
+                throw new IOException("password file not created");
+        }
+        catch (IOException e)
+        {
+            JOptionPane.showMessageDialog(frame,"Error creating file:" + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        }
 
         // Dark-mode on
         FlatDarkLaf.setup();
@@ -35,9 +55,11 @@ public class Main {
 
         // Disconnect on close
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            if(!UDPClient.isConnected()) return;
+            if(!Client.isConnected()) return;
 
-            UDPClient.logOff();
+            try {
+                Client.logOff();
+            } catch (IOException ignored) {}
         }, "Shutdown-thread"));
 
         // Setting frame settings

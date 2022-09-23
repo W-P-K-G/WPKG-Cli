@@ -1,13 +1,11 @@
-package me.wpkg.cli.networking;
+package me.wpkg.cli.net;
 
 
 import java.io.IOException;
 import java.net.*;
 
-import javax.swing.*;
 
-
-public class UDPClient {
+public class Client {
     public static DatagramSocket socket;
     public static InetAddress address;
 
@@ -33,53 +31,31 @@ public class UDPClient {
         return connected;
     }
 
-    public static void sendRegisterPing() throws IOException
-    {
-        //this method don't using receiveString and sendString method because using IOException to properly error handling
-        byte[] buf = "register".getBytes();
-        DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
-
-        socket.send(packet);
-
-        byte[] buf2 = new byte[65536];
-        packet = new DatagramPacket(buf2, buf2.length);
-
-        socket.receive(packet);
-    }
-
-    public static void sendString(String msg)
+    public static void sendString(String msg) throws IOException
     {
         System.out.println("Sended: " + msg);
-        try {
-            byte[] buf = msg.getBytes();
-            DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
 
-            /* Sending Packet */
-            socket.send(packet);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Can't send message: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            throw new RuntimeException(e);
-        }
+        byte[] buf = msg.getBytes();
+        DatagramPacket packet = new DatagramPacket(buf, buf.length, address, port);
+
+        /* Sending Packet */
+        socket.send(packet);
     }
 
-    public static String receiveString() {
-        try {
-            byte[] buf = new byte[65536];
-            DatagramPacket packet = new DatagramPacket(buf, buf.length);
+    public static String receiveString() throws IOException
+    {
+        byte[] buf = new byte[65536];
+        DatagramPacket packet = new DatagramPacket(buf, buf.length);
 
-            /* Receiving Packet */
-            socket.receive(packet);
+        /* Receiving Packet */
+        socket.receive(packet);
 
-            String msg = new String(packet.getData(), packet.getOffset(), packet.getLength());
-            System.out.println("Received: " + msg);
-            return msg;
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Can't receive message: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            throw new RuntimeException(e);
-        }
+        String msg = new String(packet.getData(), packet.getOffset(), packet.getLength());
+        System.out.println("Received: " + msg);
+        return msg;
     }
 
-    public static String sendCommand(String command)
+    public static String sendCommand(String command) throws IOException
     {
         sendString(command);
         return receiveString();
@@ -122,7 +98,7 @@ public class UDPClient {
         }
     }
 
-    public static void logOff()
+    public static void logOff() throws IOException
     {
         if (socket.isClosed()) return;
         sendString("/disconnect");

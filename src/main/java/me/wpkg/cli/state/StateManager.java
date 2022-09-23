@@ -1,7 +1,6 @@
 package me.wpkg.cli.state;
 
 import me.wpkg.cli.main.Main;
-import me.wpkg.cli.utilities.Tools;
 
 public class StateManager
 {

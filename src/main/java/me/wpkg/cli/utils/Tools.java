@@ -1,18 +1,15 @@
-package me.wpkg.cli.utilities;
+package me.wpkg.cli.utils;
 
 import me.wpkg.cli.main.Main;
-import me.wpkg.cli.networking.UDPClient;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
-
-import static me.wpkg.cli.utilities.JSONParser.getAddress;
 
 public class Tools
 {
@@ -60,6 +57,28 @@ public class Tools
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void receiveError(Exception e)
+    {
+        JOptionPane.showMessageDialog(null, "Can't receive message: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public static void sendError(Exception e)
+    {
+        JOptionPane.showMessageDialog(null, "Can't receive message: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public static String getWorkDir()
+    {
+        String osname = System.getProperty("os.name");
+        if (osname.startsWith("Windows"))
+            return Paths.get(System.getenv("APPDATA"),"WPKG CLI").toString();
+        else if (osname.contains("nux") || osname.contains("freebsd"))
+            return Paths.get(System.getProperty("user.home"),".config","WPKG CLI").toString();
+        else if (osname.contains("mac") || osname.contains("darwin"))
+            return Paths.get(System.getProperty("user.home"),"Library","Application Support","WPKG CLI").toString();
+        return "";
     }
 
     public static File getTmp()

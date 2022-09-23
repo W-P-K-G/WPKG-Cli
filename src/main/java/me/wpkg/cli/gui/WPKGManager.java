@@ -1,17 +1,19 @@
 package me.wpkg.cli.gui;
 
 import me.wpkg.cli.main.Main;
-import me.wpkg.cli.networking.UDPClient;
+import me.wpkg.cli.net.Client;
 import me.wpkg.cli.state.State;
 import me.wpkg.cli.state.StateManager;
-import me.wpkg.cli.utilities.JSONParser;
-import me.wpkg.cli.utilities.Tools;
+import me.wpkg.cli.utils.JSONParser;
+import me.wpkg.cli.utils.Tools;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import java.io.IOException;
 
-public class WPKGManager {
+public class WPKGManager
+{
     public JPanel wpkgManager;
     private JButton selectButton;
     private JButton killButton;
@@ -41,15 +43,26 @@ public class WPKGManager {
 
     public void refreshClientList(DefaultTableModel tableModel)
     {
-        tableModel.setRowCount(0);
-        clientJSON = JSONParser.getClientList(UDPClient.sendCommand("/rat-list"));
-        for (var client : clientJSON.clients)
-            tableModel.addRow(new Object[] {client.id,client.name,client.joined,client.version});
+        try
+        {
+            tableModel.setRowCount(0);
+            clientJSON = JSONParser.getClientList(Client.sendCommand("/rat-list"));
+            for (var client : clientJSON.clients)
+                tableModel.addRow(new Object[]{client.id, client.name, client.joined, client.version});
+        }
+        catch (IOException e)
+        {
+            Tools.receiveError(e);
+        }
     }
 
     public void logOffAction()
     {
-        UDPClient.logOff();
+        try {
+            Client.logOff();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         StateManager.changeState(State.LOGON_UI);
     }
@@ -61,13 +74,16 @@ public class WPKGManager {
     {
         try
         {
-            UDPClient.sendCommand("/close " + clientJSON.clients[clientTable.getSelectedRow()].id);
-
+            Client.sendCommand("/close " + clientJSON.clients[clientTable.getSelectedRow()].id);
             refreshClientList(tableModel);
         }
         catch (ArrayIndexOutOfBoundsException e)
         {
             JOptionPane.showMessageDialog(Main.frame,"Client not selected","Error",JOptionPane.ERROR_MESSAGE);
+        }
+        catch (IOException e)
+        {
+            Tools.sendError(e);
         }
     }
     public void selectAction()
@@ -90,8 +106,8 @@ public class WPKGManager {
         }
     }
 
-    public static class TableModel extends DefaultTableModel {
-
+    public static class TableModel extends DefaultTableModel
+    {
         public TableModel() {
             super(new String[] {"ID","Name","Joined","Version"}, 0);
         }

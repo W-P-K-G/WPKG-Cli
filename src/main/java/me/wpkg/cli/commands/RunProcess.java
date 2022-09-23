@@ -3,6 +3,7 @@ package me.wpkg.cli.commands;
 import me.wpkg.cli.main.Main;
 
 import javax.swing.*;
+import java.io.IOException;
 
 public class RunProcess extends Command
 {
@@ -12,7 +13,7 @@ public class RunProcess extends Command
     }
 
     @Override
-    public void execute()
+    public void execute() throws IOException
     {
         JTextField command = new JTextField();
         JTextField args = new JTextField();
