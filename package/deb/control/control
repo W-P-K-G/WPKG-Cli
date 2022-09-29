@@ -1,0 +1,10 @@
+Package: wpkg-cli
+Version: 1.1.0
+Section: Internet
+Priority: optional
+Architecture: all
+Installed-Size: 5800
+Homepage: https://wpkg.me
+Depends: openjdk-17-jre
+Maintainer: WPKG Team
+Description: WPKG CLI

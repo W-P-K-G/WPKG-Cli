@@ -1,52 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>me.wpkg</groupId>
     <artifactId>WPKG-Cli</artifactId>
     <version>1.1.0</version>
-
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
-    <dependencies>
-        <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>jgoodies-common</artifactId>
-            <version>1.8.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.formdev</groupId>
-            <artifactId>flatlaf</artifactId>
-            <version>2.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-jar-plugin</artifactId>
-            <version>3.2.2</version>
-        </dependency>
-   <dependency>
-        <groupId>com.intellij</groupId>
-        <artifactId>forms_rt</artifactId>
-        <version>7.0.3</version>
-   </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.13.3</version>
-        </dependency>
-    </dependencies>
 
-<pluginRepositories>
-    <pluginRepository>
-        <id>jitpack</id>
-        <url>https://jitpack.io</url>
-    </pluginRepository>
-</pluginRepositories>
-
+    <pluginRepositories>
+        <pluginRepository>
+            <id>jitpack</id>
+            <url>https://jitpack.io</url>
+        </pluginRepository>
+    </pluginRepositories>
     <build>
         <defaultGoal>package</defaultGoal>
         <plugins>
@@ -64,45 +32,149 @@
                     </archive>
                 </configuration>
             </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>3.4.2</version>
-            <configuration>
-              <finalName>${project.artifactId}</finalName>
-              <archive>
-                <manifest>
-                  <addClasspath>false</addClasspath>
-                  <mainClass>me.wpkg.cli.main.Main</mainClass>
-                </manifest>
-              </archive>
-              <descriptors>
-                <descriptor>${project.basedir}/jar-with-deps.xml</descriptor>
-              </descriptors>
-              <appendAssemblyId>false</appendAssemblyId>
-            </configuration>
-            <executions>
-              <execution>
-                <id>make-assembly</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>single</goal>
-                </goals>
-              </execution>
-            </executions>
-      </plugin>
-        <plugin>
-            <groupId>com.github.BenjaminFaal</groupId>
-            <artifactId>intellij-idea-gui-designer-maven-plugin</artifactId>
-            <version>2020.3.1</version>
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>compile-forms</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.4.2</version>
+                <configuration>
+                    <finalName>${project.artifactId}-${project.version}</finalName>
+                    <archive>
+                        <manifest>
+                            <addClasspath>false</addClasspath>
+                            <mainClass>me.wpkg.cli.main.Main</mainClass>
+                        </manifest>
+                    </archive>
+    
+                    <descriptorRefs>
+                      <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.github.BenjaminFaal</groupId>
+                <artifactId>intellij-idea-gui-designer-maven-plugin</artifactId>
+                <version>2020.3.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile-forms</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>jdeb</artifactId>
+                <groupId>org.vafer</groupId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jdeb</goal>
+                        </goals>
+                        <configuration>
+                            <verbose>true</verbose>
+                            <snapshotExpand>true</snapshotExpand>
+                            <snapshotEnv>USER</snapshotEnv>
+                            <controlDir>${basedir}/package/deb/control/</controlDir>
+                            <dataSet>
+                                <!-- /usr/lib/WPKG/CLI/wpkg-cli.jar -->
+                                <data>
+                                  <src>${project.build.directory}/${project.build.finalName}.jar</src>
+                                  <dst>wpkg-cli.jar</dst>
+                                  <type>file</type>
+                                  <mapper>
+                                    <type>perm</type>
+                                    <prefix>/usr/lib/WPKG/CLI</prefix>
+                                    <user>loader</user>
+                                    <group>loader</group>
+                                    <filemode>777</filemode>
+                                  </mapper>
+                                </data>
+                                <!-- /usr/bin/wpkg-cli-->
+                                <data>
+                                  <src>${basedir}/package/deb/usr/bin/wpkg-cli</src>
+                                  <dst>wpkg-cli</dst>
+                                  <type>file</type>
+                                  <mapper>
+                                    <type>perm</type>
+                                    <prefix>/usr/bin</prefix>
+                                    <user>loader</user>
+                                    <group>loader</group>
+                                    <filemode>777</filemode>
+                                  </mapper>
+                                </data>
+                                <!-- /usr/share/applications/wpkg-cli.desktop-->
+                                <data>
+                                  <src>${basedir}/package/deb/usr/share/applications/wpkg-cli.desktop</src>
+                                  <dst>wpkg-cli.desktop</dst>
+                                  <type>file</type>
+                                  <mapper>
+                                    <type>perm</type>
+                                    <prefix>/usr/share/applications</prefix>
+                                    <user>loader</user>
+                                    <group>loader</group>
+                                    <filemode>777</filemode>
+                                  </mapper>
+                                </data>
+                                <!-- /usr/share/icons/hicolor/scalable/apps/wpkg-cli.svg-->
+                                <data>
+                                  <src>${basedir}/package/deb/usr/share/icons/hicolor/scalable/apps/wpkg-cli.svg</src>
+                                  <dst>wpkg-cli.svg</dst>
+                                  <type>file</type>
+                                  <mapper>
+                                    <type>perm</type>
+                                    <prefix>/usr/share/icons/hicolor/scalable/apps/</prefix>
+                                    <user>loader</user>
+                                    <group>loader</group>
+                                    <filemode>777</filemode>
+                                  </mapper>
+                                </data>
+                            </dataSet>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.jgoodies</groupId>
+            <artifactId>jgoodies-common</artifactId>
+            <version>1.8.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>forms_rt</artifactId>
+            <version>7.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.3</version>
+        </dependency>
+    </dependencies>
+
 </project>
+
