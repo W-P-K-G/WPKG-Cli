@@ -42,6 +42,7 @@ jobs:
       with:
         name: windows-installer
         path: target/setup-WPKG-Cli-*.exe
+        retention-days: 1
 
     - name: Build deb
       run: ./mvnw clean package -P deb
@@ -51,3 +52,4 @@ jobs:
       with:
         name: deb-installer
         path: target/WPKG-Cli_*_all.deb
+        retention-days: 1
