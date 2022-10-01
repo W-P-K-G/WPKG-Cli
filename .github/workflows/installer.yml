@@ -23,6 +23,17 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
+    - name: Install NSIS
+      run: |
+        sudo apt-get -y update
+        sudo apt-get -y install nsis
+
+    - name: Print NSIS version
+      run: makensis -VERSION
+
+    - name: Print NSIS compile flags
+      run: makensis -HDRINFO
+
     - name: Build windows
       run: ./package/setup-jre-win.sh && ./mvnw clean package -P nsis
 
