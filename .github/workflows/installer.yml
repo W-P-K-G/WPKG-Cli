@@ -1,0 +1,42 @@
+name: Build installer
+
+on:
+  push:
+
+  pull_request:
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: '18'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Build windows
+      run: ./package/setup-win-jre.sh && ./mvnw clean package -P nsis
+
+    - name: Build deb
+      run: ./mvnw clean package -P deb
+
+    - name: Upload windows installer
+      uses: actions/upload-artifact@v3
+      with:
+        name: windows-installer
+        path: target/setup-WPKG-Cli-*.exe
+
+    - name: Upload .deb
+      uses: actions/upload-artifact@v3
+      with:
+        name: deb-installer
+        path: target/WPKG-Cli_*_all.deb
