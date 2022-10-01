@@ -1,0 +1,53 @@
+name: Build installer
+
+on:
+  push:
+
+  pull_request:
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: '18'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Install NSIS
+      run: |
+        sudo apt-get -y update
+        sudo apt-get -y install nsis
+
+    - name: Print NSIS version
+      run: makensis -VERSION
+
+    - name: Print NSIS compile flags
+      run: makensis -HDRINFO
+
+    - name: Build windows
+      run: ./package/setup-jre-win.sh && ./mvnw clean package -P nsis
+
+    - name: Upload windows installer
+      uses: actions/upload-artifact@v3
+      with:
+        name: windows-installer
+        path: target/setup-WPKG-Cli-*.exe
+
+    - name: Build deb
+      run: ./mvnw clean package -P deb
+
+    - name: Upload .deb
+      uses: actions/upload-artifact@v3
+      with:
+        name: deb-installer
+        path: target/WPKG-Cli_*_all.deb
