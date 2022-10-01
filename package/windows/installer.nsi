@@ -1,9 +1,3 @@
-############################################################################################
-#      NSIS Installation Script created by NSIS Quick Setup Script Generator v1.09.18
-#               Entirely Edited with NullSoft Scriptable Installation System                
-#              by Vlasis K. Barkas aka Red Wine red_wine@freemail.gr Sep 2006               
-############################################################################################
-
 !define APP_NAME "WPKG CLI"
 !define COMP_NAME "WPKG Team"
 !define VERSION "1.1.0.0"
