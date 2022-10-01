@@ -3,6 +3,7 @@ package me.wpkg.cli.net;
 
 import java.io.IOException;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 
 
 public class Client {
@@ -50,7 +51,7 @@ public class Client {
         /* Receiving Packet */
         socket.receive(packet);
 
-        String msg = new String(packet.getData(), packet.getOffset(), packet.getLength());
+        String msg = new String(packet.getData(), packet.getOffset(), packet.getLength(), StandardCharsets.UTF_8);
         System.out.println("Received: " + msg);
         return msg;
     }

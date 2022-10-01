@@ -11,9 +11,11 @@ import me.wpkg.cli.state.State;
 import me.wpkg.cli.state.StateManager;
 import me.wpkg.cli.utils.Globals;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 public class Main {
 
@@ -24,7 +26,7 @@ public class Main {
     public static CryptoManagerGPU CryptoManager;
 
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {
         System.setProperty("sun.java2d.opengl", "true");
         UIManager.put("ProgressBar.repaintInterval", 5);
@@ -69,6 +71,7 @@ public class Main {
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
+        frame.setIconImage(ImageIO.read(Objects.requireNonNull(Main.class.getResource("/images/icon.png"))));
         frame.setVisible(true);
     }
 }

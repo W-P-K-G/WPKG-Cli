@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.wpkg</groupId>
     <artifactId>WPKG-Cli</artifactId>
     <version>1.1.0</version>
+    <name>WPKG CLI</name>
+    <description>Access WPKG clients!</description>
+
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <main.class>me.wpkg.cli.main.Main</main.class>
     </properties>
 
     <pluginRepositories>
@@ -15,6 +21,30 @@
             <url>https://jitpack.io</url>
         </pluginRepository>
     </pluginRepositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.jgoodies</groupId>
+            <artifactId>jgoodies-common</artifactId>
+            <version>1.8.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>forms_rt</artifactId>
+            <version>7.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.3</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <defaultGoal>package</defaultGoal>
         <plugins>
@@ -41,12 +71,11 @@
                     <archive>
                         <manifest>
                             <addClasspath>false</addClasspath>
-                            <mainClass>me.wpkg.cli.main.Main</mainClass>
+                            <mainClass>${main.class}</mainClass>
                         </manifest>
                     </archive>
-    
                     <descriptorRefs>
-                      <descriptorRef>jar-with-dependencies</descriptorRef>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                     <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
@@ -72,109 +101,190 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <artifactId>jdeb</artifactId>
-                <groupId>org.vafer</groupId>
-                <version>1.8</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jdeb</goal>
-                        </goals>
-                        <configuration>
-                            <verbose>true</verbose>
-                            <snapshotExpand>true</snapshotExpand>
-                            <snapshotEnv>USER</snapshotEnv>
-                            <controlDir>${basedir}/package/deb/control/</controlDir>
-                            <dataSet>
-                                <!-- /usr/lib/WPKG/CLI/wpkg-cli.jar -->
-                                <data>
-                                  <src>${project.build.directory}/${project.build.finalName}.jar</src>
-                                  <dst>wpkg-cli.jar</dst>
-                                  <type>file</type>
-                                  <mapper>
-                                    <type>perm</type>
-                                    <prefix>/usr/lib/WPKG/CLI</prefix>
-                                    <user>loader</user>
-                                    <group>loader</group>
-                                    <filemode>777</filemode>
-                                  </mapper>
-                                </data>
-                                <!-- /usr/bin/wpkg-cli-->
-                                <data>
-                                  <src>${basedir}/package/deb/usr/bin/wpkg-cli</src>
-                                  <dst>wpkg-cli</dst>
-                                  <type>file</type>
-                                  <mapper>
-                                    <type>perm</type>
-                                    <prefix>/usr/bin</prefix>
-                                    <user>loader</user>
-                                    <group>loader</group>
-                                    <filemode>777</filemode>
-                                  </mapper>
-                                </data>
-                                <!-- /usr/share/applications/wpkg-cli.desktop-->
-                                <data>
-                                  <src>${basedir}/package/deb/usr/share/applications/wpkg-cli.desktop</src>
-                                  <dst>wpkg-cli.desktop</dst>
-                                  <type>file</type>
-                                  <mapper>
-                                    <type>perm</type>
-                                    <prefix>/usr/share/applications</prefix>
-                                    <user>loader</user>
-                                    <group>loader</group>
-                                    <filemode>777</filemode>
-                                  </mapper>
-                                </data>
-                                <!-- /usr/share/icons/hicolor/scalable/apps/wpkg-cli.svg-->
-                                <data>
-                                  <src>${basedir}/package/deb/usr/share/icons/hicolor/scalable/apps/wpkg-cli.svg</src>
-                                  <dst>wpkg-cli.svg</dst>
-                                  <type>file</type>
-                                  <mapper>
-                                    <type>perm</type>
-                                    <prefix>/usr/share/icons/hicolor/scalable/apps/</prefix>
-                                    <user>loader</user>
-                                    <group>loader</group>
-                                    <filemode>777</filemode>
-                                  </mapper>
-                                </data>
-                            </dataSet>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>jgoodies-common</artifactId>
-            <version>1.8.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.formdev</groupId>
-            <artifactId>flatlaf</artifactId>
-            <version>2.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-jar-plugin</artifactId>
-            <version>3.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.intellij</groupId>
-            <artifactId>forms_rt</artifactId>
-            <version>7.0.3</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.13.3</version>
-        </dependency>
-    </dependencies>
+    <profiles>
+        <profile>
+            <id>deb</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>jdeb</artifactId>
+                        <groupId>org.vafer</groupId>
+                        <version>1.8</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jdeb</goal>
+                                </goals>
+                                <configuration>
+                                    <verbose>true</verbose>
+                                    <snapshotExpand>true</snapshotExpand>
+                                    <snapshotEnv>USER</snapshotEnv>
+                                    <controlDir>${basedir}/package/deb/control/</controlDir>
+                                    <dataSet>
+                                        <!-- /usr/lib/WPKG/CLI/wpkg-cli.jar -->
+                                        <data>
+                                            <src>${project.build.directory}/${project.build.finalName}.jar</src>
+                                            <dst>wpkg-cli.jar</dst>
+                                            <type>file</type>
+                                            <mapper>
+                                                <type>perm</type>
+                                                <prefix>/usr/lib/WPKG/CLI</prefix>
+                                                <user>loader</user>
+                                                <group>loader</group>
+                                                <filemode>777</filemode>
+                                            </mapper>
+                                        </data>
+                                        <!-- /usr/bin/wpkg-cli-->
+                                        <data>
+                                            <src>${basedir}/package/linux/usr/bin/wpkg-cli</src>
+                                            <dst>wpkg-cli</dst>
+                                            <type>file</type>
+                                            <mapper>
+                                                <type>perm</type>
+                                                <prefix>/usr/bin</prefix>
+                                                <user>loader</user>
+                                                <group>loader</group>
+                                                <filemode>777</filemode>
+                                            </mapper>
+                                        </data>
+                                        <!-- /usr/share/applications/wpkg-cli.desktop-->
+                                        <data>
+                                            <src>${basedir}/package/linux/usr/share/applications/wpkg-cli.desktop</src>
+                                            <dst>wpkg-cli.desktop</dst>
+                                            <type>file</type>
+                                            <mapper>
+                                                <type>perm</type>
+                                                <prefix>/usr/share/applications</prefix>
+                                                <user>loader</user>
+                                                <group>loader</group>
+                                                <filemode>777</filemode>
+                                            </mapper>
+                                        </data>
+                                        <!-- /usr/share/icons/hicolor/scalable/apps/wpkg-cli.svg-->
+                                        <data>
+                                            <src>${basedir}/package/linux/usr/share/icons/hicolor/scalable/apps/wpkg-cli.svg</src>
+                                            <dst>wpkg-cli.svg</dst>
+                                            <type>file</type>
+                                            <mapper>
+                                                <type>perm</type>
+                                                <prefix>/usr/share/icons/hicolor/scalable/apps/</prefix>
+                                                <user>loader</user>
+                                                <group>loader</group>
+                                                <filemode>777</filemode>
+                                            </mapper>
+                                        </data>
+                                    </dataSet>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
 
+        <profile>
+            <id>nsis</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <configuration>
+                            <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                            <filesets>
+                                <fileset>
+                                    <directory>target</directory>
+                                    <followSymlinks>false</followSymlinks>
+                                    <includes>
+                                        <include>**</include>
+                                    </includes>
+                                    <excludes>
+                                        <exclude>jre/**</exclude>
+                                    </excludes>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                        <artifactId>launch4j-maven-plugin</artifactId>
+                        <version>2.0.1</version>
+                        <executions>
+                            <execution>
+                                <id>l4j-clui</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>launch4j</goal>
+                                </goals>
+                                <configuration>
+                                    <headerType>gui</headerType>
+                                    <stayAlive>true</stayAlive>
+                                    <jar>${project.build.directory}/${project.build.finalName}.jar</jar>
+                                    <icon>${basedir}/package/windows/icon.ico</icon>
+                                    <outfile>${project.build.directory}/${project.build.finalName}.exe</outfile>
+                                    <classPath>
+                                        <mainClass>${main.class}</mainClass>
+                                    </classPath>
+                                    <jre>
+                                        <minVersion>${maven.compiler.target}</minVersion>
+                                        <jdkPreference>preferJre</jdkPreference>
+                                        <path>./jre</path>
+                                    </jre>
+                                    <versionInfo>
+                                        <fileDescription>${project.name}</fileDescription>
+                                        <copyright>WPKG Team (C) 2022</copyright>
+                                        <fileVersion>${project.version}.0</fileVersion>
+                                        <txtFileVersion>true</txtFileVersion>
+                                        <productVersion>${project.version}.0</productVersion>
+                                        <txtProductVersion>true</txtProductVersion>
+                                        <productName>${project.name}</productName>
+                                        <internalName>${project.artifactId}</internalName>
+                                        <originalFilename>${project.artifactId}.exe</originalFilename>
+                                    </versionInfo>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.digitalmediaserver</groupId>
+                        <artifactId>nsis-maven-plugin</artifactId>
+                        <version>1.0.3</version>
+                        <configuration>
+                            <compression>lzma</compression>
+                            <compressionIsFinal>true</compressionIsFinal>
+                            <compressionDictSize>64</compressionDictSize>
+                            <defines>
+                                <PROJECT_NAME_SHORT>${project.name.short}</PROJECT_NAME_SHORT>
+                                <PROJECT_NAME_CAMEL>${project.name.camel}</PROJECT_NAME_CAMEL>
+                            </defines>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>build-windows-installer</id>
+                                <configuration>
+                                    <scriptFile>${basedir}/package/windows/installer.nsi</scriptFile>
+                                    <outputFile>${basedir}/target/setup-${project.build.finalName}.exe</outputFile>
+                                </configuration>
+                                <goals>
+                                    <goal>make</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
 
