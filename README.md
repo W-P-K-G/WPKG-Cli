@@ -24,7 +24,7 @@ You can generate packages for this operating systems:
 ### Requirements:
 Make sure you have installed NSIS
 ### Building:
-If you are building on **Linux**: `./package/setup-win-jre.sh && ./mvnw clean package -P nsis`
+If you are building on **Linux**: `./package/setup-jre-win.sh && ./mvnw clean package -P nsis`
 
 On **Windows** you must create **target/jre** directory and copy Java files there.
 Next run command: `./mvnw clean package -P nsis`
