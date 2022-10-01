@@ -24,7 +24,7 @@ jobs:
         cache: maven
 
     - name: Build windows
-      run: ./package/setup-win-jre.sh && ./mvnw clean package -P nsis
+      run: ./package/setup-jre-win.sh && ./mvnw clean package -P nsis
 
     - name: Build deb
       run: ./mvnw clean package -P deb
