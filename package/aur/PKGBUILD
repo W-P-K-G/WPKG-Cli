@@ -1,0 +1,35 @@
+pkgname=wpkg-cli
+pkgver=1.1.0
+pkgrel=1
+pkgdesc='Access WPKG client!'
+arch=('any')
+license=("CUSTOM")
+makedepends=('maven' 'git')
+depends=('java-environment>=17')
+source=("git+file://$(readlink -f ../../)")
+sha512sums=("SKIP")
+
+
+build() {
+    cd "${srcdir}/$(ls)/"
+    mvn clean package
+}
+
+package() {
+    cd "${srcdir}/$(ls)/"
+    mkdir -p "$pkgdir/usr/lib/WPKG/CLI"
+    cp target/*.jar "$pkgdir/usr/lib/WPKG/CLI/wpkg-cli.jar"
+    cd ../
+
+    mkdir -p "$pkgdir/usr/bin"
+    cp "$startdir/usr/bin/wpkg-cli" "$pkgdir/usr/bin"
+    chmod +x "$pkgdir/usr/bin/wpkg-cli"
+
+    mkdir -p "$pkgdir/usr/share/applications/"
+    cp $startdir/../share/usr/share/applications/wpkg-cli.desktop "$pkgdir/usr/share/applications/"
+
+    mkdir -p "$pkgdir/usr/share/icons/hicolor/scalable/apps/"
+    cp $startdir/../share/usr/share/icons/hicolor/scalable/apps/wpkg-cli.svg "$pkgdir/usr/share/icons/hicolor/scalable/apps/"
+
+    chmod +x "$pkgdir/usr/share/applications/wpkg-cli.desktop"
+}

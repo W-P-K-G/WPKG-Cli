@@ -150,7 +150,7 @@
                                         </data>
                                         <!-- /usr/bin/wpkg-cli-->
                                         <data>
-                                            <src>${basedir}/package/linux/usr/bin/wpkg-cli</src>
+                                            <src>${basedir}/package/deb/usr/bin/wpkg-cli</src>
                                             <dst>wpkg-cli</dst>
                                             <type>file</type>
                                             <mapper>
@@ -163,7 +163,7 @@
                                         </data>
                                         <!-- /usr/share/applications/wpkg-cli.desktop-->
                                         <data>
-                                            <src>${basedir}/package/linux/usr/share/applications/wpkg-cli.desktop</src>
+                                            <src>${basedir}/package/share/usr/share/applications/wpkg-cli.desktop</src>
                                             <dst>wpkg-cli.desktop</dst>
                                             <type>file</type>
                                             <mapper>
@@ -176,7 +176,7 @@
                                         </data>
                                         <!-- /usr/share/icons/hicolor/scalable/apps/wpkg-cli.svg-->
                                         <data>
-                                            <src>${basedir}/package/linux/usr/share/icons/hicolor/scalable/apps/wpkg-cli.svg</src>
+                                            <src>${basedir}/package/share/usr/share/icons/hicolor/scalable/apps/wpkg-cli.svg</src>
                                             <dst>wpkg-cli.svg</dst>
                                             <type>file</type>
                                             <mapper>
