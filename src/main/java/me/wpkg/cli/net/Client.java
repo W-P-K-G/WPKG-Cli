@@ -23,7 +23,7 @@ public class Client {
         socket = new DatagramSocket();
 
         /* Setting Timeout */
-        socket.setSoTimeout(60 * 1000);
+        socket.setSoTimeout(20 * 1000);
 
         connected = true;
     }

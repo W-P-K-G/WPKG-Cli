@@ -1,5 +1,6 @@
 package me.wpkg.cli.commands;
 
+import me.wpkg.cli.commands.error.ErrorHandler;
 import me.wpkg.cli.net.Client;
 
 import javax.swing.*;
@@ -17,7 +18,7 @@ public abstract class Command
         clientModel.addElement(name);
     }
 
-    public abstract void execute() throws IOException;
+    public abstract void execute(ErrorHandler errorHandler) throws IOException;
 
     protected String sendCommand(String command) throws IOException
     {

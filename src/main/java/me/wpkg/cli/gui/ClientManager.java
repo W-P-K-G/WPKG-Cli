@@ -4,6 +4,7 @@ import me.wpkg.cli.commands.Command;
 import me.wpkg.cli.commands.RunProcess;
 import me.wpkg.cli.commands.Screenshot;
 import me.wpkg.cli.commands.SendMessage;
+import me.wpkg.cli.commands.error.ErrorHandler;
 import me.wpkg.cli.main.Main;
 import me.wpkg.cli.net.Client;
 import me.wpkg.cli.state.State;
@@ -33,6 +34,8 @@ public class ClientManager {
 
     public boolean commandWorks = false,joined = false;
 
+    ErrorHandler errorHandler = new ErrorHandler();
+
     public ClientManager()
     {
         unjoinButton.addActionListener(ActionEvent -> unjoinAction());
@@ -51,6 +54,14 @@ public class ClientManager {
         ramBar.setStringPainted(true);
         swapBar.setStringPainted(true);
 
+        errorHandler.setSessionExpiredEvent(() -> {
+            JOptionPane.showMessageDialog(Main.frame,"Client was disconnected. Session expired","Client Disconnected",JOptionPane.INFORMATION_MESSAGE);
+            StateManager.changeState(State.CLIENT_LIST);
+        });
+        errorHandler.setNotAuthorizedEvent(() -> {
+            JOptionPane.showMessageDialog(Main.frame,"Admin authorization expired","Expired",JOptionPane.INFORMATION_MESSAGE);
+            StateManager.changeState(State.LOGON_UI);
+        });
 
     }
     public void refreshAction()
@@ -68,7 +79,11 @@ public class ClientManager {
         try
         {
             commandWorks = true;
-            commands.get(commandList.getSelectedIndex()).execute();
+
+            commands.get(commandList.getSelectedIndex()).execute(errorHandler);
+
+            errorHandler.clear();
+
             commandWorks = false;
         }
         catch (ArrayIndexOutOfBoundsException e)

@@ -1,5 +1,6 @@
 package me.wpkg.cli.commands;
 
+import me.wpkg.cli.commands.error.ErrorHandler;
 import me.wpkg.cli.gui.ProgressDialog;
 import me.wpkg.cli.main.Main;
 import me.wpkg.cli.utils.Tools;
@@ -17,26 +18,34 @@ public class Screenshot extends Command
         super("screenshot", "Get Screenshot", clientModel);
     }
     @Override
-    public void execute()
+    public void execute(ErrorHandler errorHandler)
     {
         ProgressDialog progressDialog = new ProgressDialog("Waiting for screenshot...");
         progressDialog.start((dialog) -> {
-            try {
-                String url = sendCommand("screenshot");
-                if (Desktop.isDesktopSupported())
+            try
+            {
+                String url = errorHandler.check(sendCommand("screenshot"));
+
+                System.out.println(url);
+
+                if (errorHandler.ok())
                 {
-                    try {
-                        Desktop.getDesktop().browse(new URI(url));
-                    } catch (IOException e) {
-                        JOptionPane.showMessageDialog(Main.frame, "Error:" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                    } catch (URISyntaxException e) {
-                        JOptionPane.showMessageDialog(Main.frame, "Can't open url: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    if (Desktop.isDesktopSupported())
+                    {
+                        try {
+                            Desktop.getDesktop().browse(new URI(url));
+                        } catch (IOException | URISyntaxException e) {
+                            JOptionPane.showMessageDialog(Main.frame, "Error:" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
+                    else JOptionPane.showMessageDialog(Main.frame, "System don't support java.awt.Desktop", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                else JOptionPane.showMessageDialog(Main.frame, "System don't support java.awt.Desktop", "Error", JOptionPane.ERROR_MESSAGE);
+                else if (errorHandler.error())
+                    JOptionPane.showMessageDialog(Main.frame, "Failed to capture screenshot by WPKG", "Error", JOptionPane.ERROR_MESSAGE);
             }
             catch (IOException e)
             {
+                e.printStackTrace();
                 Tools.receiveError(e);
             }
         });

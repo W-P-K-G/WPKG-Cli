@@ -1,5 +1,6 @@
 package me.wpkg.cli.commands;
 
+import me.wpkg.cli.commands.error.ErrorHandler;
 import me.wpkg.cli.main.Main;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ public class RunProcess extends Command
     }
 
     @Override
-    public void execute() throws IOException
+    public void execute(ErrorHandler errorHandler) throws IOException
     {
         JTextField command = new JTextField();
         JTextField args = new JTextField();

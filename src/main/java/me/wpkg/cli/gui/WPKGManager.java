@@ -1,5 +1,6 @@
 package me.wpkg.cli.gui;
 
+import me.wpkg.cli.commands.error.ErrorHandler;
 import me.wpkg.cli.main.Main;
 import me.wpkg.cli.net.Client;
 import me.wpkg.cli.state.State;
@@ -23,6 +24,8 @@ public class WPKGManager
 
     public TableModel tableModel;
 
+    ErrorHandler errorHandler = new ErrorHandler();
+
     // Buttons Actions
     public WPKGManager()
     {
@@ -37,6 +40,11 @@ public class WPKGManager
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment( JLabel.CENTER );
         clientTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+
+        errorHandler.setNotAuthorizedEvent(() -> {
+            JOptionPane.showMessageDialog(Main.frame,"Admin authorization expired","Expired",JOptionPane.INFORMATION_MESSAGE);
+            StateManager.changeState(State.LOGON_UI);
+        });
     }
 
     public JSONParser.ClientJSON clientJSON;
@@ -46,9 +54,14 @@ public class WPKGManager
         try
         {
             tableModel.setRowCount(0);
-            clientJSON = JSONParser.getClientList(Client.sendCommand("/rat-list"));
-            for (var client : clientJSON.clients)
-                tableModel.addRow(new Object[]{client.id, client.name, client.joined, client.version});
+            String message = errorHandler.check(Client.sendCommand("/rat-list"));
+
+            if (errorHandler.ok())
+            {
+                clientJSON = JSONParser.getClientList(message);
+                for (var client : clientJSON.clients)
+                    tableModel.addRow(new Object[]{client.id, client.name, client.joined, client.version});
+            }
         }
         catch (IOException e)
         {
@@ -74,8 +87,9 @@ public class WPKGManager
     {
         try
         {
-            Client.sendCommand("/close " + clientJSON.clients[clientTable.getSelectedRow()].id);
-            refreshClientList(tableModel);
+            errorHandler.check(Client.sendCommand("/close " + clientJSON.clients[clientTable.getSelectedRow()].id));
+            if (errorHandler.ok())
+                refreshClientList(tableModel);
         }
         catch (ArrayIndexOutOfBoundsException e)
         {
