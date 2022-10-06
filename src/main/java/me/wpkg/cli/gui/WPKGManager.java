@@ -41,6 +41,7 @@ public class WPKGManager
         centerRenderer.setHorizontalAlignment( JLabel.CENTER );
         clientTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
 
+        //default action if password expired
         errorHandler.setNotAuthorizedEvent(() -> {
             JOptionPane.showMessageDialog(Main.frame,"Admin authorization expired","Expired",JOptionPane.INFORMATION_MESSAGE);
             StateManager.changeState(State.LOGON_UI);

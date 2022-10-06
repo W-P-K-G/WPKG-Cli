@@ -1,12 +1,14 @@
 package me.wpkg.cli.commands.error;
 
+import java.util.regex.Pattern;
+
 public class ErrorHandler
 {
-    Errors error;
+    Errors error = Errors.OK;
 
     public enum Errors
     {
-        OK("0"),ERROR("1"),SESSION_EXPIRED(""), NOT_AUTHORIZED("NOT_AUTHORIZED");
+        OK("[0]"),ERROR("[1]"),SESSION_EXPIRED(""), NOT_AUTHORIZED("[NOT_AUTHORIZED]");
         public final String code;
 
         public Runnable event = () -> {};
@@ -21,15 +23,18 @@ public class ErrorHandler
         }
     }
 
-    private Errors byCode(String code)
+    private Errors byCode(String message)
     {
-        if (code.equals(Errors.OK.code))
+        if (message.startsWith(Errors.OK.code))
             return Errors.OK;
-        else if (code.equals(Errors.ERROR.code))
+        else if (message.startsWith(Errors.ERROR.code))
             return Errors.ERROR;
-        else if (code.equals(Errors.NOT_AUTHORIZED.code))
+        else if (message.startsWith(Errors.NOT_AUTHORIZED.code))
             return Errors.NOT_AUTHORIZED;
-        return null;
+        //parse serverd message about not joined
+        else if (message.startsWith("Client ") && message.contains("not joined. Unknown command."))
+            return Errors.SESSION_EXPIRED;
+        return Errors.OK;
     }
 
     public void setSessionExpiredEvent(Runnable runnable)
@@ -69,21 +74,9 @@ public class ErrorHandler
 
     public String check(String message)
     {
+        error = byCode(message);
+        error.executeEvent();
 
-        //parse serverd message about not joined
-        if (message.contains("Client ") && message.contains("not joined. Unknown command."))
-            error = Errors.SESSION_EXPIRED;
-        //not have error code = error is OK
-        else if (message.indexOf("[") != 0)
-        {
-            error = Errors.OK;
-            return message;
-        }
-        else error = byCode(message.substring(message.indexOf("[") + 1, message.indexOf("]")));
-
-        if (error != null)
-            error.executeEvent();
-
-        return message.substring(message.indexOf("]") + 1);
+        return message.replaceFirst(Pattern.quote(error.code), "");
     }
 }

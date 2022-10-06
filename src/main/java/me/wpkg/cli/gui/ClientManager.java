@@ -54,10 +54,12 @@ public class ClientManager {
         ramBar.setStringPainted(true);
         swapBar.setStringPainted(true);
 
+        //default action if session expired when joined
         errorHandler.setSessionExpiredEvent(() -> {
             JOptionPane.showMessageDialog(Main.frame,"Client was disconnected. Session expired","Client Disconnected",JOptionPane.INFORMATION_MESSAGE);
             StateManager.changeState(State.CLIENT_LIST);
         });
+        //default action if password expired
         errorHandler.setNotAuthorizedEvent(() -> {
             JOptionPane.showMessageDialog(Main.frame,"Admin authorization expired","Expired",JOptionPane.INFORMATION_MESSAGE);
             StateManager.changeState(State.LOGON_UI);

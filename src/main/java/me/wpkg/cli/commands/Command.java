@@ -1,6 +1,7 @@
 package me.wpkg.cli.commands;
 
 import me.wpkg.cli.commands.error.ErrorHandler;
+import me.wpkg.cli.main.Main;
 import me.wpkg.cli.net.Client;
 
 import javax.swing.*;
@@ -18,15 +19,20 @@ public abstract class Command
         clientModel.addElement(name);
     }
 
+    protected void failDialog(String message)
+    {
+        JOptionPane.showMessageDialog(Main.frame, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
     public abstract void execute(ErrorHandler errorHandler) throws IOException;
 
     protected String sendCommand(String command) throws IOException
     {
-        sendToServer(command);
-        return receiveFromServer();
+        send(command);
+        return receive();
     }
 
-    protected String receiveFromServer() throws IOException
+    protected String receive() throws IOException
     {
         return Client.receiveString();
     }
@@ -41,7 +47,7 @@ public abstract class Command
         Client.rawdata_send(b);
     }
 
-    protected void sendToServer(String command) throws IOException
+    protected void send(String command) throws IOException
     {
         Client.sendString(command);
     }

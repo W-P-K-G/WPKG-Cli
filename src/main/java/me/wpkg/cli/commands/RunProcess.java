@@ -28,6 +28,9 @@ public class RunProcess extends Command
         if (JOptionPane.showConfirmDialog(Main.frame,comp,"Process run",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE) != 0)
             return;
 
-        sendCommand("run " + command.getText() + " " + args.getText());
+        errorHandler.check(sendCommand("run " + command.getText() + " " + args.getText()));
+
+        if (errorHandler.error())
+            failDialog("Failed to run process by WPKG");
     }
 }

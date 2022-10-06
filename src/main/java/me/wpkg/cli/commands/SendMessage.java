@@ -18,6 +18,9 @@ public class SendMessage extends Command
     {
         String mess = JOptionPane.showInputDialog(Main.frame,"Message","Enter message to send",JOptionPane.QUESTION_MESSAGE);
 
-        sendCommand("msg " + mess);
+        errorHandler.check(sendCommand("msg " + mess));
+
+        if (errorHandler.error())
+            failDialog("Failed to display message by WPKG");
     }
 }
