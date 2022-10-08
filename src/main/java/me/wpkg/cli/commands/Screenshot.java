@@ -26,23 +26,24 @@ public class Screenshot extends Command
             {
                 String url = errorHandler.check(sendCommand("screenshot"));
 
-                if (errorHandler.ok())
+                switch (errorHandler.get())
                 {
-                    if (Desktop.isDesktopSupported())
-                    {
-                        try
+                    case OK -> {
+                        if (Desktop.isDesktopSupported())
                         {
-                            Desktop.getDesktop().browse(new URI(url));
+                            try
+                            {
+                                Desktop.getDesktop().browse(new URI(url));
+                            }
+                            catch (IOException | URISyntaxException e)
+                            {
+                                failDialog("Error:" + e.getMessage());
+                            }
                         }
-                        catch (IOException | URISyntaxException e)
-                        {
-                            failDialog("Error:" + e.getMessage());
-                        }
+                        else failDialog("System don't support java.awt.Desktop");
                     }
-                    else failDialog("System don't support java.awt.Desktop");
+                    case ERROR -> failDialog("WPKG screenshot error: " + errorHandler.msg());
                 }
-                else if (errorHandler.error())
-                    failDialog("Failed to capture screenshot by WPKG");
             }
             catch (IOException e)
             {

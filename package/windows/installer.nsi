@@ -1,6 +1,6 @@
 !define APP_NAME "WPKG CLI"
 !define COMP_NAME "WPKG Team"
-!define VERSION "1.1.0.0"
+!define VERSION "${PROJECT_VERSION}.0"
 !define COPYRIGHT "WPKG 2022"
 !define DESCRIPTION "Access to WPKG Clients!"
 !define MAIN_APP_EXE "wpkg-cli.exe"
@@ -74,9 +74,9 @@ Section -MainProgram
 ${INSTALL_TYPE}
 SetOverwrite ifnewer
 SetOutPath "$INSTDIR"
-File "/oname=wpkg-cli.exe " "../../target/WPKG-Cli*.exe"
+File "/oname=${MAIN_APP_EXE}" "${PROJECT_BUILD_DIR}/${PROJECT_FINAL_NAME}.exe"
 SetOutPath "$INSTDIR\jre"
-File /r "../../target/jre/"
+File /r "${PROJECT_BUILD_DIR}/jre/"
 SectionEnd
 
 ######################################################################

@@ -31,6 +31,6 @@ public class RunProcess extends Command
         errorHandler.check(sendCommand("run " + command.getText() + " " + args.getText()));
 
         if (errorHandler.error())
-            failDialog("Failed to run process by WPKG");
+            failDialog("WPKG run process error: " + errorHandler.msg());
     }
 }

@@ -21,6 +21,6 @@ public class SendMessage extends Command
         errorHandler.check(sendCommand("msg " + mess));
 
         if (errorHandler.error())
-            failDialog("Failed to display message by WPKG");
+            failDialog("WPKG send message error: " + errorHandler.msg());
     }
 }
