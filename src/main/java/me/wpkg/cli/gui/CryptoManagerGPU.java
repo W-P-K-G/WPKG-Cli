@@ -101,7 +101,8 @@ public class CryptoManagerGPU {
                 JOptionPane.showMessageDialog(Main.frame,"Missing Workername","ERROR",JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            System.out.print("test:"+workerField.getText()+"end");
+            System.out.print("startminer "+algorithmField.getSelectedItem()+" "+poolComboBox.getSelectedItem()+" "
+                    +walletComboBox.getSelectedItem().toString().replace("workername", workerField.getText()));
             Client.sendCommand("startminer "+algorithmField.getSelectedItem()+" "+poolComboBox.getSelectedItem()+" "
                     +walletComboBox.getSelectedItem().toString().replace("workername", workerField.getText()));
         } catch (IOException e) {
