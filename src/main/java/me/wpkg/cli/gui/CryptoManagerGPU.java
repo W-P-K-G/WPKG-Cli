@@ -1,5 +1,6 @@
 package me.wpkg.cli.gui;
 
+import me.wpkg.cli.commands.error.ErrorHandler;
 import me.wpkg.cli.main.Main;
 import me.wpkg.cli.net.Client;
 import me.wpkg.cli.state.State;
@@ -30,6 +31,41 @@ public class CryptoManagerGPU {
     private JButton STOPButton;
     static ArrayList<ArrayList<String>> Wallets = new ArrayList<>();
 
+    private final ErrorHandler errorHandler = new ErrorHandler();
+    public enum CryptoCurrencies
+    {
+        ETC,
+        UNMINEABLE
+    }
+    public ArrayList<String> ETCPools = new ArrayList<>(Arrays.asList("etc.2miners.com:1010"));
+    public ArrayList<String> unMineablePools = new ArrayList<>(Arrays.asList("etchash.unmineable.com", "kp.unmineable.com", "autolykos.unmineable.com"));
+    public ArrayList<String> Algorithms = new ArrayList<>(Arrays.asList("ethash", "etchash", "rvn", "kawpow", "ergo", "cortex", "beamhash"));
+    public CryptoManagerGPU()
+    {
+        cryptoComboBox.setModel(new DefaultComboBoxModel(CryptoManagerGPU.CryptoCurrencies.values()));
+        poolComboBox.setModel(new DefaultComboBoxModel<>(ETCPools.toArray()));
+        algorithmField.setModel(new DefaultComboBoxModel(Algorithms.toArray()));
+
+        cryptoComboBox.addActionListener(actionEvent -> updatePoolComboBox());
+        RUNButton.addActionListener(actionEvent -> runAction());
+        STOPButton.addActionListener(actionEvent -> stopAction());
+        backButton.addActionListener(actionEvent -> backAction());
+
+        //default action if session expired when joined
+        errorHandler.setSessionExpiredEvent(() -> {
+            JOptionPane.showMessageDialog(Main.frame,"Client was disconnected. Session expired","Client Disconnected",JOptionPane.INFORMATION_MESSAGE);
+            StateManager.changeState(State.CLIENT_LIST);
+        });
+        //default action if password expired
+        errorHandler.setNotAuthorizedEvent(() -> {
+            JOptionPane.showMessageDialog(Main.frame,"Admin authorization expired","Expired",JOptionPane.INFORMATION_MESSAGE);
+            StateManager.changeState(State.LOGON_UI);
+        });
+
+        refreshWallets(walletComboBox);
+
+    }
+
     public static void refreshWallets(JComboBox walletComboBox){
         Wallets.clear();
         JSONParser.walletJSON[] walletJSONS = JSONParser.getWallet(Tools.readStringFromURL(Globals.jsonURL +"Wallets.json"));
@@ -49,27 +85,6 @@ public class CryptoManagerGPU {
         //referrals.add(walletJSONS[0].referral);
         walletComboBox.setModel(new DefaultComboBoxModel(Wallets.get(0).toArray()));
     }
-    public enum CryptoCurrencies
-    {
-        ETC,
-        UNMINEABLE
-    }
-    public ArrayList<String> ETCPools = new ArrayList<>(Arrays.asList("etc.2miners.com:1010"));
-    public ArrayList<String> unMineablePools = new ArrayList<>(Arrays.asList("etchash.unmineable.com", "kp.unmineable.com", "autolykos.unmineable.com"));
-    public ArrayList<String> Algorithms = new ArrayList<>(Arrays.asList("ethash", "etchash", "rvn", "kawpow", "ergo", "cortex", "beamhash"));
-    public CryptoManagerGPU()
-    {
-        cryptoComboBox.setModel(new DefaultComboBoxModel(CryptoManagerGPU.CryptoCurrencies.values()));
-        poolComboBox.setModel(new DefaultComboBoxModel<>(ETCPools.toArray()));
-        algorithmField.setModel(new DefaultComboBoxModel(Algorithms.toArray()));
-        cryptoComboBox.addActionListener(actionEvent -> updatePoolComboBox());
-        RUNButton.addActionListener(actionEvent -> runAction());
-        STOPButton.addActionListener(actionEvent -> stopAction());
-        backButton.addActionListener(actionEvent -> backAction());
-
-        refreshWallets(walletComboBox);
-
-    }
 
     private void backAction()
     {
@@ -88,32 +103,50 @@ public class CryptoManagerGPU {
             }
         }
     }
+
+
     private void runAction() {
-        try {
+        try
+        {
             JComboBox[] Arrays = {algorithmField, poolComboBox, walletComboBox};
             for (JComboBox combo: Arrays){
                 if (combo.getSelectedItem() == null || combo.getSelectedItem() == "") {
-                    JOptionPane.showMessageDialog(Main.frame,"Missing Information","ERROR",JOptionPane.ERROR_MESSAGE);
+                    failDialog("Missing Information");
                     return;
                 }
             }
             if (workerField.getText() == null || Objects.equals(workerField.getText(), "")) {
-                JOptionPane.showMessageDialog(Main.frame,"Missing Workername","ERROR",JOptionPane.ERROR_MESSAGE);
+                failDialog("Missing Workername");
                 return;
             }
-            System.out.print("startminer "+algorithmField.getSelectedItem()+" "+poolComboBox.getSelectedItem()+" "
-                    +walletComboBox.getSelectedItem().toString().replace("workername", workerField.getText()));
-            Client.sendCommand("startminer "+algorithmField.getSelectedItem()+" "+poolComboBox.getSelectedItem()+" "
-                    +walletComboBox.getSelectedItem().toString().replace("workername", workerField.getText()));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            errorHandler.check(Client.sendCommand("startminer "
+                    + algorithmField.getSelectedItem()+" "+poolComboBox.getSelectedItem() + " "
+                    + walletComboBox.getSelectedItem().toString().replace("workername", workerField.getText())));
+
+            if (errorHandler.error())
+                failDialog("Crypto error: " + errorHandler.msg());
+        }
+        catch (IOException e)
+        {
+            Tools.sendError(e);
         }
     }
     private void stopAction() {
-        try {
-            Client.sendCommand("stopminer");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        try
+        {
+            errorHandler.check(Client.sendCommand("stopminer"));
+
+            if (errorHandler.error())
+                failDialog("Error stopping miner: " + errorHandler.msg());
         }
+        catch (IOException e)
+        {
+            Tools.sendError(e);
+        }
+    }
+
+    private void failDialog(String message)
+    {
+        JOptionPane.showMessageDialog(Main.frame,message,"ERROR",JOptionPane.ERROR_MESSAGE);
     }
 }
