@@ -16,19 +16,12 @@ public class RunProcess extends Command
     @Override
     public void execute(ErrorHandler errorHandler) throws IOException
     {
-        JTextField command = new JTextField();
-        JTextField args = new JTextField();
-        JComponent[] comp = {
-                new JLabel("Enter process name:"),
-                command,
-                new JLabel("Enter args:"),
-                args
-        };
+        String command = JOptionPane.showInputDialog(Main.frame,"Enter command to run: ","Process run",JOptionPane.QUESTION_MESSAGE);
 
-        if (JOptionPane.showConfirmDialog(Main.frame,comp,"Process run",JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE) != 0)
+        if (command == null)
             return;
 
-        errorHandler.check(sendCommand("run " + command.getText() + " " + args.getText()));
+        errorHandler.check(sendCommand("run " + command));
 
         if (errorHandler.error())
             failDialog("WPKG run process error: " + errorHandler.msg());

@@ -36,6 +36,7 @@ public class WPKGManager
 
         tableModel = new TableModel();
         clientTable.setModel(tableModel);
+        clientTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment( JLabel.CENTER );

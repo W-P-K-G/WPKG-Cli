@@ -115,6 +115,8 @@
               <focusCycleRoot value="false"/>
               <focusable value="true"/>
               <font size="24"/>
+              <minimumSize width="200" height="388"/>
+              <preferredSize width="200" height="408"/>
             </properties>
             <border type="none"/>
             <children>

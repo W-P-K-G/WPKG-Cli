@@ -10,10 +10,8 @@ import me.wpkg.cli.utils.JSONParser;
 import me.wpkg.cli.utils.Tools;
 
 import javax.swing.*;
-import javax.tools.Tool;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class CryptoManagerGPU {
@@ -22,29 +20,36 @@ public class CryptoManagerGPU {
     private JTextArea minerLog;
     public JComboBox<CryptoCurrencies> cryptoComboBox;
     private JLabel statusLabel;
-    private JComboBox poolComboBox;
-    private JComboBox walletComboBox;
+    private JComboBox<String> poolComboBox;
+    private JComboBox<String> walletComboBox;
     private JButton RUNButton;
     private JButton backButton;
     private JTextField workerField;
-    private JComboBox algorithmField;
+    private JComboBox<String> algorithmField;
     private JButton STOPButton;
-    static ArrayList<ArrayList<String>> Wallets = new ArrayList<>();
-
     private final ErrorHandler errorHandler = new ErrorHandler();
     public enum CryptoCurrencies
     {
-        ETC,
-        UNMINEABLE
+        ETC(new String[] {"etc.2miners.com:1010"}),
+        ETH(new String[]{}),
+        UNMINEABLE(new String[] {"etchash.unmineable.com", "kp.unmineable.com", "autolykos.unmineable.com"});
+        public final String[] pool;
+        public final ArrayList<String> wallets = new ArrayList<>();
+        public DefaultComboBoxModel<String> walletComboBoxModel;
+        public final DefaultComboBoxModel<String> poolComboBoxModel;
+        public static final CryptoCurrencies defaultCrypto = ETC;
+        CryptoCurrencies(String[] pool)
+        {
+            this.pool = pool;
+            poolComboBoxModel = new DefaultComboBoxModel<>(pool);
+        }
     }
-    public ArrayList<String> ETCPools = new ArrayList<>(Arrays.asList("etc.2miners.com:1010"));
-    public ArrayList<String> unMineablePools = new ArrayList<>(Arrays.asList("etchash.unmineable.com", "kp.unmineable.com", "autolykos.unmineable.com"));
-    public ArrayList<String> Algorithms = new ArrayList<>(Arrays.asList("ethash", "etchash", "rvn", "kawpow", "ergo", "cortex", "beamhash"));
+    public String[] algorithms = {"ethash", "etchash", "rvn", "kawpow", "ergo", "cortex", "beamhash"};
     public CryptoManagerGPU()
     {
-        cryptoComboBox.setModel(new DefaultComboBoxModel(CryptoManagerGPU.CryptoCurrencies.values()));
-        poolComboBox.setModel(new DefaultComboBoxModel<>(ETCPools.toArray()));
-        algorithmField.setModel(new DefaultComboBoxModel(Algorithms.toArray()));
+        cryptoComboBox.setModel(new DefaultComboBoxModel<>(CryptoManagerGPU.CryptoCurrencies.values()));
+        poolComboBox.setModel(new DefaultComboBoxModel<>(CryptoCurrencies.defaultCrypto.pool));
+        algorithmField.setModel(new DefaultComboBoxModel<>(algorithms));
 
         cryptoComboBox.addActionListener(actionEvent -> updatePoolComboBox());
         RUNButton.addActionListener(actionEvent -> runAction());
@@ -66,24 +71,22 @@ public class CryptoManagerGPU {
 
     }
 
-    public static void refreshWallets(JComboBox walletComboBox){
-        Wallets.clear();
-        JSONParser.walletJSON[] walletJSONS = JSONParser.getWallet(Tools.readStringFromURL(Globals.jsonURL +"Wallets.json"));
-        for(var value : CryptoCurrencies.values())
+    public void refreshWallets(JComboBox<String> walletComboBox)
+    {
+        JSONParser.walletJSON[] walletJSONS = JSONParser.getWallet(Tools.readStringFromURL(Globals.jsonURL + "Wallets.json"));
+
+        for (CryptoCurrencies crypto : CryptoCurrencies.values())
+            crypto.wallets.clear();
+
+        for (JSONParser.walletJSON i : walletJSONS)
+            CryptoCurrencies.valueOf(i.coin).wallets.add(i.id);
+
+        for (CryptoCurrencies crypto : CryptoCurrencies.values())
         {
-            Wallets.add(new ArrayList<>());
-        }
-        for(JSONParser.walletJSON i : walletJSONS)
-        {
-            switch (i.coin)
-            {
-                case "ETC" -> Wallets.get(CryptoCurrencies.ETC.ordinal()).add(i.id);
-                case "UNMINEABLE" -> Wallets.get(CryptoCurrencies.UNMINEABLE.ordinal()).add(i.id);
-            }
+            crypto.walletComboBoxModel = new DefaultComboBoxModel<>(crypto.wallets.toArray(String[]::new));
         }
 
-        //referrals.add(walletJSONS[0].referral);
-        walletComboBox.setModel(new DefaultComboBoxModel(Wallets.get(0).toArray()));
+        walletComboBox.setModel(CryptoCurrencies.defaultCrypto.walletComboBoxModel);
     }
 
     private void backAction()
@@ -92,36 +95,32 @@ public class CryptoManagerGPU {
     }
     private void updatePoolComboBox()
     {
-        switch(cryptoComboBox.getSelectedItem().toString()){
-            case "ETC" -> {
-                poolComboBox.setModel(new DefaultComboBoxModel<>(ETCPools.toArray()));
-                walletComboBox.setModel(new DefaultComboBoxModel(Wallets.get(CryptoCurrencies.ETC.ordinal()).toArray()));
-            }
-            case "UNMINEABLE" -> {
-                poolComboBox.setModel(new DefaultComboBoxModel<>(unMineablePools.toArray()));
-                walletComboBox.setModel(new DefaultComboBoxModel(Wallets.get(CryptoCurrencies.UNMINEABLE.ordinal()).toArray()));
-            }
-        }
+        CryptoCurrencies crypto = (CryptoCurrencies) Objects.requireNonNull(cryptoComboBox.getSelectedItem());
+
+        poolComboBox.setModel(crypto.poolComboBoxModel);
+        walletComboBox.setModel(crypto.walletComboBoxModel);
     }
-
-
-    private void runAction() {
+    private void runAction()
+    {
         try
         {
-            JComboBox[] Arrays = {algorithmField, poolComboBox, walletComboBox};
-            for (JComboBox combo: Arrays){
-                if (combo.getSelectedItem() == null || combo.getSelectedItem() == "") {
+            JComboBox<?>[] comboBoxes = { algorithmField, poolComboBox, walletComboBox };
+            for (JComboBox<?> combo : comboBoxes)
+            {
+                if (combo.getSelectedItem() == null || combo.getSelectedItem() == "")
+                {
                     failDialog("Missing Information");
                     return;
                 }
             }
-            if (workerField.getText() == null || Objects.equals(workerField.getText(), "")) {
+            if (workerField.getText() == null || workerField.getText().equals(""))
+            {
                 failDialog("Missing Workername");
                 return;
             }
             errorHandler.check(Client.sendCommand("startminer "
                     + algorithmField.getSelectedItem()+" "+poolComboBox.getSelectedItem() + " "
-                    + walletComboBox.getSelectedItem().toString().replace("workername", workerField.getText())));
+                    + Objects.requireNonNull(walletComboBox.getSelectedItem()).toString().replace("workername", workerField.getText())));
 
             if (errorHandler.error())
                 failDialog("Crypto error: " + errorHandler.msg());
@@ -131,7 +130,8 @@ public class CryptoManagerGPU {
             Tools.sendError(e);
         }
     }
-    private void stopAction() {
+    private void stopAction()
+    {
         try
         {
             errorHandler.check(Client.sendCommand("stopminer"));

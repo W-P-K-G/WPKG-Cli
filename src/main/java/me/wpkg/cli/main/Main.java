@@ -19,7 +19,7 @@ import java.util.Objects;
 
 public class Main {
 
-    public static JFrame frame = new JFrame("WPKG-CLI");
+    public static JFrame frame = new JFrame("WPKG CLI");
     public static LogonUI LogonUI;
     public static WPKGManager WPKGManager;
     public static ClientManager ClientManager;
