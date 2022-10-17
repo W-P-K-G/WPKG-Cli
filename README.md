@@ -35,10 +35,11 @@ Windows installer executable can be found as `target/setup-WPKG-Cli-(version).ex
 
 **Debian/Ubuntu based (deb):**
 run command: `./mvnw clean package -P deb`
-DEB file can be found in *target* directory.
+DEB package can be found in *target* directory.
 
 **RedHat based (rpm):**
-*not implemented yet.*
+run command: `./mvnw clean package -P rpm`
+RPM package can be found in *target/rpm/wpkg-cli/RPMS/noarch* directory.
 
 **Arch based (PKGBUILD):**
 *PKGBUILD* file can be founded in *package/aur* directory.

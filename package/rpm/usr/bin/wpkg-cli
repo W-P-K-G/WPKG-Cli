@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/usr/lib/jvm/java-17-openjdk-*/bin/java -jar "/usr/lib/WPKG/CLI/wpkg-cli.jar" $@

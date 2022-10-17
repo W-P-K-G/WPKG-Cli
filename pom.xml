@@ -289,6 +289,85 @@
                 </plugins>
             </build>
         </profile>
+
+        <profile>
+            <id>rpm</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>rpm-maven-plugin</artifactId>
+                        <version>2.2.0</version>
+                        <configuration>
+                            <name>wpkg-cli</name>
+                            <version>${project.version}</version>
+                            <release>1</release>
+                            <group>Applications/Internet</group>
+                            <summary>${project.description}</summary>
+                            <description>${project.description}</description>
+
+                            <requires>
+                                <require>jre-17</require>
+                            </requires>
+                            <mappings>
+                                <!-- /usr/lib/WPKG/CLI/wpkg-cli.jar -->
+                                <mapping>
+                                    <directory>/usr/lib/WPKG/CLI</directory>
+                                    <directoryIncluded>false</directoryIncluded>
+                                    <filemode>777</filemode>
+                                    <sources>
+                                        <source>
+                                            <location>${project.build.directory}/${project.build.finalName}.jar</location>
+                                            <destination>wpkg-cli.jar</destination>
+                                        </source>
+                                    </sources>
+                                </mapping>
+                                <!-- /usr/bin/wpkg-cli-->
+                                <mapping>
+                                    <directory>/usr/bin</directory>
+                                    <directoryIncluded>false</directoryIncluded>
+                                    <filemode>777</filemode>
+                                    <sources>
+                                        <source>
+                                            <location>${basedir}/package/rpm/usr/bin/wpkg-cli</location>
+                                            <destination>wpkg-cli</destination>
+                                        </source>
+                                    </sources>
+                                </mapping>
+                                <!-- /usr/share/applications/wpkg-cli.desktop-->
+                                <!-- /usr/share/icons/hicolor/scalable/apps/wpkg-cli.svg-->
+                                <mapping>
+                                    <directory>/usr/share</directory>
+                                    <directoryIncluded>false</directoryIncluded>
+                                    <filemode>777</filemode>
+                                    <sources>
+                                        <source>
+                                            <location>${basedir}/package/share/usr/share/applications/wpkg-cli.desktop</location>
+                                            <destination>applications/wpkg-cli.desktop</destination>
+                                        </source>
+                                        <source>
+                                            <location>${basedir}/package/share/usr/share/icons/hicolor/scalable/apps/wpkg-cli.svg</location>
+                                            <destination>icons/hicolor/scalable/apps/wpkg-cli.svg</destination>
+                                        </source>
+                                    </sources>
+                                </mapping>
+                            </mappings>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>generate-rpm</id>
+                                <goals>
+                                    <goal>rpm</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 </project>
 
