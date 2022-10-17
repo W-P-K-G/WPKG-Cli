@@ -53,3 +53,13 @@ jobs:
         name: deb-installer
         path: target/WPKG-Cli_*_all.deb
         retention-days: 1
+
+    - name: Build rpm
+      run: ./mvnw clean package -P rpm
+
+    - name: Upload .rpm
+      uses: actions/upload-artifact@v3
+      with:
+        name: rpm-installer
+        path: target/rpm/wpkg-cli/RPMS/noarch/*.rpm
+        retention-days: 1
