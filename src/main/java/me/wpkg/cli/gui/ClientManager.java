@@ -1,5 +1,8 @@
 package me.wpkg.cli.gui;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.swing.*;
 import me.wpkg.cli.commands.Command;
 import me.wpkg.cli.commands.RunProcess;
 import me.wpkg.cli.commands.Screenshot;
@@ -10,10 +13,6 @@ import me.wpkg.cli.net.Client;
 import me.wpkg.cli.state.State;
 import me.wpkg.cli.state.StateManager;
 import me.wpkg.cli.utils.Tools;
-
-import javax.swing.*;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class ClientManager {
     public JPanel clientManager;
@@ -32,12 +31,11 @@ public class ClientManager {
 
     boolean statsRefreshing;
 
-    public boolean commandWorks = false,joined = false;
+    public boolean commandWorks = false, joined = false;
 
     ErrorHandler errorHandler = new ErrorHandler();
 
-    public ClientManager()
-    {
+    public ClientManager() {
         unjoinButton.addActionListener(ActionEvent -> unjoinAction());
         refreshButton.addActionListener(ActionEvent -> refreshAction());
         cryptoManager.addActionListener(actionEvent -> cryptoAction());
@@ -54,32 +52,31 @@ public class ClientManager {
         ramBar.setStringPainted(true);
         swapBar.setStringPainted(true);
 
-        //default action if session expired when joined
+        // default action if session expired when joined
         errorHandler.setSessionExpiredEvent(() -> {
-            JOptionPane.showMessageDialog(Main.frame,"Client was disconnected. Session expired","Client Disconnected",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(Main.frame, "Client was disconnected. Session expired", "Client Disconnected",
+                    JOptionPane.INFORMATION_MESSAGE);
             StateManager.changeState(State.CLIENT_LIST);
         });
-        //default action if password expired
+        // default action if password expired
         errorHandler.setNotAuthorizedEvent(() -> {
-            JOptionPane.showMessageDialog(Main.frame,"Admin authorization expired","Expired",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(Main.frame, "Admin authorization expired", "Expired",
+                    JOptionPane.INFORMATION_MESSAGE);
             StateManager.changeState(State.LOGON_UI);
         });
-
     }
-    public void refreshAction()
-    {
+
+    public void refreshAction() {
         ProgressDialog progressDialog = new ProgressDialog("Refreshing...");
         progressDialog.start((dialog) -> refreshStats());
     }
 
-    public void cryptoAction(){
+    public void cryptoAction() {
         StateManager.changeState(State.CRYPTO_MANAGER);
     }
 
-    public void executeAction()
-    {
-        try
-        {
+    public void executeAction() {
+        try {
             commandWorks = true;
 
             commands.get(commandList.getSelectedIndex()).execute(errorHandler);
@@ -87,24 +84,18 @@ public class ClientManager {
             errorHandler.clear();
 
             commandWorks = false;
-        }
-        catch (ArrayIndexOutOfBoundsException e)
-        {
-            JOptionPane.showMessageDialog(Main.frame,"Command not selected","Error",JOptionPane.ERROR_MESSAGE);
-        }
-        catch (IOException e)
-        {
+        } catch (ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(Main.frame, "Command not selected", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
             Tools.sendError(e);
             joined = false;
             StateManager.changeState(State.CLIENT_LIST);
         }
     }
 
-    public void statsThread()
-    {
+    public void statsThread() {
         statsThread = new Thread(() -> {
-            while (true)
-            {
+            while (true) {
                 if (!joined)
                     return;
 
@@ -117,25 +108,19 @@ public class ClientManager {
         statsThread.start();
     }
 
-    public void join(int id)
-    {
-        try
-        {
+    public void join(int id) {
+        try {
             Client.sendCommand("/join " + id);
             refreshAction();
             statsThread();
             joined = true;
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             Tools.receiveError(e);
         }
     }
 
-    public void unjoinAction()
-    {
-        try
-        {
+    public void unjoinAction() {
+        try {
             joined = false;
 
             while (statsRefreshing)
@@ -143,17 +128,13 @@ public class ClientManager {
 
             Client.sendCommand("/unjoin");
             StateManager.changeState(State.CLIENT_LIST);
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             Tools.sendError(e);
         }
     }
 
-    public void refreshStats()
-    {
-        try
-        {
+    public void refreshStats() {
+        try {
             statsRefreshing = true;
 
             String[] mess = Client.sendCommand("stat").split(" ");
@@ -177,9 +158,7 @@ public class ClientManager {
                 swapBar.setValue((int) (swapfree * 100 / swaptotal));
             });
             statsRefreshing = false;
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             Tools.sendError(e);
             joined = false;
             StateManager.changeState(State.CLIENT_LIST);

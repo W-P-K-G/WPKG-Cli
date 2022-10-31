@@ -1,22 +1,20 @@
 package me.wpkg.cli.gui;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.concurrent.CompletableFuture;
+import javax.swing.*;
 
-public class ProgressDialog extends JDialog
-{
+public class ProgressDialog extends JDialog {
     private JPanel panel;
     private JLabel label;
 
-    public interface Target
-    {
+    @FunctionalInterface
+    public interface Target {
         void target(JDialog dialog);
     }
 
-    public ProgressDialog(String title)
-    {
-        setSize(400,100);
+    public ProgressDialog(String title) {
+        setSize(400, 100);
         setFocusable(true);
         setTitle(title);
         setContentPane(panel);
@@ -28,8 +26,7 @@ public class ProgressDialog extends JDialog
         label.setText(title);
     }
 
-    public ProgressDialog start(Target target)
-    {
+    public ProgressDialog start(Target target) {
         CompletableFuture.runAsync(() -> {
             target.target(this);
             SwingUtilities.invokeLater(this::dispose);

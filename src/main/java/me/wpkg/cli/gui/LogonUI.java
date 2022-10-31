@@ -1,5 +1,10 @@
 package me.wpkg.cli.gui;
 
+import static me.wpkg.cli.utils.JSONParser.*;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import javax.swing.*;
 import me.wpkg.cli.main.Main;
 import me.wpkg.cli.net.Client;
 import me.wpkg.cli.state.State;
@@ -8,39 +13,28 @@ import me.wpkg.cli.utils.Globals;
 import me.wpkg.cli.utils.JSONParser;
 import me.wpkg.cli.utils.Tools;
 
-import javax.swing.*;
-import java.io.IOException;
-import java.nio.file.Files;
-
-import static me.wpkg.cli.utils.JSONParser.*;
-
-public class LogonUI
-{
+public class LogonUI {
     public JPanel logonUI;
     private JPasswordField TokenField;
     private JButton Accept;
     public JComboBox<String> IPField;
 
     // Buttons Actions
-    public LogonUI()
-    {
+    public LogonUI() {
         ProgressDialog dialog = new ProgressDialog("Getting servers ip...");
         dialog.start(d -> refreshServerList(IPField));
 
         Accept.addActionListener(ActionEvent -> acceptAction());
 
-        try
-        {
+        try {
             TokenField.setText(Files.readString(Globals.passwordFile.toPath()));
-        }
-        catch (IOException e)
-        {
-            JOptionPane.showMessageDialog(Main.frame,"Error reading file:" + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(Main.frame, "Error reading file:" + e.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    public void refreshServerList(JComboBox<String> IPField)
-    {
+    public void refreshServerList(JComboBox<String> IPField) {
         JSONParser.AddressJSON address = getAddress(Tools.readStringFromURL(Globals.jsonURL + "Addreses.json"));
 
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
@@ -50,36 +44,33 @@ public class LogonUI
         IPField.setModel(model);
     }
 
-    public void acceptAction()
-    {
+    public void acceptAction() {
 
         ProgressDialog progressDialog = new ProgressDialog("Connecting...");
         progressDialog.start(dialog -> {
-            try
-            {
+            try {
                 String ip = (String) IPField.getSelectedItem();
-                if (ip != null)
-                {
+                if (ip != null) {
                     String[] portAddress = ip.split(":");
-                    Client.connect(portAddress[0],Integer.parseInt(portAddress[1]));
+                    Client.connect(portAddress[0], Integer.parseInt(portAddress[1]));
 
-                    Files.writeString(Globals.passwordFile.toPath(),new String(TokenField.getPassword()));
+                    Files.writeString(Globals.passwordFile.toPath(), new String(TokenField.getPassword()));
 
-                    switch (Client.sendCommand("/registeradmin " + new String(TokenField.getPassword())))
-                    {
-                        case "[REGISTER_SUCCESS]" -> SwingUtilities.invokeLater(() -> StateManager.changeState(State.CLIENT_LIST));
+                    switch (Client.sendCommand("/registeradmin " + new String(TokenField.getPassword()))) {
+                        case "[REGISTER_SUCCESS]" -> SwingUtilities
+                                .invokeLater(() -> StateManager.changeState(State.CLIENT_LIST));
                         case "[WRONG_PASSWORD]" -> {
                             dialog.dispose();
-                            JOptionPane.showMessageDialog(Main.frame,"Wrong password","Error",JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(Main.frame, "Wrong password", "Error", JOptionPane.ERROR_MESSAGE);
                         }
-                        default -> JOptionPane.showMessageDialog(Main.frame,"Registering error","Error",JOptionPane.ERROR_MESSAGE);
+                        default -> JOptionPane.showMessageDialog(Main.frame, "Registering error", "Error",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                 }
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 SwingUtilities.invokeLater(dialog::dispose);
-                JOptionPane.showMessageDialog(null, "Can't connect to server: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Can't connect to server: " + e.getMessage(), "Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
         });
     }

@@ -3,11 +3,11 @@ package me.wpkg.cli.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class JSONParser
-{
+public class JSONParser {
 
     public static class ClientJSON {
         public clients[] clients;
+
         public static class clients {
             public String name;
             public int id;
@@ -16,23 +16,27 @@ public class JSONParser
         }
     }
 
-    public static class AddressJSON{
+    public static class AddressJSON {
         public uAddresses[] uAddresses;
         public tAddresses[] tAddresses;
-        public static class uAddresses{
+
+        public static class uAddresses {
             public String ip;
             public int port;
         }
-        public static class tAddresses{
+
+        public static class tAddresses {
             public String ip;
             public int port;
         }
     }
-    public static class walletJSON{
+
+    public static class walletJSON {
         public String coin;
         public String id;
     }
-    public static ClientJSON getClientList(String json){
+
+    public static ClientJSON getClientList(String json) {
         ObjectMapper objectMapper = new ObjectMapper();
 
         ClientJSON clientJSON;
@@ -45,7 +49,7 @@ public class JSONParser
         return clientJSON;
     }
 
-    public static AddressJSON getAddress(String json){
+    public static AddressJSON getAddress(String json) {
         ObjectMapper objectMapper = new ObjectMapper();
 
         AddressJSON addressJSON;
@@ -56,7 +60,8 @@ public class JSONParser
         }
         return addressJSON;
     }
-    public static walletJSON[] getWallet(String json){
+
+    public static walletJSON[] getWallet(String json) {
         ObjectMapper objectMapper = new ObjectMapper();
 
         walletJSON[] walletJSON;

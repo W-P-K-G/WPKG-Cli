@@ -1,10 +1,8 @@
 package me.wpkg.cli.net;
 
-
 import java.io.IOException;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
-
 
 public class Client {
     public static DatagramSocket socket;
@@ -32,8 +30,7 @@ public class Client {
         return connected;
     }
 
-    public static void sendString(String msg) throws IOException
-    {
+    public static void sendString(String msg) throws IOException {
         System.out.println("Sended: " + msg);
 
         byte[] buf = msg.getBytes();
@@ -43,8 +40,7 @@ public class Client {
         socket.send(packet);
     }
 
-    public static String receiveString() throws IOException
-    {
+    public static String receiveString() throws IOException {
         byte[] buf = new byte[65536];
         DatagramPacket packet = new DatagramPacket(buf, buf.length);
 
@@ -56,16 +52,13 @@ public class Client {
         return msg;
     }
 
-    public static String sendCommand(String command) throws IOException
-    {
+    public static String sendCommand(String command) throws IOException {
         sendString(command);
         return receiveString();
     }
 
-    public static byte[] rawdata_receive()
-    {
-        try
-        {
+    public static byte[] rawdata_receive() {
+        try {
             byte[] buf = new byte[65536];
             DatagramPacket packet = new DatagramPacket(buf, buf.length);
 
@@ -78,30 +71,24 @@ public class Client {
             System.arraycopy(buf, 0, ret, 0, len);
 
             return ret;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static void rawdata_send(byte[] b)
-    {
+    public static void rawdata_send(byte[] b) {
         DatagramPacket p = new DatagramPacket(b, b.length, address, port);
-        try
-        {
+        try {
             socket.send(p);
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void logOff() throws IOException
-    {
-        if (socket.isClosed()) return;
+    public static void logOff() throws IOException {
+        if (socket.isClosed())
+            return;
         sendString("/disconnect");
         socket.close();
     }

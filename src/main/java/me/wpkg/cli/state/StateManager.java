@@ -2,19 +2,15 @@ package me.wpkg.cli.state;
 
 import me.wpkg.cli.main.Main;
 
-public class StateManager
-{
+public class StateManager {
     public static State state;
 
-    public static State getState()
-    {
+    public static State getState() {
         return state;
     }
 
-    public static void changeState(State state)
-    {
-        switch (state)
-        {
+    public static void changeState(State state) {
+        switch (state) {
             case LOGON_UI -> {
                 Main.ClientManager.clientManager.setVisible(false);
                 Main.WPKGManager.wpkgManager.setVisible(false);
