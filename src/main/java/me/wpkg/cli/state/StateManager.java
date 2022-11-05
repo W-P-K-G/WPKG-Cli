@@ -2,6 +2,8 @@ package me.wpkg.cli.state;
 
 import me.wpkg.cli.main.Main;
 
+import java.awt.*;
+
 public class StateManager {
     public static State state;
 
@@ -10,36 +12,12 @@ public class StateManager {
     }
 
     public static void changeState(State state) {
+        CardLayout cardLayout = (CardLayout) Main.mainPanel.getLayout();
         switch (state) {
-            case LOGON_UI -> {
-                Main.ClientManager.clientManager.setVisible(false);
-                Main.WPKGManager.wpkgManager.setVisible(false);
-                Main.CryptoManager.CryptoPanelGPU.setVisible(false);
-
-                Main.LogonUI.logonUI.setVisible(true);
-                Main.frame.setContentPane(Main.LogonUI.logonUI);
-            }
-
-            case CLIENT_LIST -> {
-                Main.WPKGManager.refreshClientList(Main.WPKGManager.tableModel);
-                Main.LogonUI.logonUI.setVisible(false);
-
-                Main.WPKGManager.wpkgManager.setVisible(true);
-                Main.frame.setContentPane(Main.WPKGManager.wpkgManager);
-            }
-            case CLIENT_MANAGER -> {
-                Main.ClientManager.clientManager.setVisible(true);
-                Main.WPKGManager.wpkgManager.setVisible(false);
-                Main.CryptoManager.CryptoPanelGPU.setVisible(false);
-                Main.frame.setContentPane(Main.ClientManager.clientManager);
-            }
-
-            case CRYPTO_MANAGER -> {
-                Main.ClientManager.clientManager.setVisible(false);
-                Main.WPKGManager.wpkgManager.setVisible(false);
-                Main.CryptoManager.CryptoPanelGPU.setVisible(true);
-                Main.frame.setContentPane(Main.CryptoManager.CryptoPanelGPU);
-            }
+            case LOGON_UI -> cardLayout.show(Main.mainPanel,"Logon UI");
+            case CLIENT_LIST -> cardLayout.show(Main.mainPanel,"Client List");
+            case CLIENT_MANAGER -> cardLayout.show(Main.mainPanel,"Client Manager");
+            case CRYPTO_MANAGER -> cardLayout.show(Main.mainPanel,"Crypto Manager");
         }
 
         StateManager.state = state;

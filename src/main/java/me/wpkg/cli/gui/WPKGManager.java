@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+
 import me.wpkg.cli.commands.error.ErrorHandler;
 import me.wpkg.cli.main.Main;
 import me.wpkg.cli.net.Client;

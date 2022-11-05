@@ -4,9 +4,11 @@ import static me.wpkg.cli.utils.JSONParser.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Objects;
 import javax.swing.*;
 import me.wpkg.cli.main.Main;
 import me.wpkg.cli.net.Client;
+import me.wpkg.cli.net.Protocol;
 import me.wpkg.cli.state.State;
 import me.wpkg.cli.state.StateManager;
 import me.wpkg.cli.utils.Globals;
@@ -18,6 +20,9 @@ public class LogonUI {
     private JPasswordField TokenField;
     private JButton Accept;
     public JComboBox<String> IPField;
+    private JComboBox<Protocol> protocolBox;
+
+    DefaultComboBoxModel<String> udpModel,tcpModel;
 
     // Buttons Actions
     public LogonUI() {
@@ -25,6 +30,8 @@ public class LogonUI {
         dialog.start(d -> refreshServerList(IPField));
 
         Accept.addActionListener(ActionEvent -> acceptAction());
+        protocolBox.setModel(new DefaultComboBoxModel<>(Protocol.values()));
+        protocolBox.addActionListener(ActionEvent -> protocolComboAction());
 
         try {
             TokenField.setText(Files.readString(Globals.passwordFile.toPath()));
@@ -34,14 +41,27 @@ public class LogonUI {
         }
     }
 
+    public void protocolComboAction()
+    {
+        switch ((Protocol) Objects.requireNonNull(protocolBox.getSelectedItem()))
+        {
+            case TCP -> IPField.setModel(tcpModel);
+            case UDP -> IPField.setModel(udpModel);
+        }
+    }
+
     public void refreshServerList(JComboBox<String> IPField) {
         JSONParser.AddressJSON address = getAddress(Tools.readStringFromURL(Globals.jsonURL + "Addreses.json"));
 
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-        for (var addr : address.uAddresses)
-            model.addElement(addr.ip + ":" + addr.port);
+        udpModel = new DefaultComboBoxModel<>();
+        tcpModel = new DefaultComboBoxModel<>();
 
-        IPField.setModel(model);
+        for (var addr : address.uAddresses)
+            udpModel.addElement(addr.ip + ":" + addr.port);
+        for (var addr : address.tAddresses)
+            tcpModel.addElement(addr.ip + ":" + addr.port);
+
+        IPField.setModel(tcpModel);
     }
 
     public void acceptAction() {
@@ -52,6 +72,8 @@ public class LogonUI {
                 String ip = (String) IPField.getSelectedItem();
                 if (ip != null) {
                     String[] portAddress = ip.split(":");
+
+                    Client.setProtocol((Protocol) protocolBox.getSelectedItem());
                     Client.connect(portAddress[0], Integer.parseInt(portAddress[1]));
 
                     Files.writeString(Globals.passwordFile.toPath(), new String(TokenField.getPassword()));
@@ -66,6 +88,8 @@ public class LogonUI {
                         default -> JOptionPane.showMessageDialog(Main.frame, "Registering error", "Error",
                                 JOptionPane.ERROR_MESSAGE);
                     }
+
+                    Main.WPKGManager.refreshAction();
                 }
             } catch (IOException e) {
                 SwingUtilities.invokeLater(dialog::dispose);

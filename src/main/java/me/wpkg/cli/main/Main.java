@@ -1,6 +1,8 @@
 package me.wpkg.cli.main;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+
+import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Objects;
@@ -16,20 +18,19 @@ import me.wpkg.cli.state.StateManager;
 import me.wpkg.cli.utils.Globals;
 
 public class Main {
-
     public static JFrame frame = new JFrame("WPKG CLI");
     public static LogonUI LogonUI;
     public static WPKGManager WPKGManager;
     public static ClientManager ClientManager;
     public static CryptoManagerGPU CryptoManager;
+    public static JPanel mainPanel;
 
     public static void main(String[] args) throws IOException {
         System.setProperty("sun.java2d.opengl", "true");
         UIManager.put("ProgressBar.repaintInterval", 5);
 
-        if (!Globals.workDir.exists()) {
-            boolean ignored = Globals.workDir.mkdirs();
-        }
+        if (!Globals.workDir.exists())
+            Globals.workDir.mkdirs();
 
         try {
             Globals.passwordFile = Paths.get(Globals.workDir.getPath(), "password").toFile();
@@ -63,8 +64,16 @@ public class Main {
         // Setting frame settings
         frame.setSize(765, 445);
 
+        mainPanel = new JPanel(new CardLayout());
+
+        mainPanel.add(Main.LogonUI.logonUI,"Logon UI");
+        mainPanel.add(Main.WPKGManager.wpkgManager,"Client List");
+        mainPanel.add(Main.ClientManager.clientManager,"Client Manager");
+        mainPanel.add(Main.CryptoManager.CryptoPanelGPU,"Crypto Manager");
+
         StateManager.changeState(State.LOGON_UI);
 
+        frame.add(mainPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setIconImage(ImageIO.read(Objects.requireNonNull(Main.class.getResource("/images/icon.png"))));

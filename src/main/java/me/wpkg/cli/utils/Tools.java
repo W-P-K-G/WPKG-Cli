@@ -9,6 +9,8 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 import javax.swing.*;
 import me.wpkg.cli.main.Main;
+import me.wpkg.cli.state.State;
+import me.wpkg.cli.state.StateManager;
 
 public class Tools {
     private static File tmp;
@@ -50,11 +52,17 @@ public class Tools {
     public static void receiveError(Exception e) {
         JOptionPane.showMessageDialog(null, "Can't receive message: " + e.getMessage(), "Error",
                 JOptionPane.ERROR_MESSAGE);
+
+        if (e.getMessage().equals("Connection closed"))
+            StateManager.changeState(State.LOGON_UI);
     }
 
     public static void sendError(Exception e) {
-        JOptionPane.showMessageDialog(null, "Can't receive message: " + e.getMessage(), "Error",
+        JOptionPane.showMessageDialog(null, "Can't send message: " + e.getMessage(), "Error",
                 JOptionPane.ERROR_MESSAGE);
+
+        if (e.getMessage().equals("Connection closed"))
+            StateManager.changeState(State.LOGON_UI);
     }
 
     public static String getWorkDir() {
