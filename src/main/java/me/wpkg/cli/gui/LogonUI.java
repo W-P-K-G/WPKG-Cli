@@ -73,6 +73,7 @@ public class LogonUI {
                 if (ip != null) {
                     String[] portAddress = ip.split(":");
 
+                    System.out.println("Used protocol is: " + protocolBox.getSelectedItem());
                     Client.setProtocol((Protocol) protocolBox.getSelectedItem());
                     Client.connect(portAddress[0], Integer.parseInt(portAddress[1]));
 

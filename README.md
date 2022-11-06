@@ -15,6 +15,8 @@ To build run the command: `mvn clean package`
 
 If you don't have Maven you can use Maven wrapper: `./mvnw clean package`
 
+To obfuscate binaries use `-P obfuscate` argument
+
 Jar file can be found in `target` directory
 
 # Packaging

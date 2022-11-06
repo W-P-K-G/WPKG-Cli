@@ -26,6 +26,7 @@ public class Main {
     public static JPanel mainPanel;
 
     public static void main(String[] args) throws IOException {
+		System.setProperty("awt.useSystemAAFontSettings", "on");
         System.setProperty("sun.java2d.opengl", "true");
         UIManager.put("ProgressBar.repaintInterval", 5);
 
