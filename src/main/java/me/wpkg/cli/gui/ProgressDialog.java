@@ -7,16 +7,21 @@ import javax.swing.*;
 public class ProgressDialog extends JDialog {
     private JPanel panel;
     private JLabel label;
+    private JProgressBar progressBar;
 
     @FunctionalInterface
     public interface Target {
         void target(JDialog dialog);
     }
 
+    public JProgressBar getProgressBar()
+    {
+        return progressBar;
+    }
+
     public ProgressDialog(String title) {
         setSize(400, 100);
         setFocusable(true);
-        setTitle(title);
         setContentPane(panel);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -24,6 +29,10 @@ public class ProgressDialog extends JDialog {
         setModalityType(ModalityType.APPLICATION_MODAL);
         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
         label.setText(title);
+    }
+
+    public void setText(String text) {
+        label.setText(text);
     }
 
     public ProgressDialog start(Target target) {

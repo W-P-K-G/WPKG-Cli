@@ -17,7 +17,7 @@ public class Tools {
 
     static {
         try {
-            File tmp = Files.createTempDirectory("wpkgcli").toFile();
+            tmp = Files.createTempDirectory("wpkgcli").toFile();
             tmp.deleteOnExit();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(Main.frame, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

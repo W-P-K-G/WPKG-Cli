@@ -1,13 +1,14 @@
 package me.wpkg.cli.commands;
 
-import java.awt.*;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import javax.swing.*;
 import me.wpkg.cli.commands.error.ErrorHandler;
 import me.wpkg.cli.gui.ProgressDialog;
 import me.wpkg.cli.utils.Tools;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class Screenshot extends Command {
     public Screenshot(DefaultListModel<String> clientModel) {
@@ -19,18 +20,47 @@ public class Screenshot extends Command {
         ProgressDialog progressDialog = new ProgressDialog("Waiting for screenshot...");
         progressDialog.start((dialog) -> {
             try {
-                String url = errorHandler.check(sendCommand("screenshot"));
-
+                int size = Integer.parseInt(errorHandler.check(sendCommand("screenshot")));
                 switch (errorHandler.get()) {
+
                     case OK -> {
-                        if (Desktop.isDesktopSupported()) {
-                            try {
-                                Desktop.getDesktop().browse(new URI(url));
-                            } catch (IOException | URISyntaxException e) {
-                                failDialog("Error:" + e.getMessage());
+                        progressDialog.getProgressBar().setIndeterminate(false);
+                        progressDialog.getProgressBar().setStringPainted(true);
+                        progressDialog.setText("Receiving screenshot...");
+
+                        double bandwidth = 0;
+                        String bandwidthtext = "% (" + bandwidth + "KB/s)";
+
+                        File imageFile = new File(Tools.getTmp(),"screenshot" + System.currentTimeMillis() + ".png");
+                        imageFile.deleteOnExit();
+
+                        long timeprev = 0;
+                        int i = 0;
+                        try (FileOutputStream fos = new FileOutputStream(imageFile)) {
+                            send("OK");
+
+                            while (i < size) {
+                                int percent = (int) (((float)i / (float)size) * 100);
+
+                                byte[] buffer = receiveRawdata();
+                                long timenow = System.nanoTime();
+
+                                bandwidth = Tools.roundTo2DecimalPlace((double)(buffer.length / 1024) / ((double)(timenow - timeprev) / 1000000000));
+
+                                if (i % 1000 == 0)
+                                    bandwidthtext = "(" + bandwidth + "KB/s)";
+
+                                progressDialog.getProgressBar().setValue(percent);
+                                progressDialog.getProgressBar().setString(percent + "% " + bandwidthtext);
+
+                                fos.write(buffer);
+                                i += buffer.length;
+
+                                timeprev = timenow;
                             }
-                        } else
-                            failDialog("System don't support java.awt.Desktop");
+                        }
+
+                        Desktop.getDesktop().open(imageFile);
                     }
                     case ERROR -> failDialog("WPKG screenshot error: " + errorHandler.msg());
                 }

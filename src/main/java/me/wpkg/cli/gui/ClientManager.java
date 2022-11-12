@@ -3,10 +3,8 @@ package me.wpkg.cli.gui;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.*;
-import me.wpkg.cli.commands.Command;
-import me.wpkg.cli.commands.RunProcess;
-import me.wpkg.cli.commands.Screenshot;
-import me.wpkg.cli.commands.SendMessage;
+
+import me.wpkg.cli.commands.*;
 import me.wpkg.cli.commands.error.ErrorHandler;
 import me.wpkg.cli.main.Main;
 import me.wpkg.cli.net.Client;
