@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.wpkg</groupId>
     <artifactId>WPKG-Cli</artifactId>
-    <version>1.4.0</version>
+    <version>1.4.1</version>
     <name>WPKG CLI</name>
     <description>Access WPKG clients!</description>
 
